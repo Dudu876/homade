@@ -1,0 +1,24 @@
+{
+  "name": "homade",
+  "description": "Shared food platform",
+  "main": "index.js",
+  "authors": [
+    "Dudu Lemberberg",
+    "Michael Reizelman"
+  ],
+  "license": "ISC",
+  "moduleType": [
+    "node"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.1"
+  }
+}
