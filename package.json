@@ -4,7 +4,8 @@
   "description": "Shared food platform",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"postinstall": "./node_modules/bower/bin/bower install"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   "homepage": "https://gitlab.com/Dudu876/Homade#README",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "bower": "^1.7.7",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
     "path": "^0.12.7"
