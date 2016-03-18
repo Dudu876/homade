@@ -19,6 +19,9 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^2.2.1"
+    "jquery": "^2.2.1",
+    "bootstrap": "^3.3.6",
+    "animate.css": "animate-css#^3.5.1",
+    "startbootstrap": "*"
   }
 }

@@ -5,10 +5,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 
     $routeProvider
     // home page
-    //    .when('/', {
-    //        templateUrl: 'views/carsAvailable.html',
-    //        controller: 'carsAvailable'
-    //    })
+        .when('/', {
+            templateUrl: 'views/mainPage.html',
+            controller: 'mainPage'
+        })
         .otherwise({
             redirectTo: '/'
         });
