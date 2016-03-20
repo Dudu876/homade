@@ -1,0 +1,13 @@
+{
+  "name": "startbootstrap",
+  "homepage": "https://github.com/IronSummitMedia/startbootstrap",
+  "_release": "ea27225b15",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "ea27225b151ba74cb71db76d0a8389726bc19f32"
+  },
+  "_source": "git://github.com/IronSummitMedia/startbootstrap.git",
+  "_target": "*",
+  "_originalSource": "startbootstrap"
+}
