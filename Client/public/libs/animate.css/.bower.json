@@ -19,5 +19,10 @@
   },
   "_source": "git://github.com/daneden/animate.css.git",
   "_target": "^3.5.1",
+<<<<<<< HEAD
   "_originalSource": "animate-css"
+=======
+  "_originalSource": "animate-css",
+  "_direct": true
+>>>>>>> 383ce9265fd558c30937b0dc5b51be96ccd05c20
 }
