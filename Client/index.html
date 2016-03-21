@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" ng-app="homadeApp">
+    <head>
+        <meta charset="UTF-8">
+        <base href="/">
+
+        <title>Homade</title>
+
+        <!-- CSS -->
+
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="public/libs/bootstrap/dist/css/bootstrap.min.css" type="text/css">
+
+        <!-- Bootstrap Social CSS -->
+        <link rel="stylesheet" href="public/libs/bootstrap-social/bootstrap-social.css" type="text/css">
+
+        <!-- Custom Fonts -->
+        <link rel="stylesheet" href="public/stylesheets/OpenSans.css" type="text/css">
+        <link rel="stylesheet" href="public/stylesheets/Merriweather.css" type="text/css">
+        <link rel="stylesheet" href="public/fonts/font-awesome/css/font-awesome.min.css" type="text/css">
+
+        <!-- Plugin CSS -->
+        <link rel="stylesheet" href="public/libs/animate.css/animate.min.css" type="text/css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="public/stylesheets/navbar.css" type="text/css">
+        <link rel="stylesheet" href="public/stylesheets/style.css" type="text/css">
+
+        <!-- Angular Scripts -->
+        <script src="public/libs/angular/angular.min.js"></script>
+        <script src="public/libs/angular-route/angular-route.min.js"></script>
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="public/libs/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script type="text/javascript" src="public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script type="text/javascript" src="public/libs/jquery/dist/jquery.easing.min.js"></script>
+        <script type="text/javascript" src="public/libs/jquery/dist/jquery.fittext.js"></script>
+        <script type="text/javascript" src="public/libs/wow/wow.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script type="text/javascript" src="public/libs/creative/creative.js"></script>
+
+        <!-- ANGULAR -->
+        <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="appRoutes.js"></script>
+        <script type="text/javascript" src="config.js"></script>
+        <script type="text/javascript" src="controllers/NavbarController.js"></script>
+        <script type="text/javascript" src="controllers/mainPage.js"></script>
+
+        <!-- Facebook -->
+        <script type="text/javascript" src="public/libs/angular-easyfb/src/angular-easyfb.js"></script>
+
+    </head>
+    <body>
+
+        <div ng-controller="NavbarController">
+            <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right" ng-show="loggedIn && loggedInStatusVerified" >
+                            <li>
+                                <a class="regular" href="/">Home</a>
+                            </li>
+                            <li>
+                                <a class="regular" href="/Contact">Contact</a> <!-- Example for dudu -->
+                            </li>
+                            <li>
+                                <a class="regular" href="#portfolio">Portfolio</a>
+                            </li>
+                            <li>
+                                <a class="regular" href="#contact">Contact</a>
+                            </li>
+                            <li>
+                                <a class="avatar-link" href="/Profile">
+                                    <img src="{{ apiMe.picture.data.url }}" class="avatar-frame" alt="avatar">
+                                </a>
+                                <!--<a class="btn btn-block btn-social btn-facebook" ng-click="logout()" >-->
+                                    <!--<span class="fa fa-facebook-f"></span> Sign out-->
+                                <!--</a>-->
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right" >
+                            <li>
+                                <a class="btn btn-block btn-social btn-facebook" ng-click="login()" ng-show="!loggedIn && loggedInStatusVerified">
+                                    <span class="fa fa-facebook-f"></span> Sign in with facebook
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div style="padding-top: 5vw;">
+            <!-- ANGULAR DYNAMIC CONTENT -->
+            <div ng-view></div>
+        </div>
+
+    </body>
+</html>
