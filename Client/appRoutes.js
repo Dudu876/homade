@@ -6,8 +6,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
     $routeProvider
     // home page
         .when('/', {
-            templateUrl: 'views/mainPage.html',
+            templateUrl: 'Views/mainPage.html',
             controller: 'mainPage'
+        })
+        .when('/Contact', {
+            templateUrl: 'Views/contact.html',
         })
         .otherwise({
             redirectTo: '/'
