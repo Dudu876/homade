@@ -10,7 +10,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: 'mainPage'
         })
         .when('/Contact', {
-            templateUrl: 'Views/contact.html',
+            templateUrl: 'Views/addMeal.html',
         })
         .otherwise({
             redirectTo: '/'

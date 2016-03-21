@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="public/libs/animate.css/animate.min.css" type="text/css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="public/stylesheets/navbar.css" type="text/css">
         <link rel="stylesheet" href="public/stylesheets/style.css" type="text/css">
 
         <!-- JAVASCRIPT -->
@@ -44,8 +45,8 @@
         <!-- ANGULAR -->
         <script type="text/javascript" src="app.js"></script>
         <script type="text/javascript" src="appRoutes.js"></script>
-        <script type="text/javascript" src="Controllers/NavbarController.js"></script>
-        <script type="text/javascript" src="Controllers/mainPage.js"></script>
+        <script type="text/javascript" src="controllers/NavbarController.js"></script>
+        <script type="text/javascript" src="controllers/mainPage.js"></script>
 
     </head>
     <body>
@@ -97,11 +98,9 @@
             </nav>
         </div>
 
-        <div class="container">
-
+        <div style="padding-top: 5vw;">
             <!-- ANGULAR DYNAMIC CONTENT -->
             <div ng-view></div>
-
         </div>
 
     </body>
