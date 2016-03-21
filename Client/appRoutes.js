@@ -6,14 +6,14 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
     $routeProvider
     // home page
         .when('/', {
-            templateUrl: 'Views/mainPage.html',
+            templateUrl: 'views/mainPage.html',
             controller: 'mainPage'
         })
         .when('/Contact', {
-            templateUrl: 'Views/contact.html',
+            templateUrl: 'views/contact.html',
         })
         .when('/Profile', {
-            templateUrl: 'Views/contact.html',
+            templateUrl: 'views/contact.html',
         })
         .otherwise({
             redirectTo: '/'
