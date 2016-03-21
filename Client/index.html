@@ -86,9 +86,12 @@
                                 <a class="regular" href="#contact">Contact</a>
                             </li>
                             <li>
-                                <a class="btn btn-block btn-social btn-facebook" ng-click="logout()" >
-                                    <span class="fa fa-facebook-f"></span> Sign out
+                                <a class="avatar-link" href="/Profile">
+                                    <img src="{{ apiMe.picture.data.url }}" class="avatar-frame" alt="avatar">
                                 </a>
+                                <!--<a class="btn btn-block btn-social btn-facebook" ng-click="logout()" >-->
+                                    <!--<span class="fa fa-facebook-f"></span> Sign out-->
+                                <!--</a>-->
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right" >
