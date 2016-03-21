@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="homadeApp">
     <head>
         <meta charset="UTF-8">
         <base href="/">
@@ -45,8 +45,12 @@
         <script type="text/javascript" src="app.js"></script>
         <script type="text/javascript" src="appRoutes.js"></script>
         <script type="text/javascript" src="Controllers/NavbarController.js"></script>
+        <script type="text/javascript" src="Controllers/mainPage.js"></script>
+
     </head>
-    <body ng-app="homadeApp">
+    <body>
+
+
         <div ng-controller="NavbarController">
             <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
@@ -64,13 +68,13 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <div ng-switch on="loggedIn">
-                            <div ng-switch-when="true">
+                        <!--<div ng-switch on="loggedIn">-->
+                            <!--<div ng-switch-when="true">-->
                                 <li>
-                                    <a href="#about">About</a>
+                                    <a href="/">Home</a>
                                 </li>
                                 <li>
-                                    <a href="#services">Services</a>
+                                    <a href="/Contact">Contact</a> <!-- Example for dudu -->
                                 </li>
                                 <li>
                                     <a href="#portfolio">Portfolio</a>
@@ -78,13 +82,13 @@
                                 <li>
                                     <a href="#contact">Contact</a>
                                 </li>
-                            </div>
-                            <div ng-switch-when="false">
-                                <li>
-                                    <a class="menu" href="login">Login</a>
-                                </li>
-                            </div>
-                        </div>
+                            <!--</div>-->
+                            <!--<div ng-switch-when="true">-->
+                                <!--<li>-->
+                                    <!--<a href="#login">Login</a>-->
+                                <!--</li>-->
+                            <!--</div>-->
+                        <!--</div>-->
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -92,15 +96,13 @@
             <!-- /.container-fluid -->
             </nav>
         </div>
-        <header>
-            <div class="header-content">
-                <div class="header-content-inner">
-                    <h1>Your Place To Find Great Home-cooked Meals!</h1>
-                    <hr>
-                    <p>Homade is your platfom to find great home cooked meals around you! Just type in what you want to eat and where and start going!</p>
-                    <input class="search-header" id="searchBar" name="searchBar" type="text" placeholder="What do you want to eat? " width="200px" ><input class="location-header" id="location" name="location" type="text" placeholder="Where?" >
-                </div>
-            </div>
-        </header>
+
+        <div class="container">
+
+            <!-- ANGULAR DYNAMIC CONTENT -->
+            <div ng-view></div>
+
+        </div>
+
     </body>
 </html>
