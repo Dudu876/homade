@@ -10,7 +10,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: 'mainPage'
         })
         .when('/Contact', {
-            templateUrl: 'views/addMeal.html',
+            templateUrl: 'views/contact.html',
         })
         .when('/Profile', {
             templateUrl: 'views/contact.html',
