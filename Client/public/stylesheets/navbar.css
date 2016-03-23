@@ -19,7 +19,7 @@ hr.light {
 }
 
 a {
-    color: #f05f40;
+    color: black;
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
@@ -27,7 +27,7 @@ a {
 
 a:hover,
 a:focus {
-    color: #eb3812;
+    color: black;
 }
 
 h1,
@@ -70,6 +70,23 @@ aside {
     padding: 0;
 }
 
+ul li ul.dropdown{
+    background: white;
+    display: none;
+    position:absolute;
+}
+
+ul li:hover ul.dropdown{
+    display: block;	/* Display the dropdown */
+}
+
+ul li ul.dropdown li{
+    display: block;
+}
+
+.container-fluid {
+    background-color: white;
+}
 
 .navbar-filter {
     margin-top:13px;
