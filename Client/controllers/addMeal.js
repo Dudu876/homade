@@ -6,6 +6,8 @@ homadeApp.controller('addMealCtrl', ['$scope', function ($scope) {
 
     $scope.meal = {};
 
+    $scope.tags = [];
+
     $scope.init = function (){
 
     }
