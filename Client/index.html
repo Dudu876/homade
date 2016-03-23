@@ -68,11 +68,14 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
+                        <a class="navbar-brand page-scroll" href="#page-top">HOMADE</a>
                     </div>
 
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="navbar-filter" ng-show="shouldShowFilter()">
+                        <input id="searchBar" name="searchBar" type="text" placeholder="What do you want to eat? " width="200px"><input id="location" name="location" type="text" placeholder="Where?" >
+                    </div>
+
+                    <div class="rightnav" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right" ng-show="loggedIn && loggedInStatusVerified" >
                             <li>
                                 <a class="regular" href="/">Home</a>

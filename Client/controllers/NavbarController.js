@@ -17,6 +17,10 @@ homadeApp.controller('NavbarController', function NavbarController($scope, ezfb,
         }, {scope: 'email,user_likes'});
     };
 
+    $scope.shouldShowFilter = function (){
+        return (location.pathname != "/");
+    };
+
     $scope.logout = function () {
         /**
          * Calling FB.logout

@@ -70,6 +70,17 @@ aside {
     padding: 0;
 }
 
+
+.navbar-filter {
+    margin-top:13px;
+    margin-left:400px;
+}
+
+.navbar-filter input {
+    width:200px;;
+}
+
+
 .navbar-default {
     border-color: rgba(34,34,34,.05);
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
@@ -110,6 +121,11 @@ aside {
 .navbar-default .nav > li>a:hover,
 .navbar-default .nav>li>a:focus:hover {
     color: #f05f40;
+}
+
+.rightnav
+{
+    margin: -35px;
 }
 
 .navbar-default .nav > li.active>a,
