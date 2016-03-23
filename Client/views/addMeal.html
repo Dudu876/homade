@@ -8,26 +8,25 @@
     <div class="panel-body panel-medium">
         <div class="container">
             <div class="" ng-init="init()">
-
                 <div class="row mish-margin">
                     <label for="type"> <strong>Type</strong> </label>
                     <br>
                     <div id="type" class="btn-group btn-group-lg" role="group" aria-label="Large button group">
                         <button type="button" class="btn btn-default btn-main">
-                            <img class="mish-icon" src="https://cdn3.iconfinder.com/data/icons/yummicon-pro/100/028_Meat-512.png">
+                            <img class="mish-icon" src="../public/images/meat.png">
                             Meat
                         </button>
                         <button type="button" class="btn btn-default btn-main">
-                            <img class="mish-icon" src="https://cdn3.iconfinder.com/data/icons/food-and-drink-part-1/512/29-512.png">
+                            <img class="mish-icon" src="../public/images/milk.png">
                             Milk
                         </button>
                         <button type="button" class="btn btn-default btn-main">
-                            <img class="mish-icon" src="http://www.jondayfoods.com/wp-content/uploads/2012/07/vegetarian-product-icon.png">
+                            <img class="mish-icon" src="../public/images/leaf.png">
                             Vegetarian
                         </button>
                         <button type="button" class="btn btn-default btn-main">
-                            <img class="mish-icon" src="http://www.jondayfoods.com/wp-content/uploads/2012/07/vegetarian-product-icon.png">
-                            <img class="mish-icon" src="http://www.jondayfoods.com/wp-content/uploads/2012/07/vegetarian-product-icon.png">
+                            <img class="mish-icon" src="../public/images/leaf.png">
+                            <img class="mish-icon" src="../public/images/leaf.png">
                             Vegan
                         </button>
                     </div>
@@ -42,14 +41,22 @@
                 </div>
 
                 <div class="row mish-margin">
-                    <label for="tags"> <strong>Tags</strong> </label>
+                    <label for="description">Description:</label>
                     <br>
-                    <div id="tags" class="col-lg-6">
-                        <input type="text" class="form-control" placeholder="Enter Tags">
+                    <div class="col-lg-6" id="description">
+                        <textarea class="form-control" rows="5" id=""></textarea>
                     </div>
                 </div>
 
-
+                <div class="row mish-margin">
+                    <label for="tags"> <strong>Tags</strong> </label>
+                    <br>
+                    <div class="col-lg-6">
+                        <tags-input id="tags" ng-model="tags" add-on-paste="true" add-on-space="true">
+                            <auto-complete source="loadTags($query)"></auto-complete>
+                        </tags-input>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
