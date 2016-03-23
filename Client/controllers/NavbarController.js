@@ -54,7 +54,7 @@ homadeApp.controller('NavbarController', function NavbarController($scope, ezfb,
 
     function updateApiMe()
     {
-        ezfb.api('/me?fields=id,picture', function (res) {
+        ezfb.api('/me?fields=id,picture,first_name', function (res) {
             $scope.apiMe = res;
         });
     }

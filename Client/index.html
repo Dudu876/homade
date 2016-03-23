@@ -56,7 +56,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand page-scroll" href="#page-top">HOMADE</a>
+                        <a class="navbar-brand page-scroll" href="/">HOMADE</a>
                     </div>
 
                     <div class="navbar-filter" ng-show="shouldShowFilter()">
@@ -66,27 +66,31 @@
                     <div class="rightnav" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right" ng-show="loggedIn && loggedInStatusVerified" >
                             <li>
-                                <a class="regular" href="/">Home</a>
-                            </li>
-                            <li>
-                                <a class="regular" href="/Contact">Contact</a> <!-- Example for dudu -->
-                            </li>
-                            <li>
-                                <a class="regular" href="#portfolio">Portfolio</a>
-                            </li>
-                            <li>
-                                <a class="regular" href="#contact">Contact</a>
+                                <a class="regular-chef" href="/Chef">Chef</a>
 
                                 <ul class="dropdown">
-                                    <li><a href="#">Laptops</a></li>
-                                    <li><a href="#">Monitors</a></li>
-                                    <li><a href="#">Printers</a></li>
+                                    <li><a href="#">Dashboard</a></li>
+                                    <li><a href="#">My Meals</a></li>
+                                    <li><a href="#">Add Meal</a></li>
+                                    <li><a href="#">Orders</a></li>
+                                    <li><a href="#">History</a></li>
+                                    <li><a href="#">Ratings</a></li>
                                 </ul>
+
+                            </li>
+                            <li>
+                                <a class="regular" href="/Contact">Messages</a>
                             </li>
                             <li>
                                 <a class="avatar-link" href="/Profile">
+                                    {{apiMe.first_name}}
                                     <img src="{{ apiMe.picture.data.url }}" class="avatar-frame" alt="avatar">
                                 </a>
+
+                                <ul class="dropdown">
+                                    <li><a href="#" ng-click="logout()">History</a></li>
+                                    <li><a href="#" ng-click="logout()">Log Out</a></li>
+                                </ul>
                                 <!--<a class="btn btn-block btn-social btn-facebook" ng-click="logout()" >-->
                                     <!--<span class="fa fa-facebook-f"></span> Sign out-->
                                 <!--</a>-->
