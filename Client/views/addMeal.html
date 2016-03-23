@@ -7,7 +7,7 @@
     </div>
     <div class="panel-body panel-medium">
         <div class="container">
-            <div class="" ng-init="init()">
+            <div class="col-lg-6" ng-init="init()">
                 <div class="row mish-margin">
                     <label for="type"> <strong>Type</strong> </label>
                     <br>
@@ -35,26 +35,42 @@
                 <div class="row mish-margin">
                     <label for="name"> <strong>Name</strong> </label>
                     <br>
-                    <div id="name" class="col-lg-6">
+                    <div id="name" class="">
                         <input type="text" class="form-control" placeholder="Meal Name">
                     </div>
                 </div>
 
                 <div class="row mish-margin">
-                    <label for="description">Description:</label>
+                    <label for="description">Description</label>
                     <br>
-                    <div class="col-lg-6" id="description">
-                        <textarea class="form-control" rows="5" id=""></textarea>
+                    <div class="" id="description">
+                        <textarea placeholder="Description" class="form-control" rows="5" id=""></textarea>
                     </div>
                 </div>
 
                 <div class="row mish-margin">
                     <label for="tags"> <strong>Tags</strong> </label>
                     <br>
-                    <div class="col-lg-6">
+                    <div class="">
                         <tags-input id="tags" ng-model="tags" add-on-paste="true" add-on-space="true">
-                            <auto-complete source="loadTags($query)"></auto-complete>
+                            <!--<auto-complete source="loadTags($query)"></auto-complete>-->
                         </tags-input>
+                    </div>
+                </div>
+                <div class="row mish-margin">
+                    <label class="checkbox-inline"><input type="checkbox" value="">Kosher</label>
+                    <label class="checkbox-inline"><input type="checkbox" value="">No-Gluten</label>
+                    <label class="checkbox-inline"><input type="checkbox" value="">Option 3</label>
+                </div>
+            </div>
+            <!-- RIGHT SIDE -->
+            <div class="col-lg-4" style="margin-left: 2vw;">
+                <div class="row mish-margin">
+                    <label for="price"> <strong>Price per Meal</strong> </label>
+                    <br>
+                    <div id="price" class="">
+                        <input type="number" class="form-control" placeholder="Meal Price...">
+                        <span class="input-group-addon">$</span>
                     </div>
                 </div>
             </div>
