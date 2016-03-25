@@ -263,19 +263,19 @@ header {
     margin-bottom: 0;
     text-transform: uppercase;
     font-weight: 700;
-    color: black;
+    color: white;
 }
 
 .header-content-inner hr {
     margin: 30px auto;
-    color: black;
+    color: white;
 }
 
 .header-content-inner p {
     margin-bottom: 50px;
     font-size: 16px;
     font-weight: 300;
-    color: black;
+    color: white;
 }
 
 @media(min-width:768px) {
@@ -505,7 +505,7 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .btn {
-    border-radius: 300px;
+    /*border-radius: 300px;*/
     text-transform: uppercase;
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
     font-weight: 700;

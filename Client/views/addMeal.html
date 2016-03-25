@@ -6,7 +6,8 @@
         </div>
     </div>
     <div class="panel-body panel-medium">
-        <div class="container">
+        <form ng-submit="submit()" class="container">
+            <!--LEFT SIDE-->
             <div class="col-lg-6" ng-init="init()">
                 <div class="row mish-margin">
                     <label for="type"> <strong>Type</strong> </label>
@@ -36,7 +37,7 @@
                     <label for="name"> <strong>Name</strong> </label>
                     <br>
                     <div id="name" class="">
-                        <input type="text" class="form-control" placeholder="Meal Name">
+                        <input required ng-model="meal.name" type="text" class="form-control" placeholder="Meal Name">
                     </div>
                 </div>
 
@@ -44,7 +45,7 @@
                     <label for="description">Description</label>
                     <br>
                     <div class="" id="description">
-                        <textarea placeholder="Description" class="form-control" rows="5" id=""></textarea>
+                        <textarea required ng-model="meal.description" placeholder="Description" class="form-control" rows="5" id=""></textarea>
                     </div>
                 </div>
 
@@ -52,28 +53,41 @@
                     <label for="tags"> <strong>Tags</strong> </label>
                     <br>
                     <div class="">
-                        <tags-input id="tags" ng-model="tags" add-on-paste="true" add-on-space="true">
+                        <tags-input id="tags" ng-model="meal.tags" add-on-paste="true" add-on-space="true">
                             <!--<auto-complete source="loadTags($query)"></auto-complete>-->
                         </tags-input>
                     </div>
                 </div>
+
                 <div class="row mish-margin">
-                    <label class="checkbox-inline"><input type="checkbox" value="">Kosher</label>
-                    <label class="checkbox-inline"><input type="checkbox" value="">No-Gluten</label>
+                    <label for="price"> <strong>Price per Meal</strong> </label>
+                    <br>
+                    <div id="price" class="input-group col-lg-6">
+                        <input required ng-model="meal.price" data-number-to-fixed="2" type="number" class="form-control currency" step="" placeholder="Meal Price...">
+                        <span ng-click="dropdown = !dropdown" class="input-group-addon">{{currency}}</span>
+                        <div ng-click="dropdown = !dropdown" ng-show="dropdown" class="dropdown">
+                            <a href="" ng-repeat="curren in currencies" ng-click="chngCurr(curren)">{{curren}}</a>
+                        </div>
+                        <!--<select><option>₪</option><option>₪</option></select>-->
+                    </div>
+                </div>
+
+                <div class="row mish-margin">
+                    <label class="checkbox-inline"><input ng-model="meal.kosher" type="checkbox" value="">Kosher</label>
+                    <label class="checkbox-inline"><input ng-model="meal.glutenfree" type="checkbox" value="">No-Gluten</label>
                     <label class="checkbox-inline"><input type="checkbox" value="">Option 3</label>
+                </div>
+
+                <div class="col-lg-6">
+                    <button type="submit" class="btn btn-warning btn-block mish-margin">
+                        Submit
+                    </button>
                 </div>
             </div>
             <!-- RIGHT SIDE -->
             <div class="col-lg-4" style="margin-left: 2vw;">
-                <div class="row mish-margin">
-                    <label for="price"> <strong>Price per Meal</strong> </label>
-                    <br>
-                    <div id="price" class="">
-                        <input type="number" class="form-control" placeholder="Meal Price...">
-                        <span class="input-group-addon">$</span>
-                    </div>
-                </div>
+
             </div>
-        </div>
+        </form>
     </div>
 </div>
