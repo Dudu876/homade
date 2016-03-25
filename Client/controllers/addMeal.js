@@ -6,7 +6,8 @@ homadeApp.controller('addMealCtrl', ['$scope', function ($scope) {
 
 
     $('.btn-main').click( function() {
-        $(this).addClass('active').siblings().removeClass('active');
+        //$(this).addClass('active').siblings().removeClass('active');
+        $(this).toggleClass('active');
     });
 
     $scope.meal = {};
