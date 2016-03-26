@@ -3,7 +3,7 @@
  */
 
 var mealURL = '/api/meals/';
-hoamdeApp.factory('mealFactory', ['$http', function($http) {
+homadeApp.factory('mealFactory', ['$http', function($http) {
 
     return {
         // call to get all meals

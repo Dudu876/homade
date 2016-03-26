@@ -88,14 +88,14 @@ exports.deleteMeal = function (req, res) {
 
 exports.createMeal = function (req, res) {
     var meal = new Meal();
-    meal.number = req.body.number;
-    meal.type.manufacturer = req.body.type.manufacturer;
-    meal.type.model = req.body.type.model;
-    meal.type.year = new Date(req.body.type.year).getFullYear();
-    meal.category = req.body.category;
+    meal.name = req.body.name;
+    meal.description = req.body.description;
+    meal.kosher = req.body.kosher || false;
+    meal.glutenfree = req.body.glutenfree || false;
     meal.price = req.body.price;
-    meal.gearbox = req.body.gearbox;
-    meal.branch = req.body.branch._id;
+    for (var i in req.body.tags) {
+        meal.tags.push(req.body.tags[i].text);
+    }
 
     meal.save(function (err) {
         if (!err) {

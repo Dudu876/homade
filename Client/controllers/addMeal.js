@@ -2,7 +2,7 @@
  * Created by Dudu on 19/03/2016.
  */
 
-homadeApp.controller('addMealCtrl', ['$scope', function ($scope) {
+homadeApp.controller('addMealCtrl', ['$scope', 'mealFactory', function ($scope, mealFactory) {
 
 
     $('.btn-main').click( function() {
@@ -26,6 +26,11 @@ homadeApp.controller('addMealCtrl', ['$scope', function ($scope) {
     $scope.submit = function(){
         var meal = $scope.meal;
 
+        mealFactory.create(meal).success(function(data) {
+            alert ("meal saved!" + "  " + data);
+        }).error(function(data) {
+            alert(data);
+        });
         //update meal
     }
 

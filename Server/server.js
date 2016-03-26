@@ -5,6 +5,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var path = require('path');
+var mongoose = require('mongoose');
 var routes = require('./routes');
 
 var app = express();
@@ -12,6 +13,9 @@ var port = process.env.PORT || 5000;
 var dbpath = process.env.DB || 'mongodb://localhost:27017/homade';
 var server = app.listen(port);
 console.log('Listening to port ' + port);
+
+// connect to our mongoDB database
+mongoose.connect(dbpath);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
