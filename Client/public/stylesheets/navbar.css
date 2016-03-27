@@ -127,7 +127,7 @@ ul li ul.dropdown li{
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
-    margin:10px;
+    /*margin:10px;*/
 }
 
 .navbar-default .navbar-header .navbar-brand {
