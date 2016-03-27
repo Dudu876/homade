@@ -1,7 +1,11 @@
 .mish-container {
     position: relative;
     width: 100%;
-    padding: 100px 15px;
+    /*padding: 100px 15px;*/
+    padding-top: 10vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-bottom: 20vw;
     text-align: center;
 }
 
@@ -17,7 +21,16 @@
     border-radius: 0vw;
     border-color: #DDD;
     border-width: 1px;
-    padding: 2vw;
+    padding: 1.5vw;
+}
+.btn.btn-default.btn-main.active {
+    background-color: #C3C3C3;
+}
+
+.mish-background {
+    background-image: url("../images/cover.jpg");
+    /*background-image: url("http://thumbs.dreamstime.com/z/chef-work-cooking-pasta-professional-s-hands-wooden-worktop-vegetables-food-ingredients-utensils-top-view-53157008.jpg");*/
+    background-size: cover;
 }
 
 .mish-icon {
@@ -29,3 +42,25 @@
 .mish-margin {
     margin-top: 2vw;
 }
+
+.input-group-addon {
+    cursor: pointer;
+}
+
+.dropdown {
+    /*display: none;*/
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown a {
+    color: black;
+    padding: 6px 8px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown a:hover {background-color: #f1f1f1}

@@ -9,8 +9,9 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: 'views/mainPage.html',
             controller: 'mainPage'
         })
-        .when('/Contact', {
+        .when('/AddMeal', {
             templateUrl: 'views/addMeal.html',
+            controller: 'addMealCtrl'
         })
         .when('/Profile', {
             templateUrl: 'views/contact.html',

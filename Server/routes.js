@@ -4,15 +4,14 @@
 var path = require('path');
 
 // Example
-//var carController = require('./controllers/Cars');
+var mealController = require('./controllers/mealCtrl');
 
 module.exports = function (app) {
 
-    // -- Example --
-    //app.route('/api/cars')
-    //    .get(carController.getAllCars)
-    //    .post(carController.createCar)
-    //    .put(carController.updateCar);
+    app.route('/api/meals')
+        .get(mealController.getAllMeals)
+        .post(mealController.createMeal)
+        .put(mealController.updateMeal);
 
     // route to handle all angular requests
     app.get('*', function (req, res) {
