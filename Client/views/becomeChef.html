@@ -1,0 +1,48 @@
+<div class="chef-container">
+    <div class="wizard-header">
+        <h3>
+            <b>BUILD</b> YOUR PROFILE <br>
+            <small>This information will let us know more about you.</small>
+        </h3>
+    </div>
+    <ul class="nav nav-pills nav-justified" id="pills">
+        <li ng-class="isActive1 ? 'active' : 'falseClass'"><a href="#location">Location</a></li>
+        <li ng-class="isActive2 ? 'active' : 'falseClass'"><a href="#tips">Get Location Tips!</a></li>
+        <li ng-class="isActive3 ? 'active' : 'falseClass'"><a href="#workinghours" data-toggle="pill">Working Hours</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+        <div id="location" class="tab-pane fade in active" ng-show="isActive1" >
+
+            <div class="address" >
+                <div class="col-sm-12">
+                    <h4 class="info-text"> Where do you want to supply meals?</h4>
+                </div>
+            </div>
+            <br>
+            <div class="chef-location">
+                <input id="autocomplete" required ng-model="chosenPlace" type="text" class="form-control" placeholder="Location">
+            </div>
+        </div>
+
+        <div id="tips" ng-show="isActive2" class="tab-pane fade in active">
+            <br>
+            <div class="chef-location">
+                <input required ng-model="meal" type="text" class="form-control" placeholder="Hi">
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+    <br>
+
+    <div class="pull-left">
+        <input type="button" ng-show="!isActive1" class="btn btn-previous btn-fill btn-default btn-wd btn-sm" ng-click="setPrevious()" name="previous" value="<< Previous">
+    </div>
+
+    <div class="pull-right">
+        <input type="button" ng-show="!isActive3" ng-disabled="!locationChosen" class="btn btn-previous btn-fill btn-default btn-wd btn-sm" ng-click="setNext()" name="next" value="Next >>">
+    </div>
+</div>

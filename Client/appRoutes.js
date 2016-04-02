@@ -9,6 +9,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: 'views/mainPage.html',
             controller: 'mainPage'
         })
+        .when('/BecomeAChef', {
+            templateUrl: 'views/becomeChef.html',
+            controller: 'becomeChef'
+        })
         .when('/AddMeal', {
             templateUrl: 'views/addMeal.html',
             controller: 'addMealCtrl'
