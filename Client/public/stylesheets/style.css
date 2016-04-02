@@ -64,3 +64,5 @@
 }
 
 .dropdown a:hover {background-color: #f1f1f1}
+
+.angular-google-map-container { height: 400px; }
