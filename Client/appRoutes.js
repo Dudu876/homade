@@ -7,7 +7,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
     // home page
         .when('/', {
             templateUrl: 'views/mainPage.html',
-            controller: 'mainPage'
+            controller: 'mainPageCtrl'
         })
         .when('/BecomeAChef', {
             templateUrl: 'views/becomeChef.html',
@@ -20,6 +20,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         .when('/Map', {
             templateUrl: 'views/Map.html',
             controller: 'mapCtrl'
+        })
+        .when('/Result', {
+            templateUrl: 'views/searchedOrders.html',
+            controller: 'resultCtrl'
         })
         .when('/Profile', {
             templateUrl: 'views/contact.html',
