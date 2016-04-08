@@ -7,7 +7,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
     // home page
         .when('/', {
             templateUrl: 'views/mainPage.html',
-            controller: 'mainPage'
+            controller: 'mainPageCtrl'
         })
         .when('/BecomeAChef', {
             templateUrl: 'views/becomeChef.html',

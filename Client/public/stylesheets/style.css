@@ -65,4 +65,38 @@
 
 .dropdown a:hover {background-color: #f1f1f1}
 
+.wizard-header{
+    text-align: center;
+}
+
+.centered {
+    text-align: center;
+}
+
+.chef-location input{
+    align-self: center;
+    text-align: center;
+    width: 50%;
+    margin: auto;
+
+}
+
+.chef-container {
+    margin: auto;
+    width: 60%;
+    height: 60%;
+    padding: 10px;
+}
+
+.selected-day {
+    background: green;
+    border: green;
+}
+
+.selected-day a:hover {
+    background: green;
+    border: green;
+}
+
+
 .angular-google-map-container { height: 400px; }

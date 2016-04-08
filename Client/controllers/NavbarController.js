@@ -2,7 +2,7 @@
  * Created by Michael on 3/18/2016.
  */
 
-homadeApp.controller('NavbarController', function NavbarController($scope, ezfb, $location) {
+homadeApp.controller('NavbarController', function NavbarController($scope, ezfb, $location, userFactory) {
 
     $scope.loggedIn = false;
     $scope.loggedInStatusVerified = false;
@@ -56,6 +56,7 @@ homadeApp.controller('NavbarController', function NavbarController($scope, ezfb,
     {
         ezfb.api('/me?fields=id,picture,first_name', function (res) {
             $scope.apiMe = res;
+            userFactory.fbId = res.id;
         });
     }
 });

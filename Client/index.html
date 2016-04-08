@@ -36,7 +36,8 @@
         <script type="text/javascript" src="public/libs/lodash/lodash.js"></script>
         <script type="text/javascript" src="public/libs/angular-simple-logger/dist/angular-simple-logger.js"></script>
         <script type="text/javascript" src="public/libs/angular-google-maps/dist/angular-google-maps.js"></script>
-        <script type="text/javascript" src="public/libs/wizard/wizard.js"></script>
+        <script type="text/javascript" src="public/libs/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <script type="text/javascript" src="public/libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpkTgTR--qces2l4LuT35p1todOQcimJg&libraries=places&sensor=false" type="text/javascript"></script>
 
         <!-- Custom Angular -->
@@ -45,12 +46,14 @@
         <script type="text/javascript" src="config.js"></script>
 
         <script type="text/javascript" src="factories/mealFactory.js"></script>
+        <script type="text/javascript" src="factories/locationTipsFactory.js"></script>
+        <script type="text/javascript" src="factories/chefsFactory.js"></script>
+        <script type="text/javascript" src="factories/userFactory.js"></script>
 
         <script type="text/javascript" src="controllers/NavbarController.js"></script>
         <script type="text/javascript" src="controllers/mainPage.js"></script>
         <script type="text/javascript" src="controllers/addMeal.js"></script>
         <script type="text/javascript" src="controllers/mapCtrl.js"></script>
-
         <script type="text/javascript" src="controllers/becomeChef.js"></script>
     </head>
     <body>
@@ -100,12 +103,9 @@
                                 </a>
 
                                 <ul class="dropdown">
-                                    <li><a href="#" ng-click="logout()">History</a></li>
+                                    <li><a href="#">History</a></li>
                                     <li><a href="#" ng-click="logout()">Log Out</a></li>
                                 </ul>
-                                <!--<a class="btn btn-block btn-social btn-facebook" ng-click="logout()" >-->
-                                    <!--<span class="fa fa-facebook-f"></span> Sign out-->
-                                <!--</a>-->
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right" >
