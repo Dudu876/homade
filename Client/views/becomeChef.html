@@ -6,16 +6,16 @@
         </h3>
     </div>
     <ul class="nav nav-pills nav-justified" id="pills">
-        <li ng-class="isActive1 ? 'active' : 'falseClass'"><a href="#location">Location</a></li>
-        <li ng-class="isActive2 ? 'active' : 'falseClass'"><a href="#tips">Get Location Tips!</a></li>
-        <li ng-class="isActive3 ? 'active' : 'falseClass'"><a href="#workinghours" data-toggle="pill">Working Hours</a></li>
+        <li ng-class="isActive1 ? 'active' : 'falseClass'"><a href="#">Location</a></li>
+        <li ng-class="isActive2 ? 'active' : 'falseClass'"><a href="#">Get Location Tips!</a></li>
+        <li ng-class="isActive3 ? 'active' : 'falseClass'"><a href="#">Working Hours</a></li>
     </ul>
 
     <div class="tab-content">
 
         <div id="location" class="tab-pane fade in active" ng-show="isActive1" >
 
-            <div class="address" >
+            <div class="centered" >
                 <div class="col-sm-12">
                     <h4 class="info-text"> Where do you want to supply meals?</h4>
                 </div>
@@ -27,22 +27,57 @@
         </div>
 
         <div id="tips" ng-show="isActive2" class="tab-pane fade in active">
+
+            <div class="centered" >
+                <div class="col-sm-12">
+                    <h4 class="info-text"> Some Cool Tips For Your Area! </h4>
+                </div>
+            </div>
             <br>
             <div class="chef-location">
-                <input required ng-model="meal" type="text" class="form-control" placeholder="Hi">
+                <!-- Add map tips here -->
+            </div>
+        </div>
+
+        <div id="workingHours" ng-show="isActive3" class="tab-pane fade in active">
+
+            <div class="centered" >
+                <div class="col-sm-12">
+                    <h4 class="info-text"> When do you want to be available?</h4>
+                </div>
+            </div>
+            <br>
+
+            <div class="working-hours centered">
+                <div ng-repeat="currDay in chefDetails.workDays" class="btn-group centered" >
+                    <div id="{{currDay.day}}" >
+                        <button type="button" ng-class="{ 'selected-day' : currDay.isWorking }" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-target="{{currDay.day + 'dropdown'}}">{{currDay.dayName}}</button>
+                        <div id="{{currDay.day + 'dropdown'}}" class="dropdown-menu" style="padding: 15px;" ng-click="$event.stopPropagation();">
+                            <input type="checkbox" ng-model="currDay.isWorking">
+                            <label>Working</label>
+                            <div id="start">
+                                <br>
+                                <label class="info-text"> Starting time: </label>
+                                <uib-timepicker ng-model="currDay.startingTime" ng-change="changed()" hour-step="1" minute-step="15" show-meridian="ismeridian"/>
+                            </div>
+                            <div id="finish">
+                                <label class="info-text"> Finish time: </label>
+                                <uib-timepicker ng-model="currDay.finishTime" ng-change="changed()" hour-step="1" minute-step="15" show-meridian="ismeridian"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
-
-    <br>
-    <br>
 
     <div class="pull-left">
         <input type="button" ng-show="!isActive1" class="btn btn-previous btn-fill btn-default btn-wd btn-sm" ng-click="setPrevious()" name="previous" value="<< Previous">
     </div>
 
     <div class="pull-right">
+        <input type="button" ng-show="isActive3" class="btn btn-previous btn-fill btn-default btn-wd btn-sm" ng-click="sendData()" name="next" value="Become a chef >>">
         <input type="button" ng-show="!isActive3" ng-disabled="!locationChosen" class="btn btn-previous btn-fill btn-default btn-wd btn-sm" ng-click="setNext()" name="next" value="Next >>">
     </div>
 </div>

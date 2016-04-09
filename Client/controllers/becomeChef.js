@@ -1,11 +1,13 @@
 /**
  * Created by Michael on 3/31/2016.
  */
-homadeApp.controller('becomeChef', ['$scope', function ($scope) {
+homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFactory', 'userFactory', function ($scope, locationTipsFactory, chefsFactory, userFactory) {
     $scope.isActive1 = true;
     $scope.isActive2 = false;
     $scope.isActive3 = false;
     $scope.locationChosen = false;
+    $scope.chefDetails = {};
+    $scope.chefDetails.fbId = userFactory.fbId;
 
     autocomplete = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
@@ -13,9 +15,8 @@ homadeApp.controller('becomeChef', ['$scope', function ($scope) {
 
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         var place = autocomplete.getPlace();
-        $scope.fromLat = place.geometry.location.lat();
-        $scope.fromLng = place.geometry.location.lng();
-        $scope.from = place.formatted_address;
+        $scope.chefDetails.location = [place.geometry.location.lat(), place.geometry.location.lng()];
+        $scope.chefDetails.locationName = place.formatted_address;
         $scope.locationChosen = true;
         $scope.$apply();
     });
@@ -26,6 +27,9 @@ homadeApp.controller('becomeChef', ['$scope', function ($scope) {
         {
             $scope.isActive1 = false;
             $scope.isActive2 = true;
+            locationTipsFactory.get().success(function(data) {
+            }).error(function(data) {
+            });
         }
         else {
             $scope.isActive2 = false;
@@ -44,5 +48,33 @@ homadeApp.controller('becomeChef', ['$scope', function ($scope) {
             $scope.isActive2 = true;
             $scope.isActive3 = false;
         }
+    };
+
+    var startingTime = new Date();
+    startingTime.setHours(8);
+    startingTime.setMinutes(0);
+
+
+    var finishTime = new Date();
+    finishTime.setHours(18);
+    finishTime.setMinutes(0);
+
+    $scope.chefDetails.workDays = [
+        { day: 1, dayName: 'Sunday', isWorking:false, startingTime: startingTime, finishTime: finishTime },
+        { day: 2, dayName: 'Monday', isWorking:false, startingTime: startingTime, finishTime: finishTime },
+        { day: 3, dayName: 'Tuesday', isWorking:false, startingTime: startingTime, finishTime: finishTime },
+        { day: 4, dayName: 'Wedenesday', isWorking:false, startingTime: startingTime, finishTime: finishTime },
+        { day: 5, dayName: 'Thursday', isWorking:false, startingTime: startingTime, finishTime: finishTime },
+        { day: 6, dayName: 'Friday', isWorking:false, startingTime: startingTime, finishTime: finishTime },
+        { day: 7, dayName: 'Saturday', isWorking:false, startingTime: startingTime, finishTime: finishTime }
+    ];
+
+    $scope.sendData = function()
+    {
+        chefsFactory.create($scope.chefDetails).success(function(data) {
+            alert ("chef saved!" + "  " + data);
+        }).error(function(data) {
+            alert(data);
+        });
     }
 }]);
