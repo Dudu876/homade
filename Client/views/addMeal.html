@@ -85,6 +85,31 @@
             </div>
             <!-- RIGHT SIDE -->
             <div class="col-lg-4" style="margin-left: 2vw;">
+                <!--<div flow-init flow-name="obj">-->
+                    <!--<input type="file" flow-btn />-->
+                    <!--Input OR Other element as upload button-->
+                    <!--<span class="btn" flow-btn><i class="icon icon-file"></i>Upload File</span>-->
+                    <!--<tr ng-repeat="file in obj.flow.files">-->
+                        <!--<td>{{$index+1}}</td>-->
+                        <!--<td>{{file.name}}</td>-->
+                    <!--</tr>-->
+                    <div flow-init="{target: '/upload'}"
+                         flow-files-submitted="$flow.upload()"
+                         flow-file-success="$file.msg = $message">
+
+                        <input type="file" flow-btn/>
+                        Input OR Other element as upload button
+                        <span class="btn" flow-btn>Upload File</span>
+                        <img flow-img="$flow.files[0]" />
+
+                        <table>
+                            <tr ng-repeat="file in $flow.files">
+                                <td>{{$index+1}}</td>
+                                <td>{{file.name}}</td>
+                                <td>{{file.msg}}</td>
+                            </tr>
+                        </table>
+                    </div>
 
             </div>
         </form>

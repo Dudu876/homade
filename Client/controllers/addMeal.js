@@ -22,6 +22,7 @@ homadeApp.controller('addMealCtrl', ['$scope', 'mealFactory', function ($scope, 
     $scope.chngCurr = function(curren) {
         $scope.currency = curren;
     };
+    $scope.$flow = {};
 
     $scope.submit = function(){
         var meal = $scope.meal;

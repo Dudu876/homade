@@ -1,3 +1,7 @@
+/**
+ * Created by Dudu on 25/03/2016.
+ */
+
 // grab the mongoose module
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;

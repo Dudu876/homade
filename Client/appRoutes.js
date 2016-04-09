@@ -21,6 +21,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: 'views/Map.html',
             controller: 'mapCtrl'
         })
+        .when('/Result', {
+            templateUrl: 'views/searchedOrders.html',
+            controller: 'resultCtrl'
+        })
         .when('/Profile', {
             templateUrl: 'views/contact.html',
         })
