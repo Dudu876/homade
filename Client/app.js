@@ -4,5 +4,5 @@
 var homadeApp = angular.module('homadeApp', ['ngRoute', 'appRoutes', 'ezfb', 'ngTagsInput', 'uiGmapgoogle-maps', 'ui.bootstrap', 'flow'])
     .service('User', function () {
         return {};
-    });
-});
+    }
+);
