@@ -18,6 +18,9 @@ module.exports = function (app) {
     app.route('/api/locationTips')
         .get(locationController.getLocationTips);
 
+    app.route('/api/chefs/:chef_id')
+        .get(chefController.isChef);
+
     app.route('/api/chefs')
         .post(chefController.createChef);
 

@@ -2,10 +2,15 @@
  * Created by Michael on 3/18/2016.
  */
 
-homadeApp.controller('NavbarController', function NavbarController($scope, ezfb, $location, userFactory) {
+homadeApp.controller('NavbarController', function NavbarController($scope, ezfb, $location, userFactory, chefsFactory) {
 
     $scope.loggedIn = false;
     $scope.loggedInStatusVerified = false;
+    $scope.loadedChefData = false;
+    $scope.isChef = false;
+    $scope.$on('isChefUpdate', function(event, args){
+        $scope.isChef = args;
+    });
 
     updateLoginStatus(updateApiMe);
 
@@ -57,6 +62,12 @@ homadeApp.controller('NavbarController', function NavbarController($scope, ezfb,
         ezfb.api('/me?fields=id,picture,first_name', function (res) {
             $scope.apiMe = res;
             userFactory.fbId = res.id;
+            chefsFactory.isChef(userFactory.fbId).success(function(data) {
+                userFactory.isChefUpdate(data);
+                $scope.loadedChefData = true;
+            }).error(function(data) {
+                alert('Error!');
+            });
         });
     }
 });
