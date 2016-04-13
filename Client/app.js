@@ -5,4 +5,3 @@ var homadeApp = angular.module('homadeApp', ['ngRoute', 'appRoutes', 'ezfb', 'ng
     .service('User', function () {
         return {};
     });
-});

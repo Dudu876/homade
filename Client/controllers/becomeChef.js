@@ -73,6 +73,8 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
     {
         chefsFactory.create($scope.chefDetails).success(function(data) {
             alert ("chef saved!" + "  " + data);
+            userFactory.isChefUpdate(true);
+            location.href = "/";
         }).error(function(data) {
             alert(data);
         });

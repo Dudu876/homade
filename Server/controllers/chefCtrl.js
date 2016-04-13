@@ -16,6 +16,27 @@ exports.createChef = function (req, res) {
             res.json('Chef created!');
         }
         else {
+            res.json('error occured');
+        }
+    });
+};
+
+exports.isChef = function (req, res) {
+    Chef.findOne( { 'fbId': req.params.chef_id } , function (err, chef)
+    {
+        if (err)
+        {
+            res.json(false);
+        }
+        else
+        {
+            if (chef == null)
+            {
+                res.json(false);
+            }
+            else {
+                res.json(true);
+            }
         }
     });
 };

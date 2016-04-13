@@ -8,6 +8,9 @@ homadeApp.factory('chefsFactory', ['$http', function($http) {
     return {
         create : function(chefData) {
             return $http.post(chefURL, chefData);
+        },
+        isChef : function(fbId) {
+            return $http.get(chefURL + fbId);
         }
     }
 }]);

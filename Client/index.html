@@ -84,11 +84,14 @@
 
                     <div class="rightnav" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right" ng-show="loggedIn && loggedInStatusVerified" >
-                            <li>
+                            <li ng-show="loadedChefData && !isChef" ng-hide="isChef || !loadedChefData ">
+                                <a class="regular" href="/BecomeAChef">Become A Chef!</a>
+
+                            </li>
+                            <li ng-show="loadedChefData && isChef" ng-hide="!isChef || !loadedChefData">
                                 <a class="regular-chef" href="/Chef">Chef</a>
 
                                 <ul class="dropdown">
-                                    <li><a href="/BecomeAChef">Become A Chef!</a></li>
                                     <li><a href="#">Dashboard</a></li>
                                     <li><a href="#">My Meals</a></li>
                                     <li><a href="/AddMeal">Add Meal</a></li>
