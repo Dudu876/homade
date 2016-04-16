@@ -23,14 +23,9 @@ homadeApp.controller('resultCtrl', ['$scope', 'uiGmapGoogleMapApi', function ($s
             tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false}
     ];
 
+
+    $scope.meals = meals;
     var i = 100;
-    $scope.addMark = function() {
-        var marker = angular.copy($scope.markers[0]);
-        marker.coords.latitude -= 1;
-        marker.id += i++;
-        $scope.markers.push(marker);
-        //$scope.$apply();
-    }
 
     //---------Loading the user location -------------------
     $scope.markers = [];
@@ -47,10 +42,8 @@ homadeApp.controller('resultCtrl', ['$scope', 'uiGmapGoogleMapApi', function ($s
                     longitude: element.location.lng
                 },
                 options: {
-                    draggable: true
                 },
                 events: {
-
                 },
                 window: {
                     title: element.name,

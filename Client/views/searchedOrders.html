@@ -1,6 +1,8 @@
 <div class="">
     <div class="col-lg-6">
-        <button class="btn" ng-click="addMark()">add</button>
+        <div ng-repeat="meal in meals">
+            <img class="img-rounded" ng-src="{{meal.img}}" style="height: 8vw; width: 8vw;"/>
+        </div>
     </div>
     <!---------- GMAP -------->
     <div class="col-lg-6">
@@ -17,5 +19,4 @@
             <!--</ui-gmap-markers>-->
         </ui-gmap-google-map>
     </div>
-
 </div>
