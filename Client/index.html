@@ -37,11 +37,13 @@
         <script type="text/javascript" src="public/libs/angular-simple-logger/dist/angular-simple-logger.js"></script>
         <script type="text/javascript" src="public/libs/angular-google-maps/dist/angular-google-maps.js"></script>
 
+
         <!--<script type="text/javascript" src="public/libs// ng-file-upload(.min).js"></script>-->
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpkTgTR--qces2l4LuT35p1todOQcimJg&libraries=places" type="text/javascript"></script>
         <script type="text/javascript" src="public/libs/angular-bootstrap/ui-bootstrap.min.js"></script>
         <script type="text/javascript" src="public/libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script type="text/javascript" src="public/libs/angular-confirm-modal/angular-confirm.min.js"></script>
 
 
         <!-- Custom Angular -->
@@ -60,6 +62,8 @@
         <script type="text/javascript" src="controllers/mapCtrl.js"></script>
         <script type="text/javascript" src="controllers/becomeChef.js"></script>
         <script type="text/javascript" src="controllers/searchedOrders.js"></script>
+        <script type="text/javascript" src="controllers/orderMeal.js"></script>
+
     </head>
     <body>
 
@@ -113,6 +117,7 @@
 
                                 <ul class="dropdown">
                                     <li><a href="#">History</a></li>
+                                    <li><a href="/OrderMeal">Order Meal</a></li>
                                     <li><a href="#" ng-click="logout()">Log Out</a></li>
                                 </ul>
                             </li>

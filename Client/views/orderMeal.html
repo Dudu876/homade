@@ -1,0 +1,126 @@
+<div>
+
+    <div class="pic-container">
+        <img class="backgroundImage" src="../public/images/eodiwz6phzzm6sssojqa.jpg" alt="">
+        <div class="money-text">
+            <h4> Available for: {{ price }} $ </h4>
+        </div>
+    </div>
+
+    <div class="row" style="background: #f5f5f5; ">
+
+        <div class="under-money">
+            <form class="form-inline" style="width:100%;" role="form">
+                <div class="form-group" style="width:100%;">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" class="under-money-in" placeholder="Quantity" min="1" max="20" id="quantity" ng-model="quantity">
+                </div>
+                <button class="btn btn-primary" ng-click="performOrder()" confirm="Are you sure you want to order {{ quantity }} of {{ name }}?"  confirm-settings="{size: 'la'}">
+                    Order!
+                </button>
+            </form>
+        </div>
+
+        <div class="col-md-3 profile" >
+            <a class="" href="/Profile">
+                <img src="https://a1.muscache.com/im/users/15625666/profile_pic/1432856349/original.jpg?aki_policy=profile_x_medium" class="chef-pic" align="top"><br>
+                Michael
+
+            </a>
+        </div>
+        <div>
+        </div>
+        <div class="col-md-9" style="background: #f5f5f5; width: initial" >
+            <div>
+                <h1 itemprop="name" class="overflow h1 space-1 text-center-sm test" id="listing_name" >{{ name }} </h1>
+                <i class="fa fa-star fa-2x yellowed-star" ng-repeat="n in fullStars() track by $index"></i>
+                <i ng-if="halfStar()" class="fa fa-star-half-o fa-2x yellowed-star" aria-hidden="true"></i>
+                <i class="fa fa-star-o fa-2x" ng-repeat="n in emptyStars() track by $index"></i>
+                {{ averageRating }}
+            </div>
+
+
+            <br/>
+            <div class="properties">
+                <img src="../public/images/leaf.png" align="top"><br>
+                Vegeterian
+            </div>
+            <div class="properties">
+                <img class="propInActive" src="../public/images/certifiedKosher.jpg" align="top"><br>
+                Not Kosher
+            </div>
+
+            <div class="properties">
+                <img class="propInActive" src="../public/images/glutentrue.jpg" align="top"><br>
+                With Gluten
+            </div>
+        </div>
+    </div>
+    <div class="row" >
+        <div class="descriptionMeal">
+            <hr class="soften" />
+            <h4 itemprop="name" class="overflow h4 space-1 text-center-sm test \\" > DESCRIPTION </h4>
+            <div >
+                {{ description }}
+            </div>
+        </div>
+    </div>
+
+    <div class="well">
+
+        <div class="text-right margined">
+            <a href="#reviews" class="btn btn-success">Reviews >></a>
+        </div>
+
+        <hr>
+        <div id="reviews">
+            <div class="row margined">
+                <div class="col-md-12">
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    Anonymous
+                    <span class="pull-right">10 days ago</span>
+                    <p>This product was great in terms of quality. I would definitely buy another!</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row margined">
+                <div class="col-md-12">
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    Anonymous
+                    <span class="pull-right">12 days ago</span>
+                    <p>I've alredy ordered another one!</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row margined">
+                <div class="col-md-12">
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    Anonymous
+                    <span class="pull-right">15 days ago</span>
+                    <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="hey" class="well">
+        hi
+    </div>
+
+</div>

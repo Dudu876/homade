@@ -25,6 +25,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: 'views/searchedOrders.html',
             controller: 'resultCtrl'
         })
+        .when('/OrderMeal', {
+            templateUrl: 'views/orderMeal.html',
+            controller: 'orderMealCtrl'
+        })
         .when('/Profile', {
             templateUrl: 'views/contact.html',
         })
