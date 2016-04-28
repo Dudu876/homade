@@ -1,25 +1,25 @@
 /**
  * Created by Dudu on 04/04/2016.
  */
-homadeApp.controller('resultCtrl', ['$scope', 'uiGmapGoogleMapApi', function ($scope, uiGmapGoogleMapApi) {
+homadeApp.controller('resultCtrl', ['$scope', 'mealService', 'uiGmapGoogleMapApi', function ($scope, mealService, uiGmapGoogleMapApi) {
 
     //---------Loading the result data from server--------------
     var meals = [
-        { name: 'Kebab', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.7}, price: 200,
+        { name: 'Kebab1', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.7}, price: 200,
             tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false},
-        { name: 'Kebab', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.1}, price: 200,
+        { name: 'Kebab2', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.1}, price: 200,
+            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: true},
+        { name: 'Kebab3', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.6}, price: 200,
+            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: true},
+        { name: 'Kebab4', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.2}, price: 200,
             tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false},
-        { name: 'Kebab', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.6}, price: 200,
+        { name: 'Kebab5', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.3}, price: 200,
             tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false},
-        { name: 'Kebab', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.2}, price: 200,
+        { name: 'Kebab6', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.4}, price: 200,
+            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: true},
+        { name: 'Kebab7', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.5}, price: 200,
             tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false},
-        { name: 'Kebab', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.3}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false},
-        { name: 'Kebab', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.4}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false},
-        { name: 'Kebab', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.5}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false},
-        { name: 'Kebab', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.6}, price: 200,
+        { name: 'Kebab8', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.6}, price: 200,
             tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false}
     ];
 
@@ -27,12 +27,23 @@ homadeApp.controller('resultCtrl', ['$scope', 'uiGmapGoogleMapApi', function ($s
     $scope.meals = meals;
     var i = 100;
 
+    mealService.get().then(function (response) {
+        $scope.meals2 = response.data;
+    });
+
     //---------Loading the user location -------------------
     $scope.markers = [];
 
+    function showPosition(position) {
+        console.log(position);
+        $scope.map.center.latitude = position.coords.latitude;
+        $scope.map.center.longitude = position.coords.longitude;
+    }
+
     uiGmapGoogleMapApi.then(function(maps) {
         //---------Loading the user location -------------------
-        $scope.map = { center: { latitude: 32.8, longitude: 34.2 }, zoom: 8 };
+        navigator.geolocation.getCurrentPosition(showPosition);
+        $scope.map = { center: { latitude: 32.1, longitude: 34.80 }, zoom: 14 };
 
         meals.forEach(function(element, index, array) {
             var marker = {
