@@ -10,6 +10,7 @@ var Order = require('../models/order');
 
 exports.createOrder = function(req, res) {
     var order = new Order();
+
 };
 
 exports.getAllOrders = function (req, res) {

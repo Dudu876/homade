@@ -93,6 +93,8 @@ exports.createMeal = function (req, res) {
     meal.kosher = req.body.kosher || false;
     meal.glutenfree = req.body.glutenfree || false;
     meal.price = req.body.price;
+    meal.type = req.body.type;
+
     for (var i in req.body.tags) {
         meal.tags.push(req.body.tags[i].text);
     }

@@ -6,8 +6,8 @@ homadeApp.controller('addMealCtrl', ['$scope', 'mealFactory', function ($scope, 
 
 
     $('.btn-main').click( function() {
-        //$(this).addClass('active').siblings().removeClass('active');
-        $(this).toggleClass('active');
+        $(this).addClass('active').siblings().removeClass('active');
+        //$(this).toggleClass('active');
     });
 
     $scope.meal = {};
@@ -23,6 +23,10 @@ homadeApp.controller('addMealCtrl', ['$scope', 'mealFactory', function ($scope, 
         $scope.currency = curren;
     };
     $scope.$flow = {};
+
+    $scope.setType = function(type) {
+        $scope.meal.type = type;
+    };
 
     $scope.submit = function(){
         var meal = $scope.meal;

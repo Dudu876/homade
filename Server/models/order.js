@@ -11,6 +11,7 @@ var orderSchema = new Schema({
     meal: { type: Schema.Types.ObjectId, ref: 'Meal' },
     chef: { type: Schema.Types.ObjectId, ref: 'Chef' },
     rating: { service: Number, taste: Number, valueForPrice: Number },
+    comment: String,
     quantity: Number,
     totalPrice: Number,
     date: Date
