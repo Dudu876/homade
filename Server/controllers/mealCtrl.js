@@ -6,7 +6,7 @@ var Meal = require('../models/meal');
 
 exports.getAllMeals = function (req, res) {
     Meal.find({})
-        .populate('chef')
+        .populate('Chef')
         .exec(function(error,meals){
             res.json(meals);
         });
