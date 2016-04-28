@@ -8,6 +8,7 @@ var Schema = mongoose.Schema;
 
 var orderSchema = new Schema({
     clientFBId: Number,
+    chefFBId: Number,
     meal: { type: Schema.Types.ObjectId, ref: 'Meal' },
     chef: { type: Schema.Types.ObjectId, ref: 'Chef' },
     rating: { service: Number, taste: Number, valueForPrice: Number },

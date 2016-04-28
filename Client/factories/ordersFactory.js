@@ -7,6 +7,9 @@ homadeApp.factory('ordersFactory', ['$http', function($http) {
     return {
         create : function(order) {
             return $http.post(ordersUrl, order);
+        },
+        getOrdersByChef : function(chefId) {
+            return $http.get(ordersUrl, chefId);
         }
     }
 }]);

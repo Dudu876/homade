@@ -2,7 +2,7 @@
  * Created by Dudu on 19/03/2016.
  */
 
-homadeApp.controller('addMealCtrl', ['$scope', 'mealFactory', function ($scope, mealFactory) {
+homadeApp.controller('addMealCtrl', ['$scope', 'mealFactory', 'userFactory', function ($scope, mealFactory, userFactory) {
 
 
     $('.btn-main').click( function() {
@@ -30,6 +30,7 @@ homadeApp.controller('addMealCtrl', ['$scope', 'mealFactory', function ($scope, 
 
     $scope.submit = function(){
         var meal = $scope.meal;
+        meal.chefFBId = userFactory.fbId;
 
         mealFactory.create(meal).success(function(data) {
             alert ("meal saved!" + "  " + data);

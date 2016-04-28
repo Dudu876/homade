@@ -3,9 +3,13 @@
  */
 
 var mealURL = '/api/meals/';
+var mealOfChefURL = '/api/meals/bychef/';
 homadeApp.factory('mealFactory', ['$http', function($http) {
 
     return {
+        getMealsOfChef: function(fbId) {
+            return $http.get(mealOfChefURL + fbId)  ;
+        },
         // call to get all meals
         get : function() {
             return $http.get(mealURL);

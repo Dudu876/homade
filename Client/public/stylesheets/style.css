@@ -242,4 +242,13 @@ hr.soften {
      border: 0;
  }
 
+.centeredWidth {
+    width: 70%;
+    margin-left: 15%;
+}
+
+.buttonsBlock {
+    white-space: nowrap;
+}
+
 .angular-google-map-container { height: 400px; }

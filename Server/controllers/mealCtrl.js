@@ -47,6 +47,16 @@ exports.getMealById = function (req, res) {
     });
 };
 
+exports.getMealsOfChef = function (req, res) {
+    Meal.find({ chefFBId: req.params.chef_id}, function (err, meal) {
+        if (!err) {
+            res.json(meal);
+        }
+        else {
+        }
+    });
+};
+
 exports.updateMeal = function (req, res) {
     Meal.findById(req.body._id, function (err, meal) {
         if (!err) {
@@ -94,6 +104,7 @@ exports.createMeal = function (req, res) {
     meal.glutenfree = req.body.glutenfree || false;
     meal.price = req.body.price;
     meal.type = req.body.type;
+    meal.chefFBId = req.body.chefFBId;
 
     for (var i in req.body.tags) {
         meal.tags.push(req.body.tags[i].text);

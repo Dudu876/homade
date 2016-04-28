@@ -61,6 +61,7 @@ homadeApp.controller('NavbarController', function NavbarController($scope, ezfb,
     {
         ezfb.api('/me?fields=id,picture,first_name', function (res) {
             $scope.apiMe = res;
+            userFactory.name = res.first_name;
             userFactory.fbId = res.id;
             chefsFactory.isChef(userFactory.fbId).success(function(data) {
                 userFactory.isChefUpdate(data);

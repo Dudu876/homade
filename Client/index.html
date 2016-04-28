@@ -55,6 +55,7 @@
         <script type="text/javascript" src="factories/locationTipsFactory.js"></script>
         <script type="text/javascript" src="factories/chefsFactory.js"></script>
         <script type="text/javascript" src="factories/userFactory.js"></script>
+        <script type="text/javascript" src="factories/ordersFactory.js"></script>
 
         <script type="text/javascript" src="controllers/NavbarController.js"></script>
         <script type="text/javascript" src="controllers/mainPage.js"></script>
@@ -63,13 +64,15 @@
         <script type="text/javascript" src="controllers/becomeChef.js"></script>
         <script type="text/javascript" src="controllers/searchedOrders.js"></script>
         <script type="text/javascript" src="controllers/orderMeal.js"></script>
+        <script type="text/javascript" src="controllers/chefOrders.js"></script>
+        <script type="text/javascript" src="controllers/chefMeals.js"></script>
 
     </head>
     <body>
 
         <div ng-controller="NavbarController">
             <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-                <div class="container-fluid">
+                <div class="container-fluid panel-medium">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -96,11 +99,11 @@
 
                                 <ul class="dropdown">
                                     <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">My Meals</a></li>
+                                    <li><a href="/ChefMeals">My Meals</a></li>
                                     <li><a href="/AddMeal">Add Meal</a></li>
                                     <li><a href="/Map">Map</a></li>
                                     <li><a href="/Result">Search!</a></li>
-                                    <li><a href="#">Orders</a></li>
+                                    <li><a href="/ChefOrders">Orders</a></li>
                                     <li><a href="#">History</a></li>
                                     <li><a href="#">Ratings</a></li>
                                 </ul>
@@ -134,9 +137,9 @@
             </nav>
         </div>
 
-        <div style="padding-top: 5vw;">
+        <div class="panel-medium" style="padding-top: 5vw; ">
             <!-- ANGULAR DYNAMIC CONTENT -->
-            <div ng-view></div>
+            <div class="panel-medium" ng-view></div>
         </div>
 
     </body>

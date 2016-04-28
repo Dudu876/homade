@@ -13,6 +13,12 @@ exports.createOrder = function(req, res) {
 
 };
 
+exports.getOrdersByChef = function (req, res) {
+    Order.find(req.params.chef_id).populate('meal').exec(function (err, orders) {
+        res.json(orders);
+    });
+};
+
 exports.getAllOrders = function (req, res) {
     Order.find({})
         .populate('chef')

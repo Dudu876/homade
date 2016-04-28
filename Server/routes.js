@@ -7,6 +7,7 @@ var path = require('path');
 var mealController = require('./controllers/mealCtrl');
 var locationController = require('./controllers/locationCtrl');
 var chefController = require('./controllers/chefCtrl');
+var orderController = require('./controllers/orderCtrl');
 
 module.exports = function (app) {
 
@@ -14,6 +15,9 @@ module.exports = function (app) {
         .get(mealController.getAllMeals)
         .post(mealController.createMeal)
         .put(mealController.updateMeal);
+
+    app.route('/api/meals/bychef/:chef_id')
+        .get(mealController.getMealsOfChef);
 
     app.route('/api/locationTips')
         .get(locationController.getLocationTips);
@@ -23,6 +27,12 @@ module.exports = function (app) {
 
     app.route('/api/chefs')
         .post(chefController.createChef);
+
+    app.route('/api/orders')
+        .post(orderController.createOrder);
+
+    app.route('/api/orders/:chef_id')
+        .post(orderController.getOrdersByChef);
 
     // route to handle all angular requests
     app.get('*', function (req, res) {

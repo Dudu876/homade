@@ -451,25 +451,25 @@ fieldset[disabled] .btn-default.active {
     background-color: #222;
 }
 
-.btn-primary {
-    border-color: #f05f40;
-    color: #fff;
-    background-color: #f05f40;
-    -webkit-transition: all .35s;
-    -moz-transition: all .35s;
-    transition: all .35s;
-}
+/*.btn-primary {*/
+    /*border-color: #f05f40;*/
+    /*color: #fff;*/
+    /*background-color: #f05f40;*/
+    /*-webkit-transition: all .35s;*/
+    /*-moz-transition: all .35s;*/
+    /*transition: all .35s;*/
+/*}*/
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary.focus,
-.btn-primary:active,
-.btn-primary.active,
-.open > .dropdown-toggle.btn-primary {
-    border-color: #ed431f;
-    color: #fff;
-    background-color: #ee4b28;
-}
+/*.btn-primary:hover,*/
+/*.btn-primary:focus,*/
+/*.btn-primary.focus,*/
+/*.btn-primary:active,*/
+/*.btn-primary.active,*/
+/*.open > .dropdown-toggle.btn-primary {*/
+    /*border-color: #ed431f;*/
+    /*color: #fff;*/
+    /*background-color: #ee4b28;*/
+/*}*/
 
 .btn-primary:active,
 .btn-primary.active,

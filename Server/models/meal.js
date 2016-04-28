@@ -14,6 +14,7 @@ var mealSchema = new Schema({
     tags: [ String ],
     kosher: Boolean,
     glutenfree: Boolean,
+    chefFBId: Number,
     chef: { type: Schema.Types.ObjectId, ref: 'Chef' }
 });
 
