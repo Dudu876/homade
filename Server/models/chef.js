@@ -8,6 +8,7 @@ var Schema = mongoose.Schema;
 var chefSchema = new Schema({
     workDays: [ { day: Number, isWorking: Boolean, startingTime: Date, finishTime: Date } ],
     fbId: Number,
+    name: String,
     location: { type: { type: String }, coordinates: [] },
     locationName: String
 });

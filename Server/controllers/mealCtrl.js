@@ -3,6 +3,7 @@
  */
 
 var Meal = require('../models/meal');
+var Chef = require('../models/chef');
 
 exports.getAllMeals = function (req, res) {
     Meal.find({})
@@ -37,7 +38,7 @@ exports.searchMeal = function(req,res){
 };
 
 exports.getMealById = function (req, res) {
-    Meal.findById(req.params.meal_id, function (err, meal) {
+    Meal.findById(req.params.meal_id).populate('chef').exec(function (err, meal) {
         if (!err) {
             res.json(meal);
         }
@@ -48,7 +49,7 @@ exports.getMealById = function (req, res) {
 };
 
 exports.getMealsOfChef = function (req, res) {
-    Meal.find({ chefFBId: req.params.chef_id}, function (err, meal) {
+    Meal.find({ chefFBId: req.params.chef_id}).populate('chef').exec(function (err, meal) {
         if (!err) {
             res.json(meal);
         }
@@ -110,13 +111,21 @@ exports.createMeal = function (req, res) {
         meal.tags.push(req.body.tags[i].text);
     }
 
-    meal.save(function (err) {
+    Chef.find({fbId: req.body.chefFBId}, function (err, chef) {
         if (!err) {
+            meal.chef = chef[0];
+            meal.save(function (error) {
+                if (!error) {
 
-            res.json('meal created');
+                    res.json('meal created');
+                }
+                else {
+                    //Utils.generateResponse(req, res, 0, err);
+                }
+            });
         }
         else {
-            //Utils.generateResponse(req, res, 0, err);
+
         }
     });
 };

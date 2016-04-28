@@ -8,6 +8,7 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
     $scope.locationChosen = false;
     $scope.chefDetails = {};
     $scope.chefDetails.fbId = userFactory.fbId;
+    $scope.chefDetails.name = userFactory.fullname;
 
     autocomplete = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),

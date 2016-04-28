@@ -38,6 +38,11 @@
     width: 20px;
     margin-right: 5px;
     margin-left: -5px;
+    float: left;
+}
+.mish-icon.meal-icon {
+    /*margin: 10px;*/
+    width: 50px;
 }
 
 .mish-margin {
@@ -79,7 +84,6 @@
     text-align: center;
     width: 50%;
     margin: auto;
-
 }
 
 .chef-container {
@@ -241,6 +245,52 @@ hr.soften {
      background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.8), rgba(0,0,0,0));
      border: 0;
  }
+
+.mish-price-baner {
+    position: absolute;
+    text-decoration: none;
+    background-color: rgba(60,63,64,0.9);
+    color: #fff;
+    /*bottom: 70px;*/
+    top: 200px;
+    left: 10px;
+    padding: 7px 10px;
+}
+
+.media-photo {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: relative;
+    display: inline-block;
+    /* vertical-align: bottom; */
+    overflow: hidden;
+    top: -40px;
+    right: 10px;
+    background-color: #cacccd;
+}
+
+.media-round {
+    -webkit-border-radius: 50%;
+    /*-moz-border-radius: 50%;*/
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+.meal-card {
+    position: relative;
+}
+
+.mish-map {
+    position: fixed;
+    right: 0;
+    left: auto;
+    bottom: 0;
+}
+
+.angular-google-map-container {
+    height: 400px;
+}
 
 .centeredWidth {
     width: 70%;

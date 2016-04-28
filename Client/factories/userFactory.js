@@ -5,6 +5,7 @@ homadeApp.factory('userFactory', function($rootScope){
     return {
         fbId: '',
         name: '',
+        fullname: '',
         isChefUpdate: function(data) {
             $rootScope.$broadcast('isChefUpdate', data);
         }

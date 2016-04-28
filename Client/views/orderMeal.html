@@ -3,7 +3,7 @@
     <div class="pic-container">
         <img class="backgroundImage" src="../public/images/eodiwz6phzzm6sssojqa.jpg" alt="">
         <div class="money-text">
-            <h4> Available for: {{ price }} $ </h4>
+            <h4> Available for: {{ meal.price }} $ </h4>
         </div>
     </div>
 
@@ -15,7 +15,7 @@
                     <label for="quantity">Quantity:</label>
                     <input type="number" class="under-money-in" placeholder="Quantity" min="1" max="20" id="quantity" ng-model="quantity">
                 </div>
-                <button class="btn btn-primary" ng-click="performOrder()" confirm="Are you sure you want to order {{ quantity }} of {{ name }}?"  confirm-settings="{size: 'la'}">
+                <button class="btn btn-primary" ng-click="performOrder()" confirm="Are you sure you want to order {{ quantity }} of {{ meal.name }}?"  confirm-settings="{size: 'la'}">
                     Order!
                 </button>
             </form>
@@ -23,8 +23,8 @@
 
         <div class="col-md-3 profile" >
             <a class="" href="/Profile">
-                <img src="https://a1.muscache.com/im/users/15625666/profile_pic/1432856349/original.jpg?aki_policy=profile_x_medium" class="chef-pic" align="top"><br>
-                Michael
+                <img ng-src="{{ chefPic }}" class="chef-pic" align="top"><br>
+                {{ chefName }}
 
             </a>
         </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="col-md-9" style="background: #f5f5f5; width: initial" >
             <div>
-                <h1 itemprop="name" class="overflow h1 space-1 text-center-sm test" id="listing_name" >{{ name }} </h1>
+                <h1 itemprop="name" class="overflow h1 space-1 text-center-sm test" id="listing_name" >{{ meal.name }} </h1>
                 <i class="fa fa-star fa-2x yellowed-star" ng-repeat="n in fullStars() track by $index"></i>
                 <i ng-if="halfStar()" class="fa fa-star-half-o fa-2x yellowed-star" aria-hidden="true"></i>
                 <i class="fa fa-star-o fa-2x" ng-repeat="n in emptyStars() track by $index"></i>
@@ -41,18 +41,45 @@
 
 
             <br/>
-            <div class="properties">
+            <div class="properties" ng-show="meal.type == 'Vegetrian'">
                 <img src="../public/images/leaf.png" align="top"><br>
                 Vegeterian
             </div>
-            <div class="properties">
+
+            <div class="properties" ng-show="meal.type == 'Vegan'">
+                <img src="../public/images/leaf.png" align="top"><br>
+                Vegan
+            </div>
+
+            <div class="properties" ng-show="meal.type == 'Milk'">
+                <img src="../public/images/milk.png" align="top"><br>
+                Milk
+            </div>
+
+            <div class="properties" ng-show="meal.type == 'Meat'">
+                <img src="../public/images/meat.png" align="top"><br>
+                Meat
+            </div>
+
+            <div class="properties" ng-show="!meal.kosher">
                 <img class="propInActive" src="../public/images/certifiedKosher.jpg" align="top"><br>
                 Not Kosher
             </div>
 
-            <div class="properties">
-                <img class="propInActive" src="../public/images/glutentrue.jpg" align="top"><br>
+            <div class="properties" ng-show="meal.kosher">
+                <img src="../public/images/certifiedKosher.jpg" align="top"><br>
+                Kosher
+            </div>
+
+
+            <div class="properties" ng-show="!meal.glutenfree">
+                <img src="../public/images/glutentrue.jpg" align="top"><br>
                 With Gluten
+            </div>
+
+            <div class="properties" ng-show="meal.glutenfree">
+                <img class="propInActive" src="../public/images/glutentrue.jpg" align="top"><br>
+                No Gluten
             </div>
         </div>
     </div>
@@ -61,7 +88,7 @@
             <hr class="soften" />
             <h4 itemprop="name" class="overflow h4 space-1 text-center-sm test \\" > DESCRIPTION </h4>
             <div >
-                {{ description }}
+                {{ meal.description }}
             </div>
         </div>
     </div>

@@ -6,21 +6,21 @@ homadeApp.controller('resultCtrl', ['$scope', 'mealService', 'uiGmapGoogleMapApi
     //---------Loading the result data from server--------------
     var meals = [
         { name: 'Kebab1', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.7}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false},
+            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false, _id: '57225a491d2444382e347355'},
         { name: 'Kebab2', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.1}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: true},
+            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: true, _id: '57225a491d2444382e347355'},
         { name: 'Kebab3', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.6}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: true},
+            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: true, _id: '57225a491d2444382e347355'},
         { name: 'Kebab4', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.2}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false},
+            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false, _id: '57225a491d2444382e347355'},
         { name: 'Kebab5', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.3}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false},
+            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false, _id: '57225a491d2444382e347355'},
         { name: 'Kebab6', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.4}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: true},
+            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: true, _id: '57225a491d2444382e347355'},
         { name: 'Kebab7', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.5}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false},
+            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false, _id: '57225a491d2444382e347355'},
         { name: 'Kebab8', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.6}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false}
+            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false, _id: '57225a491d2444382e347355'}
     ];
 
 

@@ -10,6 +10,9 @@ homadeApp.factory('mealFactory', ['$http', function($http) {
         getMealsOfChef: function(fbId) {
             return $http.get(mealOfChefURL + fbId)  ;
         },
+        getMeal : function(mealId) {
+            return $http.get(mealURL + mealId)  ;
+        },
         // call to get all meals
         get : function() {
             return $http.get(mealURL);

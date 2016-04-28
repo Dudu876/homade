@@ -16,6 +16,9 @@ module.exports = function (app) {
         .post(mealController.createMeal)
         .put(mealController.updateMeal);
 
+    app.route('/api/meals/:meal_id')
+        .get(mealController.getMealById);
+
     app.route('/api/meals/bychef/:chef_id')
         .get(mealController.getMealsOfChef);
 

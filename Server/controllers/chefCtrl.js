@@ -10,6 +10,7 @@ exports.createChef = function (req, res) {
     chef.locationName = req.body.locationName;
     chef.workDays = req.body.workDays;
     chef.fbId = req.body.fbId;
+    chef.name = req.body.name;
 
     chef.save(function (err) {
         if (!err) {
