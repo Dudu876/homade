@@ -1,7 +1,7 @@
 /**
  * Created by Dudu on 04/04/2016.
  */
-homadeApp.controller('resultCtrl', ['$scope', 'mealFactory', '$timeout', '$location', 'uiGmapGoogleMapApi', function ($scope, mealFactory, $timeout, $location, uiGmapGoogleMapApi) {
+homadeApp.controller('resultCtrl', ['$scope', 'mealFactory', '$timeout', '$location', 'ezfb', 'uiGmapGoogleMapApi', function ($scope, mealFactory, $timeout, $location, ezfb, uiGmapGoogleMapApi) {
 
     //$scope.meals = meals;
     var i = 100;
@@ -28,6 +28,9 @@ homadeApp.controller('resultCtrl', ['$scope', 'mealFactory', '$timeout', '$locat
         }
         console.log('Map is ready')
         $scope.meals.forEach(function(element, index, array) {
+            ezfb.api('/v2.6/' + element.chefFBId + '/picture?height=100&width=100', function (res) {
+                element.chefPic = res.data.url;
+            });
             var marker = {
                 id: index,
                 coords: {
@@ -58,14 +61,13 @@ homadeApp.controller('resultCtrl', ['$scope', 'mealFactory', '$timeout', '$locat
     }
 
     $scope.mealClicked = function(meal) {
-        mealFactory.setSelected(meal);
         $location.url('/OrderMeal/' + meal._id);
     };
 
     uiGmapGoogleMapApi.then(function(maps) {
+        $scope.map = { center: { latitude: 32.1, longitude: 34.80 }, zoom: 14 };
         //---------Loading the user location -------------------
         navigator.geolocation.getCurrentPosition(showPosition);
-        $scope.map = { center: { latitude: 32.1, longitude: 34.80 }, zoom: 14 };
         mapIsReady = true;
     });
 
