@@ -17,8 +17,11 @@ homadeApp.controller('resultCtrl', ['$scope', 'mealFactory', '$timeout', '$locat
 
     function showPosition(position) {
         console.log(position);
-        $scope.map.center.latitude = position.coords.latitude;
-        $scope.map.center.longitude = position.coords.longitude;
+        $timeout(function() {
+            console.log('center changed');
+            $scope.map.center.latitude = position.coords.latitude;
+            $scope.map.center.longitude = position.coords.longitude;
+        },1000);
     }
 
     function addMarkers() {
