@@ -1,34 +1,15 @@
 /**
  * Created by Dudu on 04/04/2016.
  */
-homadeApp.controller('resultCtrl', ['$scope', 'mealService', 'uiGmapGoogleMapApi', function ($scope, mealService, uiGmapGoogleMapApi) {
+homadeApp.controller('resultCtrl', ['$scope', 'mealService', '$timeout', 'uiGmapGoogleMapApi', function ($scope, mealService, $timeout, uiGmapGoogleMapApi) {
 
-    //---------Loading the result data from server--------------
-    var meals = [
-        { name: 'Kebab1', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.7}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false, _id: '57225a491d2444382e347355'},
-        { name: 'Kebab2', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.1}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: true, _id: '57225a491d2444382e347355'},
-        { name: 'Kebab3', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.6}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: true, _id: '57225a491d2444382e347355'},
-        { name: 'Kebab4', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.2}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false, _id: '57225a491d2444382e347355'},
-        { name: 'Kebab5', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.3}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false, _id: '57225a491d2444382e347355'},
-        { name: 'Kebab6', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.4}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: true, _id: '57225a491d2444382e347355'},
-        { name: 'Kebab7', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.5}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false, _id: '57225a491d2444382e347355'},
-        { name: 'Kebab8', description: 'The best Kebab in the country', location:{lat:32.1,lng:34.6}, price: 200,
-            tags: ['best','meal','ever','kebab'],type:'meat',kosher: true,glutenfree: false, _id: '57225a491d2444382e347355'}
-    ];
-
-
-    $scope.meals = meals;
+    //$scope.meals = meals;
     var i = 100;
+    var mapIsReady = false;
 
     mealService.get().then(function (response) {
-        $scope.meals2 = response.data;
+        $scope.meals = response.data;
+        addMarkers();
     });
 
     //---------Loading the user location -------------------
@@ -40,17 +21,20 @@ homadeApp.controller('resultCtrl', ['$scope', 'mealService', 'uiGmapGoogleMapApi
         $scope.map.center.longitude = position.coords.longitude;
     }
 
-    uiGmapGoogleMapApi.then(function(maps) {
-        //---------Loading the user location -------------------
-        navigator.geolocation.getCurrentPosition(showPosition);
-        $scope.map = { center: { latitude: 32.1, longitude: 34.80 }, zoom: 14 };
-
-        meals.forEach(function(element, index, array) {
+    function addMarkers() {
+        if (!mapIsReady) {
+            $timeout(addMarkers,500);
+            console.log('Map is not ready yet')
+        }
+        console.log('Map is ready')
+        $scope.meals.forEach(function(element, index, array) {
             var marker = {
                 id: index,
                 coords: {
-                    latitude: element.location.lat,
-                    longitude: element.location.lng
+                    //latitude: element.location.lat,
+                    //longitude: element.location.lng
+                    latitude: $scope.meals[0].chef.location.coordinates[0],
+                    longitude: $scope.meals[0].chef.location.coordinates[1]
                 },
                 options: {
                 },
@@ -71,6 +55,15 @@ homadeApp.controller('resultCtrl', ['$scope', 'mealService', 'uiGmapGoogleMapApi
             };
             $scope.markers.push(marker);
         });
+    }
+
+    uiGmapGoogleMapApi.then(function(maps) {
+        //---------Loading the user location -------------------
+        navigator.geolocation.getCurrentPosition(showPosition);
+        $scope.map = { center: { latitude: 32.1, longitude: 34.80 }, zoom: 14 };
+
+        mapIsReady = true;
+
 
         //var mark = {
         //    id: 500,
