@@ -1,9 +1,9 @@
 <div class="">
     <div class="col-lg-8 col-sm-6 col-xs-12">
         <div class="col-lg-6 col-sm-12 col-xs-12" ng-repeat="meal in meals" style="padding: 10px;">
-            <div class="" style=" cursor: pointer">
+            <div class="" ng-click="mealClicked(meal)" style="cursor: pointer; ">
                 <img class="" ng-src="http://placehold.it/350x150" style="height: auto; width: 100%;"/>
-                    <div class="mish-price-baner">
+                <div class="mish-price-baner">
                     <!--<div class="tooltip tooltip-fixed tooltip-bottom-left total-price-breakdown text-dark-gray" role="tooltip">-->
                     <!--<div class="loading"></div>-->
                     <!--</div>-->

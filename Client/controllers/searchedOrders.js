@@ -1,14 +1,14 @@
 /**
  * Created by Dudu on 04/04/2016.
  */
-homadeApp.controller('resultCtrl', ['$scope', 'mealService', '$timeout', 'uiGmapGoogleMapApi', function ($scope, mealService, $timeout, uiGmapGoogleMapApi) {
+homadeApp.controller('resultCtrl', ['$scope', 'mealFactory', '$timeout', '$location', 'uiGmapGoogleMapApi', function ($scope, mealFactory, $timeout, $location, uiGmapGoogleMapApi) {
 
     //$scope.meals = meals;
     var i = 100;
     var mapIsReady = false;
 
-    mealService.get().then(function (response) {
-        $scope.meals = response.data;
+    mealFactory.get().success(function (response) {
+        $scope.meals = response;
         addMarkers();
     });
 
@@ -57,47 +57,16 @@ homadeApp.controller('resultCtrl', ['$scope', 'mealService', '$timeout', 'uiGmap
         });
     }
 
+    $scope.mealClicked = function(meal) {
+        mealFactory.setSelected(meal);
+        $location.url('/OrderMeal/' + meal._id);
+    };
+
     uiGmapGoogleMapApi.then(function(maps) {
         //---------Loading the user location -------------------
         navigator.geolocation.getCurrentPosition(showPosition);
         $scope.map = { center: { latitude: 32.1, longitude: 34.80 }, zoom: 14 };
-
         mapIsReady = true;
-
-
-        //var mark = {
-        //    id: 500,
-        //    coords: {
-        //        latitude: 32.062505962459944,
-        //        longitude: 34.794884460449225
-        //    },
-        //    options: {
-        //        draggable: true
-        //    },
-        //    events: {
-        //        dragend: function (marker, eventName, args) {
-        //            console.log('marker dragend1');
-        //            var lat = marker.getPosition().lat();
-        //            var lng = marker.getPosition().lng();
-        //            console.log(lat);
-        //            console.log(lng);
-        //        }
-        //    },
-        //    window: {
-        //        title: 'this is title',
-        //        options: {
-        //            visible: false
-        //        },
-        //        onClick: function() {
-        //            $scope.window.options.visible = !$scope.window.options.visible;
-        //        },
-        //        closeClick: function() {
-        //            $scope.window.options.visible = false;
-        //        }
-        //    }
-        //};
-        //$scope.markers.push(mark);
-
     });
 
 }]);
