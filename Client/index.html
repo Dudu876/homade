@@ -67,6 +67,8 @@
         <script type="text/javascript" src="controllers/chefOrders.js"></script>
         <script type="text/javascript" src="controllers/chefMeals.js"></script>
 
+        <script type="text/javascript" src="directives/myEnter.js"></script>
+
     </head>
     <body>
 
@@ -85,7 +87,8 @@
                     </div>
 
                     <div class="navbar-filter" ng-show="shouldShowFilter()">
-                        <input id="searchBar" name="searchBar" type="text" placeholder="What do you want to eat? " width="200px"><input id="location" name="location" type="text" placeholder="Where?" >
+                        <input id="searchBar" my-enter="search()" ng-model="search.text" name="searchBar" type="text" placeholder="What do you want to eat? " width="200px">
+                        <input id="location" ng-model="search.location" name="location" type="text" placeholder="Where?" >
                     </div>
 
                     <div class="rightnav" id="bs-example-navbar-collapse-1">
