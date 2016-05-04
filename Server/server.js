@@ -24,9 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-var imageDir = '../Client/meal_uploads';
-
 app.use('/',express.static(path.join(__dirname, '../Client')));
 
-uploader.init(imageDir);
+uploader.init(path.join(__dirname,'../Client/meal_uploads'));
 routes(app);

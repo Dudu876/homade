@@ -9,14 +9,14 @@ var _this = this;
 var storage;
 var upload;
 var _mealId;
-exports.init = function(imageDir) {
-    if (!fs.existsSync(imageDir)){
-        fs.mkdirSync(imageDir);
+exports.init = function(imageDirPath) {
+    if (!fs.existsSync(imageDirPath)){
+        fs.mkdirSync(imageDirPath);
     }
     storage = multer.diskStorage({ //multers disk storage settings
         destination: function (req, file, cb) {
             //cb(null, '../Client/meal_uploads/')
-            cb(null, imageDir);
+            cb(null, imageDirPath);
         },
         filename: function (req, file, cb) {
             var datetimestamp = Date.now();
