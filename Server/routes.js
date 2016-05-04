@@ -5,7 +5,7 @@ var path = require('path');
 
 // Example
 var mealController = require('./controllers/mealCtrl');
-var locationController = require('./controllers/locationCtrl');
+var cityController = require('./controllers/cityCtrl');
 var chefController = require('./controllers/chefCtrl');
 var orderController = require('./controllers/orderCtrl');
 
@@ -17,13 +17,14 @@ module.exports = function (app) {
         .put(mealController.updateMeal);
 
     app.route('/api/meals/:meal_id')
-        .get(mealController.getMealById);
+        .get(mealController.getMealById)
+        .delete(mealController.deleteMeal);
 
     app.route('/api/meals/bychef/:chef_id')
         .get(mealController.getMealsOfChef);
 
     app.route('/api/locationTips')
-        .get(locationController.getLocationTips);
+        .get(cityController.getLocationTips);
 
     app.route('/api/chefs/:chef_id')
         .get(chefController.isChef);

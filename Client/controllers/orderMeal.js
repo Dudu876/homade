@@ -3,8 +3,12 @@
  */
 homadeApp.controller('orderMealCtrl', ['$scope', 'ordersFactory', 'userFactory', 'mealFactory', 'ezfb', function ($scope, ordersFactory, userFactory, mealFactory, ezfb) {
     var mealId = location.pathname.split("/").pop();
+    $scope.order = {};
+
     mealFactory.getMeal(mealId).success(function(data) {
-        $scope.meal = data;
+        $scope.order.meal = data;
+        $scope.order.chefFBId = data.chefFBId;
+        $scope.order.chef = data.chef;
         $scope.chefName = data.chef.name.split(' ')[0];
 
         ezfb.api('/v2.6/' + data.chefFBId + '/picture?height=100&width=100', function (res) {
@@ -12,11 +16,10 @@ homadeApp.controller('orderMealCtrl', ['$scope', 'ordersFactory', 'userFactory',
         });
     });
 
-    $scope.quantity = 1;
+    $scope.order.quantity = 1;
     $scope.averageRating = 4.8;
     $scope.flooredRating = Math.floor($scope.averageRating);
     $scope.comments = [ { } ];
-    $scope.quantity = 1;
 
 
     $scope.fullStars = function() {
@@ -43,8 +46,8 @@ homadeApp.controller('orderMealCtrl', ['$scope', 'ordersFactory', 'userFactory',
     };
 
     $scope.performOrder = function () {
-        order = {clientFBId: userFactory.fbId};
-        ordersFactory.create(order);
+        $scope.order.clientFBId = userFactory.fbId;
+        ordersFactory.create($scope.order);
     };
 
     $scope.toggleReviews = function() {

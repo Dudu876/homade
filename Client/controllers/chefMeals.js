@@ -16,4 +16,21 @@ homadeApp.controller('chefMealsCtrl', ['$scope', 'mealFactory', 'userFactory', '
         }
     });
 
+    $scope.deleteMeal = function(mealId) {
+        mealFactory.delete(mealId).success(function(resultId) {
+            if (resultId != null)
+            {
+                var removeSaver = 0;
+                for (i = 0; i < $scope.meals.length; i++) {
+                    if ($scope.meals._id == resultId)
+                    {
+                        removeSaver = i;
+                        break;
+                    }
+                }
+
+                $scope.meals.splice(removeSaver, 1);
+            }
+        });
+    };
 }]);

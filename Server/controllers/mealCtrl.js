@@ -87,9 +87,9 @@ exports.updateMeal = function (req, res) {
 };
 
 exports.deleteMeal = function (req, res) {
-    Meal.remove({number: req.params.number}, function (err) {
+    Meal.remove({_id: req.params.meal_id}, function (err) {
         if (!err) {
-            res.json(req.params.number);
+            res.json(req.params.meal_id);
         }
         else {
             //Utils.generateResponse(req, res, 0, err);
