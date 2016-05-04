@@ -12,7 +12,7 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
 
     autocomplete = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
-        {types: ['geocode']});
+        {types: ['address']});
 
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         var place = autocomplete.getPlace();

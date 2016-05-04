@@ -288,6 +288,52 @@ hr.soften {
     bottom: 0;
 }
 
+.mish-title-chef-meals {
+    text-decoration: none;
+    background-color: rgba(60,63,64,0.9);
+    color: #fff;
+    bottom: 32%;
+    /*top: 200px;*/
+    left: 10px;
+    padding: 7px 10px;
+}
+
+.mish-price-baner-chef-meals {
+    float:right;
+    text-decoration: none;
+    color: #fff;
+    /*top: 200px;*/
+    left: 10px;
+    padding: 7px 10px;
+}
+
+.meal-pic-container {
+    position: relative;
+}
+
+.meal-pic-container:hover .edit-delete-image {
+    display: block;
+}
+
+.edit-delete-image {
+    padding-top: 7px;
+    padding-right: 7px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none;
+}
+
+.meal-attributes {
+    padding-top: 5px;
+    padding-left: 7px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+}
+
+
 .angular-google-map-container {
     height: 100vh;
 }

@@ -10,7 +10,8 @@ var chefSchema = new Schema({
     fbId: Number,
     name: String,
     location: { type: { type: String }, coordinates: [] },
-    locationName: String
+    locationName: String,
+    city: String
 });
 
 module.exports = mongoose.model('Chef', chefSchema );
