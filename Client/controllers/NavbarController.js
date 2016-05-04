@@ -8,9 +8,16 @@ homadeApp.controller('NavbarController', function NavbarController($scope, ezfb,
     $scope.loggedInStatusVerified = false;
     $scope.loadedChefData = false;
     $scope.isChef = false;
+
+    $scope.search = {};
+
     $scope.$on('isChefUpdate', function(event, args){
         $scope.isChef = args;
     });
+
+    $scope.search = function() {
+        $location.url('/Result?q=' + $scope.search.text);
+    };
 
     updateLoginStatus(updateApiMe);
 

@@ -107,9 +107,15 @@ exports.createMeal = function (req, res) {
     meal.type = req.body.type;
     meal.chefFBId = req.body.chefFBId;
 
+    //handle tags
     for (var i in req.body.tags) {
         meal.tags.push(req.body.tags[i].text);
     }
+    var name_tags = req.body.name.split(" ");
+    meal.tags = meal.tags.concat(name_tags);
+
+    meal.tags = fixTags(meal.tags);
+    meal.tags = filterTags(meal.tags);
 
     Chef.find({fbId: req.body.chefFBId}, function (err, chef) {
         if (!err) {
@@ -129,5 +135,18 @@ exports.createMeal = function (req, res) {
         }
     });
 };
+
+function fixTags(tags) {
+    var seen = {};
+    return tags.filter(function(item) {
+        return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+    });
+}
+function filterTags(tags) {
+    var badWords = ['the','for','in','a','on','at','with','like'];
+    return tags.filter(function(item) {
+        return (badWords.indexOf(item) < 0);
+    });
+}
 
 
