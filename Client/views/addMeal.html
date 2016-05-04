@@ -85,7 +85,19 @@
             </div>
             <!-- RIGHT SIDE -->
             <div class="col-lg-4" style="margin-left: 2vw;">
-
+                <input  type="file"
+                        ngf-select
+                        ng-model="meal.file"
+                        name="file"
+                        ngf-pattern="'image/*'"
+                        accept="image/*"
+                        ngf-max-size="20MB"/>
+                Image thumbnail: <img style="width:100px;" ngf-thumbnail="meal.file || '/thumb.jpg'"> <br>
+                <i ng-show="meal.file.$error.required">*required</i><br>
+                <i ng-show="meal.file.$error.maxSize">File too large
+                    {{meal.file.size / 1000000|number:1}}MB: max 20M</i>
+                <!--<button type="submit" ng-click="up.submit()">submit</button>-->
+                <p>{{meal.file.progress}}</p>
             </div>
         </form>
     </div>
