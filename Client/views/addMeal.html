@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="panel-body panel-medium">
-        <form ng-submit="submit()" class="container">
+        <form name="form" ng-submit="submit()" class="container">
             <!--LEFT SIDE-->
             <div class="col-lg-6" ng-init="init()">
                 <div class="row mish-margin">
@@ -77,15 +77,8 @@
                     <label class="checkbox-inline"><input type="checkbox" value="">Option 3</label>
                 </div>
 
-                <div class="col-lg-6">
-                    <button type="submit" class="btn btn-warning btn-block mish-margin">
-                        Submit
-                    </button>
-                </div>
-            </div>
-            <!-- RIGHT SIDE -->
-            <div class="col-lg-4" style="margin-left: 2vw;">
-                <input  type="file"
+                <input  class="mish-margin"
+                        type="file"
                         ngf-select
                         ng-model="meal.file"
                         name="file"
@@ -98,6 +91,16 @@
                     {{meal.file.size / 1000000|number:1}}MB: max 20M</i>
                 <!--<button type="submit" ng-click="up.submit()">submit</button>-->
                 <p>{{meal.file.progress}}</p>
+
+                <div class="col-lg-6">
+                    <button type="submit" class="btn btn-warning btn-block mish-margin">
+                        Submit
+                    </button>
+                </div>
+            </div>
+            <!-- RIGHT SIDE -->
+            <div class="col-lg-4" style="margin-left: 2vw;">
+
             </div>
         </form>
     </div>

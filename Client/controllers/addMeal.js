@@ -16,7 +16,7 @@ homadeApp.controller('addMealCtrl', ['$scope', 'mealFactory', 'userFactory', 'Up
     $scope.currency = $scope.currencies[0];
     $scope.dropdown = false;
 
-    $scope.file = {};
+    //$scope.meal.file = {};
 
     $scope.init = function (){
 
@@ -31,6 +31,22 @@ homadeApp.controller('addMealCtrl', ['$scope', 'mealFactory', 'userFactory', 'Up
     };
 
     $scope.submit = function(){
+        if (!$scope.meal.type) {
+            alert('No type selected. Select one.');
+            //$('.btn-group').focus();
+            //$('html, body').animate({ scrollTop: $('#type').offset().top }, 'slow');
+            $("#type").attr("tabindex",-1).focus();
+            return;
+        }
+        if (!$scope.form.$valid){
+            alert('Form is invalid. Fix it');
+            return;
+        }
+        if (!$scope.meal.file) {
+            alert('Please add an image. No Image, No Meal!');
+            return;
+        }
+
         var meal = $scope.meal;
         meal.chefFBId = userFactory.fbId;
 
@@ -40,13 +56,13 @@ homadeApp.controller('addMealCtrl', ['$scope', 'mealFactory', 'userFactory', 'Up
             alert(data);
         });
 
-        upload($scope.file); //call upload function
+        upload($scope.meal.file); //call upload function
         //update meal
     };
 
     function upload(file) {
         Upload.upload({
-            url: 'http://localhost:5000/upload', //webAPI exposed to upload the file
+            url: '/upload', //webAPI exposed to upload the file
             data:{file:file} //pass file as data, should be user ng-model
         }).then(function (resp) { //upload function returns a promise
             if(resp.data.error_code === 0){ //validate success
