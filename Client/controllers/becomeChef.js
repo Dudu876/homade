@@ -1,7 +1,7 @@
 /**
  * Created by Michael on 3/31/2016.
  */
-homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFactory', 'userFactory', function ($scope, locationTipsFactory, chefsFactory, userFactory) {
+homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFactory', 'userFactory', 'uiGmapGoogleMapApi', function ($scope, locationTipsFactory, chefsFactory, userFactory, uiGmapGoogleMapApi) {
     $scope.isActive1 = true;
     $scope.isActive2 = false;
     $scope.isActive3 = false;
@@ -9,6 +9,11 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
     $scope.chefDetails = {};
     $scope.chefDetails.fbId = userFactory.fbId;
     $scope.chefDetails.name = userFactory.fullname;
+    $scope.zoom = 14;
+
+    uiGmapGoogleMapApi.then(function(maps) {
+        $scope.map = {center: {latitude: 45, longitude: -73}, zoom: 8};
+    });
 
     autocomplete = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),

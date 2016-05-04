@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var cityAreaSchema = new Schema({
-    city: { type: Schema.Types.ObjectId, ref: 'Chef' },
+    cityname: String,
     area: { type: {type: String}, coordinates: []},
     popularTags: [String]
 });
