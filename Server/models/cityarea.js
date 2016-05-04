@@ -7,8 +7,11 @@ var Schema = mongoose.Schema;
 
 var cityAreaSchema = new Schema({
     city: { type: Schema.Types.ObjectId, ref: 'Chef' },
-    polygon: { type: { type: String }, coordinates: [] },
+    area: { type: {type: String}, coordinates: []},
     popularTags: [String]
 });
+
+// define the index
+cityAreaSchema.index({area: '2dsphere'});
 
 module.exports = mongoose.model('CityArea', cityAreaSchema );
