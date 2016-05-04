@@ -5,43 +5,10 @@ var kmeans = require('node-kmeans');
 var d3 = require('d3-voronoi');
 var Order = require('../models/order');
 var City = require('../models/city');
-var CityAreas = require('../models/cityarea');
+var CityArea = require('../models/cityarea');
+var cityHashtable = {};
 
 exports.getLocationTips = function (req, res) {
-    var data = [
-        {'company': 'Microsoft' , 'size': 91259, 'revenue': 60420},
-        {'company': 'IBM' , 'size': 400000, 'revenue': 98787},
-        {'company': 'Skype' , 'size': 700, 'revenue': 716},
-        {'company': 'SAP' , 'size': 48000, 'revenue': 11567},
-        {'company': 'Yahoo!' , 'size': 14000 , 'revenue': 6426 },
-        {'company': 'eBay' , 'size': 15000, 'revenue': 8700},
-    ];
-
-    var vertices = [
-        [1, 0],
-        [0, 1],
-        [0, 0],
-    ];
-    var width = 960,
-        height = 500;
-
-    var temp = d3.voronoi();
-    var voronoi = d3.voronoi().extent([[0, 0], [1, 1]]);
-
-    var res = voronoi(vertices).polygons();
-
-// Create the data 2D-array (vectors) describing the data
-    var vectors = [];
-    for (var i = 0 ; i < data.length ; i++)
-        vectors[i] = [ data[i]['size'] , data[i]['revenue']];
-
-    kmeans.clusterize(vectors, {k: 4}, function(err,res) {
-        if (err) console.error(err);
-        else
-        {
-            //console.log('%o',res);
-        }
-    });
 };
 
 exports.createCity = function (city) {
@@ -76,57 +43,127 @@ getExtentOfCity = function(cityName) {
     });
 };
 
-exports.performCitiesSplitting = function (){
-    Order.find("").populate('chef meal').exec(function(error, orders){
-        var cityLocations = {};
+exports.performCitySplitting = function (affectedCity)
+{
+    if (cityHashtable[affectedCity] == null)
+    {
+        cityHashtable[affectedCity] = 1;
+    }
+    else {
+        cityHashtable[affectedCity]++;
+    }
 
-        for (i = 0; i < orders.length; i++)
-        {
-            if (cityLocations[orders[i].chef.city] == null)
-            {
-                cityLocations[orders[i].chef.city] = {};
+    if (cityHashtable[affectedCity] % 1 == 0)
+    {
+        Order.find({city: affectedCity}).populate('chef meal').exec(function(error, orders) {
+            var cityLocations = [];
+            var cityTags = [];
+
+            for (i = 0; i < orders.length; i++) {
+                cityLocations.push(orders[i].chef.location.coordinates);
+                cityTags.push(orders[i].meal.tags);
             }
 
-            if (cityLocations[orders[i].chef.city].locations == null)
-            {
-                cityLocations[orders[i].chef.city].locations = [];
-            }
-
-            cityLocations[orders[i].chef.city].locations.push(orders[i].chef.location.coordinates);
-        }
-
-        for (var city in cityLocations)
-        {
-            kmeans.clusterize(cityLocations[city].locations, {k: 4}, function(err, res) {
+            kmeans.clusterize(cityLocations, {k: 4}, function (err, kmeansRes) {
                 if (err) {
                     console.error(err);
                 }
-                else
-                {
-                    City.findOne({name: city}, function (error, cityRes)
+                else {
+                    var areaTags = [];
+                    // Iterate over the areas and find the most popular tags in each one
+                    for (j = 0; j < kmeansRes.length; j++)
                     {
-                        if (error){
+                        var currAreaTags = {};
+
+                        for (k = 0; k < kmeansRes[j].clusterInd.length; k++)
+                        {
+                            var currTagArr = cityTags[kmeansRes[j].clusterInd[k]];
+
+                            for (l = 0; l < currTagArr.length; l++)
+                            {
+                                if (currAreaTags[currTagArr[l]] == null)
+                                {
+                                    currAreaTags[currTagArr[l]] = 1;
+                                }
+                                else
+                                {
+                                    currAreaTags[currTagArr[l]]++;
+                                }
+                            }
+                        }
+
+                        // Sort popular tags
+                        var tuples = [];
+
+                        for (var key in currAreaTags) tuples.push([key, currAreaTags[key]]);
+
+                        tuples.sort(function(a, b) {
+                            a = a[1];
+                            b = b[1];
+
+                            return a < b ? -1 : (a > b ? 1 : 0);
+                        });
+
+                        var topTags = [];
+
+                        // Take 5 most popular
+                        for (var i = 0; i < 5 && i < tuples.length; i++) {
+                            var key = tuples[i][0];
+                            topTags.push(key);
+                        }
+
+                        areaTags.push(topTags);
+                    }
+
+                    City.findOne({name: affectedCity}, function (error, cityRes) {
+                        if (error) {
                             console.error(error);
                         }
                         else {
-                            cityLocations[city].kmeansResults = res;
                             var voronoitemp = d3.voronoi();
                             var voronoi = d3.voronoi().extent([cityRes.southwest, cityRes.northeast]);
                             var vertices = [];
 
-                            for (i = 0; i < res.length; i++)
-                            {
-                                if (res[i].centroid.length == 2 ) {
-                                    vertices.push(res[i].centroid);
+                            for (i = 0; i < kmeansRes.length; i++) {
+                                if (kmeansRes[i].centroid.length == 2) {
+                                    vertices.push(kmeansRes[i].centroid);
                                 }
                             }
 
                             var areas = voronoi(vertices).polygons();
+
+                            for (x = 0; x < areas.length; x++)
+                            {
+                                if (areas[x] != null)
+                                {
+                                    var cityArea = new CityArea();
+                                    cityArea.popularTags = areaTags[x];
+
+                                    // make complete polygon
+                                    var poly = [];
+
+                                    for (p = 0; p < areas[x].length; p++)
+                                    {
+                                        poly.push(areas[x][p]);
+                                    }
+
+                                    poly.push(areas[x][0]);
+
+                                    cityArea.area = { type: 'Polygon', coordinates: [poly] };
+                                    cityArea.cityname = cityRes.name;
+
+                                    cityArea.save(function (error) {
+                                        if (!error) {
+                                        }
+                                        else {
+                                        }
+                                    });
+                                }
+                            }
                         }
                     });
                 }
             });
-        }
-    });
-
+        });
+    }
 };

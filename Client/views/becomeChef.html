@@ -14,16 +14,18 @@
     <div class="tab-content">
 
         <div id="location" class="tab-pane fade in active" ng-show="isActive1" >
-
             <div class="centered" >
                 <div class="col-sm-12">
                     <h4 class="info-text"> Where do you want to supply meals?</h4>
                 </div>
             </div>
+
             <br>
+
             <div class="chef-location">
                 <input id="autocomplete" required ng-model="chosenPlace" type="text" class="form-control" placeholder="Location">
             </div>
+
         </div>
 
         <div id="tips" ng-show="isActive2" class="tab-pane fade in active">
@@ -33,10 +35,16 @@
                     <h4 class="info-text"> Some Cool Tips For Your Area! </h4>
                 </div>
             </div>
+
             <br>
-            <div class="chef-location">
+
+            <div class="chef-location" ng-show="isActive2">
+                <ui-gmap-google-map center='chefDetails.location' ng-show="isActive2" pan='true' zoom='zoom'>
+
+                </ui-gmap-google-map>
                 <!-- Add map tips here -->
             </div>
+
         </div>
 
         <div id="workingHours" ng-show="isActive3" class="tab-pane fade in active">

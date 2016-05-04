@@ -17,12 +17,13 @@ exports.createOrder = function(req, res) {
     order.meal = req.body.meal;
     order.quantity = req.body.quantity;
     order.totalPrice = req.body.quantity * req.body.meal.price;
+    order.city = req.body.chef.city;
     order.date = new Date();
 
     order.save(function (err) {
         if (!err) {
             res.json('Created order!');
-            cityController.performCitiesSplitting();
+            cityController.performCitySplitting(order.city);
         }
         else {
         }
