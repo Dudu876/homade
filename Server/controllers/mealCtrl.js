@@ -1,6 +1,7 @@
 /**
  * Created by Dudu on 25/03/2016.
  */
+var uploader = require('./uploadCtrl');
 
 var Meal = require('../models/meal');
 var Chef = require('../models/chef');
@@ -99,6 +100,10 @@ exports.deleteMeal = function (req, res) {
 
 exports.createMeal = function (req, res) {
     var meal = new Meal();
+    //set meal id for the uploader controller
+    uploader.setMealId(meal.id);
+
+    //set meal props
     meal.name = req.body.name;
     meal.description = req.body.description;
     meal.kosher = req.body.kosher || false;
@@ -122,7 +127,6 @@ exports.createMeal = function (req, res) {
             meal.chef = chef[0];
             meal.save(function (error) {
                 if (!error) {
-
                     res.json('meal created');
                 }
                 else {

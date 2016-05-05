@@ -8,7 +8,7 @@
     <div class="col-lg-4 col-sm-2 col-xs-12" ng-repeat="meal in meals" style="padding: 10px;">
         <div class="" ng-click="mealClicked(meal)" style="cursor: pointer; ">
             <div class="meal-pic-container">
-                <img class="" ng-src="http://placehold.it/350x150" style="height: auto; width: 100%;"/>
+                <img class="" ng-src="../meal_uploads/{{meal._id}}" style="height: auto; width: 100%;"/>
                 <div class="edit-delete-image">
                     <button type="button" class="btn btn-xs btn-primary inlineEditor" ng-click="editrow()">
                         <i class="fa fa-edit fa-lg"></i>

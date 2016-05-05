@@ -4,10 +4,11 @@
 var path = require('path');
 
 // Example
-var mealController = require('./controllers/mealCtrl');
-var cityController = require('./controllers/cityCtrl');
-var chefController = require('./controllers/chefCtrl');
-var orderController = require('./controllers/orderCtrl');
+var mealController   = require('./controllers/mealCtrl');
+var cityController   = require('./controllers/cityCtrl');
+var chefController   = require('./controllers/chefCtrl');
+var orderController  = require('./controllers/orderCtrl');
+var uploadController = require('./controllers/uploadCtrl');
 
 module.exports = function (app) {
 
@@ -37,6 +38,9 @@ module.exports = function (app) {
 
     app.route('/api/orders/:chef_id')
         .post(orderController.getOrdersByChef);
+
+    app.route('/upload')
+        .post(uploadController.uploadFile);
 
     // route to handle all angular requests
     app.get('*', function (req, res) {
