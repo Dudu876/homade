@@ -9,9 +9,12 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
     $scope.chefDetails = {};
     $scope.chefDetails.fbId = userFactory.fbId;
     $scope.chefDetails.name = userFactory.fullname;
-    $scope.zoom = 14;
+    $scope.chefDetails.location = {latitude: 32, longitude: 35};
+    $scope.zoom = 10;
+    $scope.polygons = [];
 
     uiGmapGoogleMapApi.then(function(maps) {
+        $scope.chefDetails.location = {latitude: 45, longitude: -73};
         $scope.map = {center: {latitude: 45, longitude: -73}, zoom: 8};
     });
 
@@ -21,7 +24,33 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
 
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         var place = autocomplete.getPlace();
-        $scope.chefDetails.location = [place.geometry.location.lat(), place.geometry.location.lng()];
+        $scope.chefDetails.location = [place.geometry.location.lng(), place.geometry.location.lat()];
+
+        locationTipsFactory.getTips($scope.chefDetails.location).success(function(data) {
+            if(data.showTips)
+            {
+                for (i = 0; i < data.areas.length; i++) {
+                    $scope.polygons.push({
+                        id: i,
+                        path: data.areas[i].area,
+                        stroke: {
+                            color: '#6060FB',
+                            weight: 3
+                        },
+                        editable: false,
+                        draggable: false,
+                        geodesic: false,
+                        visible: true,
+                        fill: {
+                            color: '#ff0000',
+                            opacity: 0.3
+                        }
+                    })
+                }
+            }
+        });
+
+        $scope.zoom = 15;
         $scope.chefDetails.locationName = place.formatted_address;
         $scope.locationChosen = true;
         $scope.$apply();

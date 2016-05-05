@@ -24,7 +24,7 @@ module.exports = function (app) {
         .get(mealController.getMealsOfChef);
 
     app.route('/api/locationTips')
-        .get(cityController.getLocationTips);
+        .post(cityController.getLocationTips);
 
     app.route('/api/chefs/:chef_id')
         .get(chefController.isChef);

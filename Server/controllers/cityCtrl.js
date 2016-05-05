@@ -9,6 +9,17 @@ var CityArea = require('../models/cityarea');
 var cityHashtable = {};
 
 exports.getLocationTips = function (req, res) {
+    //var area = getAreaByPoint(req.body);
+    //if (area == null)
+    //{
+    //    res.json({ showTips:false });
+    //}
+    //else {
+    var cityName = exports.findCityByCoordinates(req.body);
+    var cityAreas = getCityAreas(cityName.name);
+
+    res.json({ showTips:true, selected: 1, areas: cityAreas });
+    //}
 };
 
 exports.createCity = function (city) {
@@ -31,16 +42,76 @@ exports.createCity = function (city) {
     });
 };
 
-getExtentOfCity = function(cityName) {
-    City.findOne({name: city.name}, function (err, res) {
-        if (res.length == 0) {
-            var cityExtent = [];
-            cityExtent.push(res.southwest);
-            cityExtent.push(res.northeast);
+getAreaByPoint = function (point) {
+    var area;
 
-            return city;
+    CityArea.findOne({"area":{"$geoIntersects":{"$geometry":{"type":"Point", "coordinates":point}}}}, function (error, result) {
+       if (!error)
+       {
+           area = result;
+       }
+    });
+
+    while(area === undefined) {
+        require('deasync').runLoopOnce();
+    }
+
+    return area;
+};
+
+getCityAreas = function(cityName) {
+    var areas;
+    CityArea.find({cityname: cityName}, function (error, result){
+        if (!error)
+        {
+            areas = result;
         }
     });
+
+    while(areas === undefined) {
+        require('deasync').runLoopOnce();
+    }
+
+    return areas;
+};
+
+exports.findCityByCoordinates = function(location) {
+    var request = require("request");
+    var city;
+    request("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + location[1] + "," + location[0] +"&sensor=false&key=AIzaSyDpkTgTR--qces2l4LuT35p1todOQcimJg",
+        function(error, response, body){
+            var parsedJson = JSON.parse(body);
+
+            if (parsedJson.results.length != 0) {
+                var cityNameSaver = '';
+                var cityLocation = [];
+
+                for (i = 0; i < parsedJson.results.length && cityNameSaver == ''; i++) {
+                    if (parsedJson.results[i].types.length == 2 &&
+                        parsedJson.results[i].types[0] == 'locality' &&
+                        parsedJson.results[i].types[1] == 'political') {
+                        cityNameSaver = parsedJson.results[i].address_components[0].long_name;
+
+                        // Push extent
+                        var cityNorthEast = [];
+                        cityNorthEast.push(parsedJson.results[i].geometry.bounds.northeast.lat);
+                        cityNorthEast.push(parsedJson.results[i].geometry.bounds.northeast.lng);
+
+                        var citySouthWest = [];
+                        citySouthWest.push(parsedJson.results[i].geometry.bounds.southwest.lat);
+                        citySouthWest.push(parsedJson.results[i].geometry.bounds.southwest.lng);
+
+                        city = {name: cityNameSaver, southwest: citySouthWest, northeast: cityNorthEast};
+
+                    }
+                }
+            }
+        });
+    while(city === undefined) {
+        require('deasync').runLoopOnce();
+    }
+
+    return city;
 };
 
 exports.performCitySplitting = function (affectedCity)
@@ -64,7 +135,7 @@ exports.performCitySplitting = function (affectedCity)
                 cityTags.push(orders[i].meal.tags);
             }
 
-            kmeans.clusterize(cityLocations, {k: 4}, function (err, kmeansRes) {
+            kmeans.clusterize(cityLocations, {k: 3}, function (err, kmeansRes) {
                 if (err) {
                     console.error(err);
                 }
@@ -121,16 +192,32 @@ exports.performCitySplitting = function (affectedCity)
                         }
                         else {
                             var voronoitemp = d3.voronoi();
-                            var voronoi = d3.voronoi().extent([cityRes.southwest, cityRes.northeast]);
+                            var voronoi = d3.voronoi().extent([[[cityRes.southwest[1]], cityRes.southwest[0]] , [cityRes.northeast[1], cityRes.northeast[0]]]);
                             var vertices = [];
 
                             for (i = 0; i < kmeansRes.length; i++) {
                                 if (kmeansRes[i].centroid.length == 2) {
-                                    vertices.push(kmeansRes[i].centroid);
+                                    vertices.push([kmeansRes[i].centroid[0], kmeansRes[i].centroid[1]]);
                                 }
                             }
 
-                            var areas = voronoi(vertices).polygons();
+                            var temp = voronoi(vertices);
+                            var areas = temp.polygons();
+
+                            if (areas.length != 0) {
+                                var removingDone;
+                                CityArea.remove({cityname: affectedCity}, function (err) {
+                                    if (!err) {
+                                        removingDone = true;
+                                    }
+                                    else {
+                                        //Utils.generateResponse(req, res, 0, err);
+                                    }
+                                });
+                                while(removingDone === undefined) {
+                                    require('deasync').runLoopOnce();
+                                }
+                            }
 
                             for (x = 0; x < areas.length; x++)
                             {
@@ -151,6 +238,7 @@ exports.performCitySplitting = function (affectedCity)
 
                                     cityArea.area = { type: 'Polygon', coordinates: [poly] };
                                     cityArea.cityname = cityRes.name;
+
 
                                     cityArea.save(function (error) {
                                         if (!error) {

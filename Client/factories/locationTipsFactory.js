@@ -6,8 +6,8 @@ var locationTipsURL = '/api/locationTips/';
 homadeApp.factory('locationTipsFactory', ['$http', function($http) {
     return {
         // call to get location tips
-        get : function() {
-            return $http.get(locationTipsURL);
+        getTips : function(location) {
+            return $http.post(locationTipsURL, location);
         }
     }
 }]);

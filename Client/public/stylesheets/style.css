@@ -338,6 +338,10 @@ hr.soften {
     height: 100vh;
 }
 
+.map-become-chef .angular-google-map-container {
+    height: 50vh;
+}
+
 .centeredWidth {
     width: 70%;
     margin-left: 15%;
