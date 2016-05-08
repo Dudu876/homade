@@ -29,6 +29,7 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
         locationTipsFactory.getTips($scope.chefDetails.location).success(function(data) {
             if(data.showTips)
             {
+                $scope.polygons = [];
                 for (i = 0; i < data.areas.length; i++) {
                     $scope.polygons.push({
                         id: i,

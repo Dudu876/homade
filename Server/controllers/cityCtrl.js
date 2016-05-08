@@ -16,9 +16,20 @@ exports.getLocationTips = function (req, res) {
     //}
     //else {
     var cityName = exports.findCityByCoordinates(req.body);
-    var cityAreas = getCityAreas(cityName.name);
+    CityArea.find({cityname: cityName.name}, function (error, result){
+        if (!error)
+        {
+            //areas = result;
+            res.json({ showTips:true, selected: 1, areas: result });
+        }
+        else {
 
-    res.json({ showTips:true, selected: 1, areas: cityAreas });
+            res.json({ showTips:false });
+        }
+    });
+    //ar cityAreas = getCityAreas(cityName.name);
+
+    //res.json({ showTips:true, selected: 1, areas: cityAreas });
     //}
 };
 
