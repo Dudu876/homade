@@ -31,7 +31,7 @@ exports.init = function(imageDirPath) {
 
 exports.setMealId = function(mealId) {
     _mealId = mealId;
-}
+};
 
 /** API path that will upload the files */
 exports.uploadFile = function(req, res) {
