@@ -10,16 +10,20 @@ var storage;
 var upload;
 var _mealId;
 exports.init = function(imageDirPath) {
+    console.log('checking if upload file exists');
+    console.log(imageDirPath + ' - exists? - ' + fs.existsSync(imageDirPath));
     if (!fs.existsSync(imageDirPath)){
         fs.mkdirSync(imageDirPath);
+        console.log('creating the folder');
     }
+    console.log('after folder creation');
     storage = multer.diskStorage({ //multers disk storage settings
         destination: function (req, file, cb) {
             //cb(null, '../Client/meal_uploads/')
             cb(null, imageDirPath);
         },
         filename: function (req, file, cb) {
-            var datetimestamp = Date.now();
+            //var datetimestamp = Date.now();
             //cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
             cb(null, _mealId)
         }
