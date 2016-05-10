@@ -13,11 +13,12 @@ exports.init = function(imageDirPath) {
     console.log('checking if upload folder exists');
     console.log(imageDirPath + ' - exists? - ' + fs.existsSync(imageDirPath));
     if (!fs.existsSync(imageDirPath)){
+        console.log('creating the folder');
         fs.mkdirSync(imageDirPath, function (err) {
             console.log('error');
             console.log(err);
         });
-        console.log('creating the folder');
+
     }
     console.log('after folder creation');
     storage = multer.diskStorage({ //multers disk storage settings
