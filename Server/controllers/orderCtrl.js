@@ -19,6 +19,7 @@ exports.createOrder = function(req, res) {
     order.totalPrice = req.body.quantity * req.body.meal.price;
     order.city = req.body.chef.city;
     order.date = new Date();
+    order.status = 1;
 
     order.save(function (err) {
         if (!err) {
@@ -30,9 +31,11 @@ exports.createOrder = function(req, res) {
     });
 };
 
-exports.getOrdersByChef = function (req, res) {
-    Order.find(req.params.chef_id).populate('meal').exec(function (err, orders) {
-        res.json(orders);
+exports.getActiveOrdersByChef = function (req, res) {
+    Order.find({chefFBId: req.params.chef_id, status: {$lt: 4}}).populate('meal').exec(function (err, orders) {
+        if (!err) {
+            res.json(orders);
+        }
     });
 };
 

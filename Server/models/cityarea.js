@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 var cityAreaSchema = new Schema({
     cityname: String,
     area: { type: {type: String}, coordinates: []},
-    popularTags: [String]
+    popularTags: [{tag: String, count: Number}]
 });
 
 // define the index

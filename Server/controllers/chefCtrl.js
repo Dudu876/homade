@@ -10,7 +10,7 @@ exports.createChef = function (req, res) {
     chef.location = { type: 'Point', coordinates: req.body.location } ;
     chef.locationName = req.body.locationName;
     chef.workDays = req.body.workDays;
-    chef.fbId = NumberInt(req.body.fbId);
+    chef.fbId = req.body.fbId;
     chef.name = req.body.name;
 
     var city = cityController.findCityByCoordinates(req.body.location);

@@ -16,7 +16,8 @@ var orderSchema = new Schema({
     quantity: Number,
     totalPrice: Number,
     date: Date,
-    city: String
+    city: String,
+    status: Number
 });
 
 // define our order model

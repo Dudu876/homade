@@ -6,6 +6,11 @@ homadeApp.controller('resultCtrl', ['$scope', 'mealFactory', '$timeout', '$locat
     //$scope.meals = meals;
     var i = 100;
     var mapIsReady = false;
+    var fromMain = false;
+
+    if (location.search.indexOf('fromMainPage') > -1 && /fromMainPage=([^&]+)/.exec(location.search)[1] == 'true'){
+        fromMain = true;
+    }
 
     //console.log('this is the route params' +  $routeParams.q); *********WORKING
 

@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="wizard-header">
+        <h2>
+            <b>MANAGE</b> your orders
+        </h2>
+    </div>
+    <div class="panel panel-default">
+        <table class="table table-hover">
+            <tbody>
+            <tr>
+                <th>
+                    Meal
+                </th>
+                <th>
+                    Client
+                </th>
+                <th>
+                    Quantity
+                </th>
+            </tr>
+            <tr ng-repeat="order in activeOrders">
+                <td>
+                    <span class="glyphicon glyphicon-file"></span>
+                    {{ order.meal.name }}
+                </td>
+                <td>aaa</td>
+                <td>{{ order.quantity }}</td>
+                <td class="text-right text-nowrap">
+                    <button class="btn btn-xs btn-info" ng-bind="formatDate(order.date) |  date:'MM/dd/yyyy H:mm' ">
+                    </button>
+                    <button class="btn btn-xs btn-info" ng-bind="getStatusName(order.status)">
+                    </button>
+                    <button class="btn btn-xs btn-warning">
+                        Send message
+                        <span class="glyphicon glyphicon-envelope" style="height: 10px"/>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

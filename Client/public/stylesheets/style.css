@@ -350,3 +350,19 @@ hr.soften {
 .buttonsBlock {
     white-space: nowrap;
 }
+
+.mybar {
+    align-self: center;
+    text-align: center;
+    width: 50%;
+    margin: auto;
+}
+
+.graphs {
+    height: 400px;
+}
+
+.tagGraph {
+    width: 523px;
+    height: 95vh;
+}
