@@ -366,3 +366,8 @@ hr.soften {
     width: 523px;
     height: 95vh;
 }
+
+.gridPhoto {
+    height: 30vh;
+    width: 100%;
+}

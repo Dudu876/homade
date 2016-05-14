@@ -53,8 +53,8 @@ homadeApp.controller('resultCtrl', ['$scope', 'mealFactory', '$timeout', '$locat
                 coords: {
                     //latitude: element.location.lat,
                     //longitude: element.location.lng
-                    latitude: $scope.meals[0].chef.location.coordinates[0],
-                    longitude: $scope.meals[0].chef.location.coordinates[1]
+                    longitude : element.chef.location.coordinates[0],
+                    latitude: element.chef.location.coordinates[1]
                 },
                 options: {
                 },
