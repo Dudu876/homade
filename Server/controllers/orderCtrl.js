@@ -18,7 +18,8 @@ exports.createOrder = function(req, res) {
     order.quantity = req.body.quantity;
     order.totalPrice = req.body.quantity * req.body.meal.price;
     order.city = req.body.chef.city;
-    order.date = new Date();
+    order.startDate = new Date();
+    order.status = 0;
 
     order.save(function (err) {
         if (!err) {
@@ -30,9 +31,26 @@ exports.createOrder = function(req, res) {
     });
 };
 
-exports.getOrdersByChef = function (req, res) {
-    Order.find(req.params.chef_id).populate('meal').exec(function (err, orders) {
-        res.json(orders);
+exports.updateOrder = function (req, res) {
+    Order.findByIdAndUpdate(req.body._id, req.body, {upsert:true}, function(err, doc){
+        if (err) return res.send(500, { error: err });
+        return res.send("succesfully saved");
+    });
+};
+
+exports.getActiveOrdersByChef = function (req, res) {
+    Order.find({chefFBId: req.params.chef_id, status: {$lt: 3}}).populate('meal').exec(function (err, orders) {
+        if (!err) {
+            res.json(orders);
+        }
+    });
+};
+
+exports.getCompletedOrdersByChef = function (req, res) {
+    Order.find({chefFBId: req.params.chef_id, status: 3}).populate('meal').exec(function (err, orders) {
+        if (!err) {
+            res.json(orders);
+        }
     });
 };
 

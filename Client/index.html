@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="public/libs/animate.css/animate.min.css" type="text/css">
         <link rel="stylesheet" href="public/libs/ng-tags-input/ng-tags-input.bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="public/libs/ng-tags-input/ng-tags-input.min.css" type="text/css">
+        <link rel="stylesheet" href="public/libs/angular-chart.js/dist/angular-chart.min.css" type="text/css">
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="public/stylesheets/navbar.css" type="text/css">
@@ -46,7 +47,8 @@
         <script type="text/javascript" src="public/libs/angular-bootstrap/ui-bootstrap.min.js"></script>
         <script type="text/javascript" src="public/libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
         <script type="text/javascript" src="public/libs/angular-confirm-modal/angular-confirm.js"></script>
-
+        <script type="text/javascript" src="public/libs/Chart.js/Chart.js"></script>
+        <script type="text/javascript" src="public/libs/angular-chart.js/dist/angular-chart.min.js"></script>
 
         <!-- Custom Angular -->
         <script type="text/javascript" src="app.js"></script>
@@ -68,6 +70,7 @@
         <script type="text/javascript" src="controllers/orderMeal.js"></script>
         <script type="text/javascript" src="controllers/chefOrders.js"></script>
         <script type="text/javascript" src="controllers/chefMeals.js"></script>
+        <script type="text/javascript" src="controllers/chefHistory.js"></script>
 
         <script type="text/javascript" src="directives/myEnter.js"></script>
 
@@ -106,10 +109,8 @@
                                     <li><a href="#">Dashboard</a></li>
                                     <li><a href="/ChefMeals">My Meals</a></li>
                                     <li><a href="/AddMeal">Add Meal</a></li>
-                                    <li><a href="/Map">Map</a></li>
-                                    <li><a href="/Result">Search!</a></li>
                                     <li><a href="/ChefOrders">Orders</a></li>
-                                    <li><a href="#">History</a></li>
+                                    <li><a href="/ChefHistory">History</a></li>
                                     <li><a href="#">Ratings</a></li>
                                 </ul>
 
@@ -124,6 +125,7 @@
                                 </a>
 
                                 <ul class="dropdown">
+                                    <li><a href="/Result">Search!</a></li>
                                     <li><a href="#">History</a></li>
                                     <li><a href="#" ng-click="logout()">Log Out</a></li>
                                 </ul>

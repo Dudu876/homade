@@ -4,7 +4,6 @@
 homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFactory', 'userFactory', 'uiGmapGoogleMapApi', function ($scope, locationTipsFactory, chefsFactory, userFactory, uiGmapGoogleMapApi) {
     $scope.isActive1 = true;
     $scope.isActive2 = false;
-    $scope.isActive3 = false;
     $scope.locationChosen = false;
     $scope.chefDetails = {};
     $scope.chefDetails.fbId = userFactory.fbId;
@@ -12,6 +11,22 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
     $scope.chefDetails.location = {latitude: 32, longitude: 35};
     $scope.zoom = 10;
     $scope.polygons = [];
+    $scope.areaLoaded = false;
+    $scope.tags = "a";
+    $scope.series = ['Popular Tags'];
+
+    $scope.showCols = function(){
+        if ($scope.data[0].length > 0){
+            return "col-md-4";
+        }
+        else {
+            return "col-md-2";
+        }
+    };
+
+    $scope.data = [
+        []
+    ];
 
     uiGmapGoogleMapApi.then(function(maps) {
         $scope.chefDetails.location = {latitude: 45, longitude: -73};
@@ -24,14 +39,21 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
 
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         var place = autocomplete.getPlace();
-        $scope.chefDetails.location = [place.geometry.location.lng(), place.geometry.location.lat()];
 
-        locationTipsFactory.getTips($scope.chefDetails.location).success(function(data) {
+        locationTipsFactory.getTips([place.geometry.location.lng(), place.geometry.location.lat()]).success(function(data) {
+
+            $scope.labels = [];
+
+            $scope.chefDetails.location = [place.geometry.location.lng(), place.geometry.location.lat()];
+
             if(data.showTips)
             {
+                $scope.tags = [];
+                $scope.areaLoaded = true;
                 $scope.polygons = [];
+
                 for (i = 0; i < data.areas.length; i++) {
-                    $scope.polygons.push({
+                    var currPolygon =  {
                         id: i,
                         path: data.areas[i].area,
                         stroke: {
@@ -46,15 +68,25 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
                             color: '#ff0000',
                             opacity: 0.3
                         }
-                    })
+                    };
+
+                    if(data.areas[i]._id == data.selected) {
+                        for (j = 0; j < data.areas[i].popularTags.length; j++){
+                            $scope.data[0].push(data.areas[i].popularTags[j].count);
+                            $scope.labels.push(data.areas[i].popularTags[j].tag);
+                        }
+                        currPolygon.fill.color = '#53AE68'
+                    }
+
+                    $scope.polygons.push(currPolygon);
                 }
             }
+
+            $scope.zoom = 15;
+            $scope.chefDetails.locationName = place.formatted_address;
+            $scope.locationChosen = true;
         });
 
-        $scope.zoom = 15;
-        $scope.chefDetails.locationName = place.formatted_address;
-        $scope.locationChosen = true;
-        $scope.$apply();
     });
 
     $scope.setNext = function(){
@@ -67,10 +99,6 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
             }).error(function(data) {
             });
         }
-        else {
-            $scope.isActive2 = false;
-            $scope.isActive3 = true;
-        }
     };
 
     $scope.setPrevious = function(){
@@ -78,11 +106,6 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
         {
             $scope.isActive1 = true;
             $scope.isActive2 = false;
-        }
-        else
-        {
-            $scope.isActive2 = true;
-            $scope.isActive3 = false;
         }
     };
 

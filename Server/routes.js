@@ -34,10 +34,14 @@ module.exports = function (app) {
         .post(chefController.createChef);
 
     app.route('/api/orders')
-        .post(orderController.createOrder);
+        .post(orderController.createOrder)
+        .put(orderController.updateOrder);
 
-    app.route('/api/orders/:chef_id')
-        .post(orderController.getOrdersByChef);
+    app.route('/api/orders/active/:chef_id')
+        .get(orderController.getActiveOrdersByChef);
+
+    app.route('/api/orders/complete/:chef_id')
+        .get(orderController.getCompletedOrdersByChef);
 
     app.route('/upload')
         .post(uploadController.uploadFile);

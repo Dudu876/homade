@@ -6,6 +6,11 @@ homadeApp.controller('resultCtrl', ['$scope', 'mealFactory', '$timeout', '$locat
     //$scope.meals = meals;
     var i = 100;
     var mapIsReady = false;
+    var fromMain = false;
+
+    if (location.search.indexOf('fromMainPage') > -1 && /fromMainPage=([^&]+)/.exec(location.search)[1] == 'true'){
+        fromMain = true;
+    }
 
     //console.log('this is the route params' +  $routeParams.q); *********WORKING
 
@@ -31,18 +36,25 @@ homadeApp.controller('resultCtrl', ['$scope', 'mealFactory', '$timeout', '$locat
             $timeout(addMarkers,500);
             console.log('Map is not ready yet')
         }
-        console.log('Map is ready')
+        console.log('Map is ready');
         $scope.meals.forEach(function(element, index, array) {
-            ezfb.api('/v2.6/' + element.chefFBId + '/picture?height=100&width=100', function (res) {
-                element.chefPic = res.data.url;
+            ezfb.api(element.chefFBId + '/picture?height=100&width=100', function (res) {
+                if (!res.error)
+                {
+                    element.chefPic = res.data.url;
+                }
+                else
+                {
+                    element.chefPic = "../public/images/BlankPicture.png";
+                }
             });
             var marker = {
                 id: index,
                 coords: {
                     //latitude: element.location.lat,
                     //longitude: element.location.lng
-                    latitude: $scope.meals[0].chef.location.coordinates[0],
-                    longitude: $scope.meals[0].chef.location.coordinates[1]
+                    longitude : element.chef.location.coordinates[0],
+                    latitude: element.chef.location.coordinates[1]
                 },
                 options: {
                 },

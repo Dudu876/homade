@@ -1,8 +1,17 @@
 <div class="panel-body panel-light mish-heading">
-    <div>
+    <div ng-show="meals.length > 0">
         <h2> Manage Your Meals </h2>
     </div>
 </div>
+
+<h2 style="left: 25%;
+ line-height: 200px;
+ margin: auto;
+ margin-top: -100px;
+ position: absolute;
+ top: 50%;
+ width: 75%;" ng-show="meals.length == 0 && mealsLoaded"> You haven't created any meals. Go and <b><a href="/AddMeal">ADD</a> </b> some!</h2>
+
 <div class="col-lg-12 col-sm-6 col-xs-12">
 
     <div class="col-lg-4 col-sm-2 col-xs-12" ng-repeat="meal in meals" style="padding: 10px;">

@@ -8,4 +8,5 @@ homadeApp.controller('mainPageCtrl', ['$scope', '$location', function ($scope, $
     $scope.search = function() {
         $location.url('/Result?q=' + $scope.search.text);
     };
+
 }]);

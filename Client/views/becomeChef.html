@@ -7,8 +7,7 @@
     </div>
     <ul class="nav nav-pills nav-justified" id="pills">
         <li ng-class="isActive1 ? 'active' : 'falseClass'"><a href="#">Location</a></li>
-        <li ng-class="isActive2 ? 'active' : 'falseClass'"><a href="#">Get Location Tips!</a></li>
-        <li ng-class="isActive3 ? 'active' : 'falseClass'"><a href="#">Working Hours</a></li>
+        <li ng-class="isActive2 ? 'active' : 'falseClass'"><a href="#">Working Hours</a></li>
     </ul>
 
     <div class="tab-content">
@@ -22,41 +21,36 @@
             <br>
 
             <div class="chef-location">
+
                 <input id="autocomplete" required ng-model="chosenPlace" type="text" class="form-control" placeholder="Location">
                 <br>
+                <div class="row graphs">
+                    <div ng-class="showCols()">
+                        <canvas id="bar" class="chart chart-bar" width="523" style="width: 523px; height: 95vh;"
+                                chart-data="data" chart-labels="labels" chart-series="series">
+                        </canvas>
+                    </div>
 
-                <ui-gmap-google-map class="map-become-chef"
-                                    center="chefDetails.location"
-                                    zoom="zoom"
-                                    ng-cloak>
-                    <ui-gmap-polygon static="true" ng-repeat="p in polygons track by p.id" path="p.path" stroke="p.stroke" visible="p.visible"
-                                     geodesic="p.geodesic" fill="p.fill" fit="false" editable="p.editable" draggable="p.draggable">
-                    </ui-gmap-polygon>
-                    <ui-gmap-marker coords="chefDetails.location" ng-show="locationChosen" options="marker.options" events="marker.events" idkey="chefDetails.name">
-                    </ui-gmap-marker>
-                </ui-gmap-google-map>
-            </div>
-
-
-        </div>
-
-        <div id="tips" ng-show="isActive2" class="tab-pane fade in active">
-
-            <div class="centered" >
-                <div class="col-sm-12">
-                    <h4 class="info-text"> Some Cool Tips For Your Area! </h4>
+                    <div class="col-md-8">
+                        <ui-gmap-google-map class="map-become-chef"
+                                            center="chefDetails.location"
+                                            zoom="zoom"
+                                            ng-cloak>
+                            <ui-gmap-polygon static="true" ng-repeat="p in polygons track by p.id" path="p.path" stroke="p.stroke" visible="p.visible"
+                                             geodesic="p.geodesic" fill="p.fill" fit="false" editable="p.editable" draggable="p.draggable">
+                            </ui-gmap-polygon>
+                            <ui-gmap-marker coords="chefDetails.location" ng-show="locationChosen" options="marker.options" events="marker.events" idkey="chefDetails.name">
+                            </ui-gmap-marker>
+                        </ui-gmap-google-map>
+                    </div>
                 </div>
+
             </div>
 
-            <br>
-
-            <div class="chef-location" ng-show="isActive2">
-                <!-- Add map tips here -->
-            </div>
 
         </div>
 
-        <div id="workingHours" ng-show="isActive3" class="tab-pane fade in active">
+        <div id="workingHours" ng-show="isActive2" class="tab-pane fade in active">
 
             <div class="centered" >
                 <div class="col-sm-12">
@@ -94,7 +88,7 @@
     </div>
 
     <div class="pull-right">
-        <input type="button" ng-show="isActive3" class="btn btn-previous btn-fill btn-default btn-wd btn-sm" ng-click="sendData()" name="next" value="Become a chef >>">
-        <input type="button" ng-show="!isActive3" ng-disabled="!locationChosen" class="btn btn-previous btn-fill btn-default btn-wd btn-sm" ng-click="setNext()" name="next" value="Next >>">
+        <input type="button" ng-show="isActive2" class="btn btn-previous btn-fill btn-default btn-wd btn-sm" ng-click="sendData()" name="next" value="Become a chef >>">
+        <input type="button" ng-show="!isActive2" ng-disabled="!locationChosen" class="btn btn-previous btn-fill btn-default btn-wd btn-sm" ng-click="setNext()" name="next" value="Next >>">
     </div>
 </div>

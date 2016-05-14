@@ -47,7 +47,10 @@ homadeApp.controller('orderMealCtrl', ['$scope', 'ordersFactory', 'userFactory',
 
     $scope.performOrder = function () {
         $scope.order.clientFBId = userFactory.fbId;
-        ordersFactory.create($scope.order);
+        ordersFactory.create($scope.order).success(function(data) {
+            alert('Order complete');
+            location.href = "/";
+        });
     };
 
     $scope.toggleReviews = function() {
