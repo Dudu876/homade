@@ -15,7 +15,8 @@ var orderSchema = new Schema({
     comment: String,
     quantity: Number,
     totalPrice: Number,
-    date: Date,
+    startDate: Date,
+    endDate: Date,
     city: String,
     status: Number
 });

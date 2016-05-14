@@ -1,7 +1,7 @@
 <div class="container">
     <div class="wizard-header">
         <h2>
-            <b>MANAGE</b> your orders
+            <b>HISTORY</b>
         </h2>
     </div>
     <div class="panel panel-default">
@@ -18,7 +18,7 @@
                     Quantity
                 </th>
             </tr>
-            <tr ng-repeat="order in activeOrders" ng-show="order.status != 3" ng-hide="order.status == 3">
+            <tr ng-repeat="order in orders">
                 <td>
                     <span class="glyphicon glyphicon-file"></span>
                     {{ order.meal.name }}
@@ -29,12 +29,12 @@
                     <button class="btn btn-xs btn-info" >
                         Created: {{ formatDate(order.startDate) |  date:'MM/dd/yyyy H:mm' }}
                     </button>
-                    <button class="btn btn-xs btn-info" ng-bind="getStatusName(order.status, true)" ng-click="updateStatus(order)" confirm="Change order status to: {{ getStatusName(order.status + 1, false) }} ?" confirm-settings="{size: 'la'}">
+                    <button class="btn btn-xs btn-success">
+                        Supplied: {{ formatDate(order.endDate) |  date:'MM/dd/yyyy H:mm' }}
                     </button>
-                    <button class="btn btn-xs btn-warning">
-                        Send message
-                        <span class="glyphicon glyphicon-envelope" style="height: 10px"/>
-                    </button>
+                </td>
+                <td>
+
                 </td>
             </tr>
             </tbody>
