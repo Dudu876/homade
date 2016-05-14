@@ -52,6 +52,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: 'views/chefMeals.html',
             controller: 'chefMealsCtrl'
         })
+        .when('/ClientOrders', {
+            templateUrl: 'views/clientOrders.html',
+            controller: 'clientOrdersCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });

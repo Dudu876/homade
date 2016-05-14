@@ -5,7 +5,7 @@ homadeApp.controller('clientOrdersCtrl', ['$scope', 'ordersFactory', 'chefsFacto
     var statusesArr = ['Order Received', 'Cooking', 'Ready', 'Taken'];
 
     $scope.$on('isChefUpdate', function (event, args) {
-        ordersFactory.getActiveOrdersByChef(userFactory.fbId).success(function (data) {
+        ordersFactory.getActiveOrdersByClient(userFactory.fbId).success(function (data) {
             updateChefNamesAndFillOrders(data);
         });
     });
@@ -26,7 +26,7 @@ homadeApp.controller('clientOrdersCtrl', ['$scope', 'ordersFactory', 'chefsFacto
     {
         chefsFactory.isChef(userFactory.fbId).success(function (isChef) {
             if (isChef) {
-                ordersFactory.getActiveOrdersByChef(userFactory.fbId).success(function(data) {
+                ordersFactory.getActiveOrdersByClient(userFactory.fbId).success(function(data) {
                     updateChefNamesAndFillOrders(data);
                 });
             }

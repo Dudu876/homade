@@ -40,6 +40,9 @@ module.exports = function (app) {
     app.route('/api/orders/active/:chef_id')
         .get(orderController.getActiveOrdersByChef);
 
+    app.route('/api/orders/activeclient/:client_id')
+        .get(orderController.getActiveOrdersByClient);
+
     app.route('/api/orders/complete/:chef_id')
         .get(orderController.getCompletedOrdersByChef);
 
