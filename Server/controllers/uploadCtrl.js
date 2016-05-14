@@ -10,12 +10,8 @@ var storage;
 var upload;
 var _mealId;
 exports.init = function(imageDirPath) {
-    console.log('checking if upload folder exists');
-    console.log(imageDirPath + ' - exists? - ' + fs.existsSync(imageDirPath));
     if (!fs.existsSync(imageDirPath)){
-        console.log('creating the folder');
         fs.mkdirSync(imageDirPath, function (err) {
-            console.log('error');
             console.log(err);
         });
 
