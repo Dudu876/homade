@@ -46,8 +46,8 @@ exports.getActiveOrdersByChef = function (req, res) {
     });
 };
 
-exports.getActiveOrdersByClient = function (req, res) {
-    Order.find({clientFBId: req.params.client_id, status: {$lt: 3}}).populate('meal').exec(function (err, orders) {
+exports.getOrdersByClient = function (req, res) {
+    Order.find({clientFBId: req.params.client_id}).populate('meal').exec(function (err, orders) {
         if (!err) {
             res.json(orders);
         }

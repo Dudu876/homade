@@ -41,7 +41,7 @@ module.exports = function (app) {
         .get(orderController.getActiveOrdersByChef);
 
     app.route('/api/orders/activeclient/:client_id')
-        .get(orderController.getActiveOrdersByClient);
+        .get(orderController.getOrdersByClient);
 
     app.route('/api/orders/complete/:chef_id')
         .get(orderController.getCompletedOrdersByChef);

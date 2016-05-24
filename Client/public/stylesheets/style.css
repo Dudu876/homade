@@ -371,3 +371,51 @@ hr.soften {
     height: 30vh;
     width: 100%;
 }
+
+.chef-photo-center {
+    margin-left:45%;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif
+}
+
+.order-image-text {
+    margin-top: -10%;
+    display: block;
+}
+
+.date-text {
+    font-size:10px;
+}
+
+.comment-hr {
+    max-width: 100%;
+    width: 80%;
+    border: 0;
+    border-top: 1px solid #dddddd;
+}
+
+.bordered-order {
+    cursor: pointer;
+    border: black;
+    border-width: 1px;
+    border-radius: 15px 50px;
+    background: rgba(30, 31, 28, 0.04);
+    padding: 20px;
+}
+
+.angular-input-stars {
+
+     display: inline-block;
+     padding: 0;
+     padding-left: -5px;
+     list-style: none;
+
+ }
+
+.angular-input-stars > li {
+    display: inline-block;
+}
+
+.orders-photo {
+    height: 20vh;
+    width: 100%;
+}
