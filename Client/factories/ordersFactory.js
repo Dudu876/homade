@@ -3,6 +3,7 @@
  */
 var ordersUrl = '/api/orders/';
 var activeOrdersUrl = '/api/orders/active/';
+var activeClientOrdersUrl = '/api/orders/activeclient/';
 var completeOrdersUrl = '/api/orders/complete/';
 
 homadeApp.factory('ordersFactory', ['$http', function($http) {
@@ -19,6 +20,9 @@ homadeApp.factory('ordersFactory', ['$http', function($http) {
         },
         getActiveOrdersByChef : function(chefId) {
             return $http.get(activeOrdersUrl +  chefId);
+        },
+        getActiveOrdersByClient : function(clientId) {
+            return $http.get(activeClientOrdersUrl +  clientId);
         }
     }
 }]);

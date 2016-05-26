@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="public/libs/ng-tags-input/ng-tags-input.bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="public/libs/ng-tags-input/ng-tags-input.min.css" type="text/css">
         <link rel="stylesheet" href="public/libs/angular-chart.js/dist/angular-chart.min.css" type="text/css">
+        <!--<link rel="stylesheet" href="public/libs/angular-input-stars-directive/angular-input-stars.css" type="text/css">-->
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="public/stylesheets/navbar.css" type="text/css">
@@ -50,6 +51,8 @@
         <script type="text/javascript" src="public/libs/angular-confirm-modal/angular-confirm.js"></script>
         <script type="text/javascript" src="public/libs/Chart.js/Chart.js"></script>
         <script type="text/javascript" src="public/libs/angular-chart.js/dist/angular-chart.min.js"></script>
+        <script type="text/javascript" src="public/libs/angular-input-stars-directive/angular-input-stars.js"></script>
+
 
         <!-- Custom Angular -->
         <script type="text/javascript" src="app.js"></script>
@@ -72,6 +75,8 @@
         <script type="text/javascript" src="controllers/chefOrders.js"></script>
         <script type="text/javascript" src="controllers/chefMeals.js"></script>
         <script type="text/javascript" src="controllers/chefHistory.js"></script>
+        <script type="text/javascript" src="controllers/clientOrders.js"></script>
+        <script type="text/javascript" src="controllers/commentOnOrder.js"></script>
 
         <script type="text/javascript" src="directives/myEnter.js"></script>
 
@@ -127,7 +132,7 @@
 
                                 <ul class="dropdown">
                                     <li><a href="/Result">Search!</a></li>
-                                    <li><a href="#">History</a></li>
+                                    <li><a href="/ClientOrders">My Orders</a></li>
                                     <li><a href="#" ng-click="logout()">Log Out</a></li>
                                 </ul>
                             </li>

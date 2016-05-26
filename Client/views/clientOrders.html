@@ -1,7 +1,20 @@
 <div class="container">
+    <script type="text/ng-template" id="commentOnOrder.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Comment</h3>
+        </div>
+        <div class="modal-body">
+            <textarea ng-model="comment" style="width: 100%;" ></textarea>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
     <div class="wizard-header">
         <h2>
-            <b>ORDERS</b>
+            <b>ACTIVE</b> ORDERS
         </h2>
     </div>
     <div class="panel panel-default">
@@ -18,7 +31,7 @@
                     Quantity
                 </th>
             </tr>
-            <tr ng-repeat="order in activeOrders" ng-show="order.status != 3" ng-hide="order.status == 3">
+            <tr ng-repeat="order in orders" ng-show="order.status != 3" ng-hide="order.status == 3">
                 <td>
                     <span class="glyphicon glyphicon-file"></span>
                     {{ order.meal.name }}
@@ -27,7 +40,7 @@
                 <td>{{ order.quantity }}</td>
                 <td class="text-right text-nowrap">
                     <button class="btn btn-xs btn-info" >
-                        Created: {{ formatDate(order.startDate) |  date:'MM/dd/yyyy H:mm' }}
+                        Created: {{ formatDate(order.startDate) |  date:'dd/MM/yyyy H:mm' }}
                     </button>
                     <button class="btn btn-xs btn-info" ng-bind="getStatusName(order.status, true)">
                     </button>
@@ -39,5 +52,41 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div class="wizard-header">
+        <h2>
+            <b>PAST</b> ORDERS
+        </h2>
+    </div>
+
+    <div class="col-lg-4 col-sm-8 col-xs-8" ng-repeat="order in orders" ng-show="order.status != 3" style="padding: 10px;">
+        <div class="bordered-order" ng-click="mealClicked(meal)" style="cursor: pointer; ">
+            <img class="orders-photo" cl-src="{{order.meal._id}}" >
+            <div class="panel-body meal-card" style="padding: 0px;">
+                <div class="">
+                    <div class="media-photo media-round chef-photo-center">
+                        <img alt="" style="width: 50px;height: 50px;" ng-src="{{ order.chefPic }}">
+                    </div>
+                    <h3 title="" class="h3 order-image-text">
+                        <a ng-href="/OrderMeal/{{order.meal._id}}" class="text-normal ng-binding" style="text-decoration: none;">
+                            {{ order.meal.name }}
+                            <small class="date-text" style="font-size:10px">
+                                {{ formatDate(order.startDate) |  date:'dd/MM/yyyy' }}
+                            </small>
+                        </a>
+
+                        <div class="pull-right">
+                            <input-stars max="5" icon-base="fa fa-fw" icon-empty="fa-star-o yellowed-star" icon-hover="hover" icon-full="fa-star yellowed-star" ng-model="order.rating" ng-click="saveOrder(order)"></input-stars>
+                        </div>
+                    </h3>
+                    <div style="text-align: center;">
+                    </div>
+                    <hr class="comment-hr">
+                    <a class="btn btn-info" ng-click="open(order)" style="width: 50%;margin-left: 25%;">
+                        COMMENT <i class="fa fa-comment-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
