@@ -12,8 +12,8 @@ var multer = require('multer');
 
 var app = express();
 var port = process.env.PORT || 5000;
-//var dbpath = process.env.DB || 'mongodb://localhost:27017/homade';
-var dbpath = process.env.DB || 'mongodb://homade:Aa123123@ds015929.mlab.com:15929/homade';
+var dbpath = process.env.DB || 'mongodb://localhost:27017/homade';
+//var dbpath = process.env.DB || 'mongodb://homade:Aa123123@ds015929.mlab.com:15929/homade';
 var server = app.listen(port);
 console.log('Listening to port ' + port);
 
