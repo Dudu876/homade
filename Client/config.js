@@ -11,4 +11,10 @@ homadeApp
         key: 'AIzaSyDpkTgTR--qces2l4LuT35p1todOQcimJg',
         v: '3.20', //defaults to latest 3.X anyhow
         libraries: 'weather,geometry,visualization'
-    })});
+    })})
+    .config(function (cloudinaryProvider) {
+        cloudinaryProvider.config({
+            upload_endpoint: 'https://api.cloudinary.com/v1_1/dzidemhzt', // default
+            cloud_name: 'dzidemhzt' // required
+        });
+    });

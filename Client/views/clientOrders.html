@@ -61,7 +61,7 @@
 
     <div class="col-lg-4 col-sm-8 col-xs-8" ng-repeat="order in orders" ng-show="order.status != 3" style="padding: 10px;">
         <div class="bordered-order" ng-click="mealClicked(meal)" style="cursor: pointer; ">
-            <img class="orders-photo" ng-src="../meal_uploads/{{order.meal._id}}" >
+            <img class="orders-photo" cl-src="{{order.meal._id}}" >
             <div class="panel-body meal-card" style="padding: 0px;">
                 <div class="">
                     <div class="media-photo media-round chef-photo-center">

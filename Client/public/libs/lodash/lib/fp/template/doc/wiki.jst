@@ -1,7 +1,9 @@
 ## lodash/fp
 
-The `lodash/fp` module is an instance of `lodash` with its methods wrapped to
-produce immutable auto-curried iteratee-first data-last methods.
+The `lodash/fp` module promotes a more
+[functional programming](https://en.wikipedia.org/wiki/Functional_programming)
+(FP) friendly style by exporting an instance of `lodash` with its methods wrapped
+to produce immutable auto-curried iteratee-first data-last methods.
 
 ## Installation
 
@@ -9,6 +11,19 @@ In a browser:
 ```html
 <script src='path/to/lodash.js'></script>
 <script src='path/to/lodash.fp.js'></script>
+<script>
+// Loading `lodash.fp.js` converts `_` to its fp variant.
+_.defaults({ 'a': 2, 'b': 2 })({ 'a': 1 });
+// → { 'a: 1, 'b': 2 }
+
+// Use `noConflict` to restore the pre-fp variant.
+var fp = _.noConflict();
+
+_.defaults({ 'a': 1 }, { 'a': 2, 'b': 2 });
+// → { 'a: 1, 'b': 2 }
+fp.defaults({ 'a': 2, 'b': 2 })({ 'a': 1 });
+// → { 'a: 1, 'b': 2 }
+</script>
 ```
 
 In Node.js:
@@ -33,11 +48,13 @@ to convert each method.
 
 Iteratee arguments are capped to avoid gotchas with variadic iteratees.
 ```js
-// The `lodash/map` iteratee recieves three arguments: (value, index|key, collection).
+// The `lodash/map` iteratee receives three arguments:
+// (value, index|key, collection)
 _.map(['6', '8', '10'], parseInt);
 // → [6, NaN, 2]
 
-// The `lodash/fp/map` iteratee is capped at one argument: (value).
+// The `lodash/fp/map` iteratee is capped at one argument:
+// (value)
 fp.map(parseInt)(['6', '8', '10']);
 // → [6, 8, 10]
 ```
@@ -54,11 +71,11 @@ The iteratee of `mapKeys` is invoked with one argument: (key)
 
 Methods have fixed arities to support auto-currying.
 ```js
-// The `lodash/padStart` method accepts an optional `chars` param.
+// `lodash/padStart` accepts an optional `chars` param.
 _.padStart('a', 3, '-')
 // → '--a'
 
-// The `lodash/fp/padStart` method does not.
+// `lodash/fp/padStart` does not.
 fp.padStart(3)('a');
 // → '  a'
 fp.padCharsStart('-')(3)('a');
@@ -66,52 +83,58 @@ fp.padCharsStart('-')(3)('a');
 ```
 
 Methods with a fixed arity of one:<br>
-<%= toFuncList(mapping.aryMethod[1]) %>
+<%= toFuncList(_.difference(mapping.aryMethod[1], _.keys(mapping.skipFixed))) %>
 
 Methods with a fixed arity of two:<br>
-<%= toFuncList(mapping.aryMethod[2]) %>
+<%= toFuncList(_.difference(mapping.aryMethod[2], _.keys(mapping.skipFixed))) %>
 
 Methods with a fixed arity of three:<br>
-<%= toFuncList(mapping.aryMethod[3]) %>
+<%= toFuncList(_.difference(mapping.aryMethod[3], _.keys(mapping.skipFixed))) %>
 
 Methods with a fixed arity of four:<br>
-<%= toFuncList(mapping.aryMethod[4]) %>
+<%= toFuncList(_.difference(mapping.aryMethod[4], _.keys(mapping.skipFixed))) %>
 
 #### Rearranged Arguments
 
 Method arguments are rearranged to make composition easier.
 ```js
-// The `lodash/filter` method accepts (collection, iteratee).
+// `lodash/filter` is data-first iteratee-last:
+// (collection, iteratee)
 var compact = _.partial(_.filter, _, Boolean);
 compact(['a', null, 'c']);
 // → ['a', 'c']
 
-// The `lodash/fp/filter` method accepts (iteratee, collection)
+// `lodash/fp/filter` is iteratee-first data-last:
+// (iteratee, collection)
 var compact = fp.filter(Boolean);
 compact(['a', null, 'c']);
 // → ['a', 'c']
 ```
 
-Methods with a fixed arity of two have an argument order of:<br>
+##### Most methods follow these rules
+
+A fixed arity of two has an argument order of:<br>
 <%= toArgOrder(mapping.aryRearg[2]) %>
 
-Methods with a fixed arity of three have an argument order of:<br>
+A fixed arity of three has an argument order of:<br>
 <%= toArgOrder(mapping.aryRearg[3]) %>
 
-Methods with a fixed arity of four have an argument order of:<br>
+A fixed arity of four has an argument order of:<br>
 <%= toArgOrder(mapping.aryRearg[4]) %>
+
+##### Exceptions to the rules
+
+Methods that accept an array of arguments as their second parameter:<br>
+<%= toFuncList(_.keys(mapping.methodSpread)) %>
+
+Methods with unchanged argument orders:<br>
+<%= toFuncList(_.keys(mapping.skipRearg)) %>
 
 Methods with custom argument orders:<br>
 <%= _.map(_.keys(mapping.methodRearg), function(methodName) {
   var orders = mapping.methodRearg[methodName];
   return ' * `_.' + methodName + '` has an order of ' + toArgOrder(orders);
 }).join('\n') %>
-
-Methods with unchanged argument orders:<br>
-<%= toFuncList(_.keys(mapping.skipRearg)) %>
-
-The methods `partial` & `partialRight` accept an array of arguments to partially
-apply as their second parameter.
 
 #### New Methods
 
@@ -130,11 +153,26 @@ There are <%= _.size(mapping.aliasToReal) %> method aliases:<br>
   return ' * `_.' + alias + '` is an alias of `_.' + realName + '`';
 }).join('\n') %>
 
+## Placeholders
+
+The placeholder argument, which defaults to `_`, may be used to fill in method
+arguments in a different order. Placeholders are filled by the first available
+arguments of the curried returned function.
+```js
+// The equivalent of `2 > 5`.
+_.gt(2)(5);
+// → false
+
+// The equivalent of `_.gt(5, 2)` or `5 > 2`.
+_.gt(_, 2)(5);
+// → true
+```
+
 ## Chaining
 
 The `lodash/fp` module **does not** convert chain sequence methods. See
 [Izaak Schroeder’s article](https://medium.com/making-internets/why-using-chain-is-a-mistake-9bc1f80d51ba)
-for more details.
+on using functional composition as an alternative to method chaining.
 
 ## Convert
 
@@ -166,7 +204,7 @@ mapValuesWithKey(function(value, key) {
 // => { 'a': -1, 'b': 1 }
 ```
 
-// Manual conversions are also possible with the `convert` module.
+Manual conversions are also possible with the `convert` module.
 ```js
 var convert = require('lodash/fp/convert');
 
@@ -182,3 +220,8 @@ var fp = convert({
 // Convert by `lodash` instance.
 var fp = convert(lodash.runInContext());
 ```
+
+## Tooling
+
+Use [eslint-plugin-lodash-fp](https://www.npmjs.com/package/eslint-plugin-lodash-fp)
+to help use `lodash/fp` more efficiently.

@@ -2,6 +2,9 @@
  * Created by Dudu on 08/03/2016.
  */
 var path = require('path');
+// Requires multiparty
+var multiparty = require('connect-multiparty');
+var multipartyMiddleware = multiparty();
 
 // Example
 var mealController   = require('./controllers/mealCtrl');
@@ -49,8 +52,11 @@ module.exports = function (app) {
     app.route('/api/orders/meal/:meal_id')
         .get(orderController.getOrdersByMeal);
 
-    app.route('/upload')
-        .post(uploadController.uploadFile);
+    //app.route('/upload')
+    //    .post(uploadController.uploadFile);
+    app.post('/upload', multipartyMiddleware, uploadController.uploadFile);
+
+
 
     // route to handle all angular requests
     app.get('*', function (req, res) {
