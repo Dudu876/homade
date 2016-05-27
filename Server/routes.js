@@ -46,6 +46,9 @@ module.exports = function (app) {
     app.route('/api/orders/complete/:chef_id')
         .get(orderController.getCompletedOrdersByChef);
 
+    app.route('/api/orders/meal/:meal_id')
+        .get(orderController.getOrdersByMeal);
+
     app.route('/upload')
         .post(uploadController.uploadFile);
 

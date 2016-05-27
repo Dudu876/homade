@@ -15,6 +15,7 @@ exports.createOrder = function(req, res) {
     order.chefFBId = req.body.chefFBId;
     order.chef = req.body.chef;
     order.meal = req.body.meal;
+    order.mealID = req.body.meal._id;
     order.quantity = req.body.quantity;
     order.totalPrice = req.body.quantity * req.body.meal.price;
     order.city = req.body.chef.city;
@@ -27,6 +28,14 @@ exports.createOrder = function(req, res) {
             cityController.performCitySplitting(order.city);
         }
         else {
+        }
+    });
+};
+
+exports.getOrdersByMeal = function(req, res) {
+    Order.find({mealID: req.params.meal_id}).populate('meal').exec(function (err, orders) {
+        if (!err) {
+            res.json(orders);
         }
     });
 };
