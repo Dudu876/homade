@@ -35,8 +35,8 @@
                 <h1 itemprop="name" class="overflow h1 space-1 text-center-sm test" id="listing_name" >{{ order.meal.name }} </h1>
                 <i class="fa fa-star fa-2x yellowed-star" ng-repeat="n in fullStars() track by $index"></i>
                 <i ng-if="halfStar()" class="fa fa-star-half-o fa-2x yellowed-star" aria-hidden="true"></i>
-                <i class="fa fa-star-o fa-2x" ng-repeat="n in emptyStars() track by $index"></i>
-                {{ averageRating }}
+                <i class="fa fa-star-o fa-2x yellowed-star" ng-repeat="n in emptyStars() track by $index"></i>
+                {{ ratingText }}
             </div>
 
 
@@ -96,65 +96,25 @@
     <div class="well">
 
         <div class="text-right margined">
-            <a href="#reviews" class="btn btn-success">Reviews >></a>
+            <a class="btn btn-success">Reviews >></a>
         </div>
 
-        <!--<div class="row margined">-->
-            <!--<div class="col-md-12">-->
-                <!--<span class="glyphicon glyphicon-star"></span>-->
-                <!--<span class="glyphicon glyphicon-star"></span>-->
-                <!--<span class="glyphicon glyphicon-star"></span>-->
-                <!--<span class="glyphicon glyphicon-star"></span>-->
-                <!--<span class="glyphicon glyphicon-star-empty"></span>-->
-                <!--{{ ratingUser }}-->
-                <!--<br/>-->
-                <!--<textarea style="width: 80%;"></textarea>-->
-            <!--</div>-->
-        <!--</div>-->
-
         <hr>
+
         <div id="reviews">
-            <div class="row margined">
-                <div class="col-md-12">
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star-empty"></span>
-                    Anonymous
-                    <span class="pull-right">10 days ago</span>
-                    <p>This product was great in terms of quality. I would definitely buy another!</p>
+
+            <div ng-repeat="order in ordersOfMeal">
+                <div class="row margined">
+                    <div class="col-md-12">
+                        <i class="fa fa-star yellowed-star" ng-repeat="n in order.fullStars track by $index"></i>
+                        <i class="fa fa-star-o yellowed-star" ng-repeat="n in order.emptyStars track by $index"></i>
+                        {{ order.clientName }}
+                        <span class="pull-right">{{ order.daysAgo }} days ago</span>
+                        <p> {{ order.comment }} </p>
+                    </div>
                 </div>
-            </div>
 
-            <hr>
-
-            <div class="row margined">
-                <div class="col-md-12">
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star-empty"></span>
-                    Anonymous
-                    <span class="pull-right">12 days ago</span>
-                    <p>I've alredy ordered another one!</p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row margined">
-                <div class="col-md-12">
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star-empty"></span>
-                    Anonymous
-                    <span class="pull-right">15 days ago</span>
-                    <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
-                </div>
+                <hr>
             </div>
 
         </div>

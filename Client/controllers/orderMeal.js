@@ -4,6 +4,10 @@
 homadeApp.controller('orderMealCtrl', ['$scope', 'ordersFactory', 'userFactory', 'mealFactory', 'ezfb', function ($scope, ordersFactory, userFactory, mealFactory, ezfb) {
     var mealId = location.pathname.split("/").pop();
     $scope.order = {};
+    $scope.flooredRating = 0;
+    $scope.averageRating = 0;
+    $scope.ratingText = "No Ratings Yet!";
+    $scope.order.quantity = 1;
 
     mealFactory.getMeal(mealId).success(function(data) {
         $scope.order.meal = data;
@@ -11,16 +15,51 @@ homadeApp.controller('orderMealCtrl', ['$scope', 'ordersFactory', 'userFactory',
         $scope.order.chef = data.chef;
         $scope.chefName = data.chef.name.split(' ')[0];
 
+        if ($scope.order.meal.averageRating != null)
+        {
+            $scope.averageRating = $scope.order.meal.averageRating;
+            $scope.ratingText = $scope.averageRating;
+            $scope.flooredRating = Math.floor($scope.averageRating);
+        }
+
         ezfb.api('/v2.6/' + data.chefFBId + '/picture?height=100&width=100', function (res) {
             $scope.chefPic = res.data.url;
         });
     });
 
-    $scope.order.quantity = 1;
-    $scope.averageRating = 4.8;
-    $scope.flooredRating = Math.floor($scope.averageRating);
-    $scope.comments = [ { } ];
+    var getOrders = function(){
+        ordersFactory.getOrdersByMeal(mealId, 5).success(function (data) {
+            $scope.ordersOfMeal = data;
+            $scope.ordersOfMeal.forEach(function (element, index, array) {
+                ezfb.api(element.clientFBId + '?fields=first_name', function (res) {
+                    if (!res.error) {
+                        element.clientName = res.first_name;
+                    }
+                    else {
+                        element.clientName = "Anonymous";
+                    }
+                });
 
+                element.fullStars = new Array(element.rating);
+                element.emptyStars = new Array(5 - element.rating);
+                var now = new Date();
+                var timeDiff = Math.abs(now - new Date(element.endDate));
+                element.daysAgo = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            });
+        });
+    };
+
+
+    if (userFactory.fbId != "") {
+        getOrders();
+    }
+    else {
+        $scope.$on('isChefUpdate', function (event, args) {
+            getOrders();
+        });
+    }
+
+    $scope.comments = [ { } ];
 
     $scope.fullStars = function() {
         return new Array($scope.flooredRating);

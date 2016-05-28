@@ -25,8 +25,8 @@ homadeApp.factory('ordersFactory', ['$http', function($http) {
         getActiveOrdersByClient : function(clientId) {
             return $http.get(activeClientOrdersUrl +  clientId);
         },
-        getOrdersByMeal : function(mealID) {
-            return $http.get(mealOrdersUrl + mealID);
+        getOrdersByMeal : function(mealID, count) {
+            return $http.get(mealOrdersUrl + mealID + "/" + count);
         }
     }
 }]);
