@@ -106,8 +106,7 @@
             <div ng-repeat="order in ordersOfMeal">
                 <div class="row margined">
                     <div class="col-md-12">
-                        <i class="fa fa-star yellowed-star" ng-repeat="n in order.fullStars track by $index"></i>
-                        <i class="fa fa-star-o yellowed-star" ng-repeat="n in order.emptyStars track by $index"></i>
+                        <i class="fa fa-star yellowed-star" ng-repeat="n in order.fullStars track by $index"></i><i class="fa fa-star-o yellowed-star" ng-repeat="n in order.emptyStars track by $index"></i>
                         {{ order.clientName }}
                         <span class="pull-right">{{ order.daysAgo }} days ago</span>
                         <p> {{ order.comment }} </p>
