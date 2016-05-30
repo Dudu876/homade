@@ -52,7 +52,7 @@ module.exports = function (app) {
     app.route('/api/orders/complete/:chef_id')
         .get(orderController.getCompletedOrdersByChef);
 
-    app.route('/api/orders/meal/:meal_id')
+    app.route('/api/orders/meal/:meal_id/:count')
         .get(orderController.getOrdersByMeal);
 
     //app.route('/upload')

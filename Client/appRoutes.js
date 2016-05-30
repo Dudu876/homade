@@ -38,7 +38,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: 'orderMealCtrl'
         })
         .when('/Profile', {
-            templateUrl: 'views/contact.html',
+            templateUrl: 'views/chefDashboard.html',
         })
         .when('/ChefOrders', {
             templateUrl: 'views/chefOrders.html',

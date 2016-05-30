@@ -122,7 +122,7 @@
                                 <a class="regular-chef" href="/Chef">Chef</a>
 
                                 <ul class="dropdown">
-                                    <li><a href="#">Dashboard</a></li>
+                                    <li><a href="/Profile">Dashboard</a></li>
                                     <li><a href="/ChefMeals">My Meals</a></li>
                                     <li><a href="/AddMeal">Add Meal</a></li>
                                     <li><a href="/ChefOrders">Orders</a></li>
@@ -134,7 +134,7 @@
                                 <a class="regular" href="/Contact">Messages</a>
                             </li>
                             <li>
-                                <a class="avatar-link" href="/Profile">
+                                <a class="avatar-link" ng-href="{{ getProfile() }} ">
                                     {{apiMe.first_name}}
                                     <img src="{{ apiMe.picture.data.url }}" class="avatar-frame" alt="avatar">
                                 </a>

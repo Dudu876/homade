@@ -7,6 +7,7 @@
  */
 
 var Order = require('../models/order');
+var Meal = require('../models/meal');
 var cityController = require('./cityCtrl');
 
 exports.createOrder = function(req, res) {
@@ -33,7 +34,7 @@ exports.createOrder = function(req, res) {
 };
 
 exports.getOrdersByMeal = function(req, res) {
-    Order.find({mealID: req.params.meal_id}).populate('meal').exec(function (err, orders) {
+    Order.find({mealID: req.params.meal_id, status: 3, comment: { $ne: null }}).sort('endDate').limit(req.params.count).populate('meal').exec(function (err, orders) {
         if (!err) {
             res.json(orders);
         }
@@ -43,7 +44,27 @@ exports.getOrdersByMeal = function(req, res) {
 exports.updateOrder = function (req, res) {
     Order.findByIdAndUpdate(req.body._id, req.body, {upsert:true}, function(err, doc){
         if (err) return res.send(500, { error: err });
-        return res.send("succesfully saved");
+        res.json("succesfully saved");
+
+        if (req.body.rating != null && req.body.rating > 0 && req.body.rating <= 5)
+        {
+            Order.find({mealID: req.body.mealID, rating: { $ne: null }}).exec(function (err, ordersOfMeal) {
+                var ratingsSum = 0;
+                var ratingsCount = 0;
+                ordersOfMeal.forEach(function(element) {
+                    ratingsSum += element.rating;
+                    ratingsCount++;
+                }, this);
+
+                var mealAverage = ratingsSum / ratingsCount;
+                Meal.findByIdAndUpdate(req.body.mealID, { $set: {'averageRating': mealAverage}}, function (err)
+                {
+                    if (err){
+                        console.log(err);
+                    }
+                });
+            });
+        }
     });
 };
 

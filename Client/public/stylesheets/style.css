@@ -419,6 +419,35 @@ hr.soften {
     height: 20vh;
     width: 100%;
 }
+
+.dashboard-container {
+    width:60%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:30px;
+}
+
+.panel-header {
+    background-color: #edefed;
+    font-size: 16px;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    padding: 12px;
+    position: relative;
+    border-bottom: 1px solid #dce0e0;
+}
+
+.message-dashboard {
+    margin-top:10px;
+}
+
+.new-line-message {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-color: #ccc;
+    max-width: none;
+    width: 100%;
+}
 .col-centered {
     display:inline-block;
     float:none;

@@ -24,6 +24,16 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
         $location.url('/Result?q=' + $scope.search.query);
     };
 
+    $scope.getProfile = function() {
+        if ($scope.isChef) {
+            return "/Profile";
+        }
+        else
+        {
+            return "/";
+        }
+    };
+
     updateLoginStatus(updateApiMe);
 
     $scope.login = function () {
@@ -45,6 +55,7 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
          */
         ezfb.logout(function () {
             updateLoginStatus(updateApiMe);
+            location.href = "/";
         });
     };
 

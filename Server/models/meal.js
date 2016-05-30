@@ -15,7 +15,8 @@ var mealSchema = new Schema({
     kosher: Boolean,
     glutenfree: Boolean,
     chefFBId: Number,
-    chef: { type: Schema.Types.ObjectId, ref: 'Chef' }
+    chef: { type: Schema.Types.ObjectId, ref: 'Chef' },
+    averageRating: Number
 });
 
 // define our meal model
