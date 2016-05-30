@@ -2,21 +2,26 @@
  * Created by Michael on 3/18/2016.
  */
 
-homadeApp.controller('NavbarController', function NavbarController($scope, ezfb, $location, userFactory, chefsFactory) {
+homadeApp.controller('NavbarController', function NavbarController($scope, $rootScope, ezfb, $location, userFactory, chefsFactory) {
 
     $scope.loggedIn = false;
     $scope.loggedInStatusVerified = false;
     $scope.loadedChefData = false;
     $scope.isChef = false;
+    $scope.search = $rootScope.search;
 
-    $scope.search = {};
+    //$scope.search = {};
 
     $scope.$on('isChefUpdate', function(event, args){
         $scope.isChef = args;
     });
 
-    $scope.search = function() {
-        $location.url('/Result?q=' + $scope.search.text);
+    $scope.$on('SEARCH', function(event, args) {
+        $scope.search = args;
+    });
+
+    $scope.go = function() {
+        $location.url('/Result?q=' + $scope.search.query);
     };
 
     updateLoginStatus(updateApiMe);
