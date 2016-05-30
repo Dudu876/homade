@@ -13,7 +13,6 @@ homadeApp.controller('mainPageCtrl', ['$scope', '$rootScope', '$location', 'meal
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         var place = autocomplete.getPlace();
         $scope.search.latlng = [place.geometry.location.lng(), place.geometry.location.lat()];
-        console.log($scope.search.latlng);
     });
 
     navigator.geolocation.getCurrentPosition(setPosition);
