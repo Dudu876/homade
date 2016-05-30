@@ -461,3 +461,12 @@ hr.soften {
     /* inline-block space fix */
     margin-right:-4px;
 }
+
+.inline-autocomplete {
+    width: 45%;
+}
+
+.angucomplete-holder {
+    width: 45%;
+    display: inline;
+}

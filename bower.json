@@ -39,6 +39,7 @@
     "angular-material": "^1.0.9",
     "angular-animate": "^1.5.5",
     "angular-aria": "^1.5.5",
-    "angular": "^1.5.5"
+    "angular": "^1.5.5",
+    "angucomplete-alt": "^2.4.1"
   }
 }
