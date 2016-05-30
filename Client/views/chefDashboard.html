@@ -1,8 +1,7 @@
 <div class="row dashboard-container">
     <div class="col-md-3">
         <div class="panel space-4">
-            <div class="media media-photo-block
-            ">
+            <div class="media media-photo-block">
                 <a href="/users/show/47263153" title="View Profile"><img alt="Michael" class="img-responsive" height="190" src="https://a2.muscache.com/im/pictures/9472b64c-8c77-4e0c-86a5-52436c76cce2.jpg?aki_policy=profile_x_medium" title="Michael" ></a>
             </div>
             <div class="panel-body">
@@ -11,10 +10,10 @@
                 </h2>
                 <ul class="list-unstyled text-center">
                     <li>
-                        <b>28</b> Orders In Total
+                        <b>{{ totalOrders }}</b> Orders In Total
                     </li>
                     <li>
-                        <b>15</b> Last Month
+                        <b>{{ lastMonth }}</b> Last Month
                     </li>
                 </ul>
             </div>
@@ -93,6 +92,9 @@ text-align:center;">
             <hr class="new-line-message">
 
         </div>
+
+        <b>Active Orders:</b>
+
         <div class="panel panel-default">
             <table class="table table-hover">
                 <tbody>
@@ -101,10 +103,13 @@ text-align:center;">
                         Meal
                     </th>
                     <th>
-                        Price
+                        Chef
                     </th>
                     <th>
                         Quantity
+                    </th>
+                    <th>
+                        Total Price
                     </th>
                     <th>
                         Date
@@ -116,13 +121,11 @@ text-align:center;">
                     </td>
                     <td class="ng-binding">Michael Reizelman</td>
                     <td class="ng-binding">2</td>
+                    <td class="ng-binding">25ש"ח</td>
                     <td class="text-left text-nowrap">
                         <button class="btn btn-xs btn-success ng-binding">
-                            Supplied: 05/27/2016 19:56
+                           05/27/2016 19:56
                         </button>
-                    </td>
-                    <td>
-
                     </td>
                 </tr>
                 <tr class="ng-scope">
@@ -131,14 +134,55 @@ text-align:center;">
                     </td>
                     <td class="ng-binding">Michael Reizelman</td>
                     <td class="ng-binding">3</td>
+                    <td class="ng-binding">25ש"ח</td>
                     <td class="text-left text-nowrap">
                         <button class="btn btn-xs btn-success ng-binding">
-                            Supplied: 05/28/2016 14:19
+                            05/28/2016 14:19
                         </button>
                     </td>
-                    <td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
+        <b>Finished Orders:</b>
+
+        <div class="panel panel-default">
+            <table class="table table-hover">
+                <tbody>
+                <tr class="panel-header">
+                    <th>
+                        Meal
+                    </th>
+                    <th>
+                        Chef
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Total Price
+                    </th>
+                    <th>
+                        Finish Date
+                    </th>
+                    <th>
+                        Rating
+                    </th>
+                </tr>
+                <tr class="ng-scope">
+                    <td class="ng-binding">
+                        Test
                     </td>
+                    <td class="ng-binding">Michael Reizelman</td>
+                    <td class="ng-binding">2</td>
+                    <td class="ng-binding">25ש"ח</td>
+                    <td class="text-left text-nowrap">
+                        <button class="btn btn-xs btn-success ng-binding">
+                            05/27/2016 19:56
+                        </button>
+                    </td>
+                    <td class="ng-binding">25ש"ח</td>
                 </tr>
                 </tbody>
             </table>

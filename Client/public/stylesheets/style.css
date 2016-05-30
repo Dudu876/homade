@@ -448,3 +448,8 @@ hr.soften {
     max-width: none;
     width: 100%;
 }
+
+.panel-header th {
+    font-weight: normal;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}

@@ -6,6 +6,7 @@ var activeOrdersUrl = '/api/orders/active/';
 var activeClientOrdersUrl = '/api/orders/activeclient/';
 var completeOrdersUrl = '/api/orders/complete/';
 var mealOrdersUrl = 'api/orders/meal/';
+var countOrdersUrl = 'api/orders/count/';
 
 homadeApp.factory('ordersFactory', ['$http', function($http) {
 
@@ -27,6 +28,9 @@ homadeApp.factory('ordersFactory', ['$http', function($http) {
         },
         getOrdersByMeal : function(mealID, count) {
             return $http.get(mealOrdersUrl + mealID + "/" + count);
+        },
+        getOrdersCount : function(chefFBId) {
+            return $http.get(countOrdersUrl + chefFBId);
         }
     }
 }]);

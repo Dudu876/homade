@@ -40,6 +40,9 @@ module.exports = function (app) {
         .post(orderController.createOrder)
         .put(orderController.updateOrder);
 
+    app.route('/api/orders/count/:chef_id')
+        .get(orderController.getChefOrderNumbers);
+
     app.route('/api/orders/active/:chef_id')
         .get(orderController.getActiveOrdersByChef);
 
