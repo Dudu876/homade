@@ -1,20 +1,15 @@
 /**
  * Created by Dudu on 04/04/2016.
  */
-homadeApp.controller('resultCtrl', ['$scope', 'mealFactory', '$timeout', '$location', '$routeParams', 'ezfb', 'uiGmapGoogleMapApi', function ($scope, mealFactory, $timeout, $location, $routeParams, ezfb, uiGmapGoogleMapApi) {
+homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$timeout', '$location', '$routeParams', 'ezfb', 'uiGmapGoogleMapApi', function ($scope, $rootScope, mealFactory, $timeout, $location, $routeParams, ezfb, uiGmapGoogleMapApi) {
 
     //$scope.meals = meals;
     var i = 100;
     var mapIsReady = false;
-    var fromMain = false;
-
-    if (location.search.indexOf('fromMainPage') > -1 && /fromMainPage=([^&]+)/.exec(location.search)[1] == 'true'){
-        fromMain = true;
-    }
 
     //console.log('this is the route params' +  $routeParams.q); *********WORKING
 
-    mealFactory.get().success(function (response) {
+    mealFactory.getFiltered($rootScope.search).success(function (response) {
         $scope.meals = response;
         addMarkers();
     });

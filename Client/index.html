@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" ng-app="homadeApp">
     <head>
-        <meta charset="UTF-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
         <base href="/">
 
         <title>Homade</title>
@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="public/libs/ng-tags-input/ng-tags-input.bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="public/libs/ng-tags-input/ng-tags-input.min.css" type="text/css">
         <link rel="stylesheet" href="public/libs/angular-chart.js/dist/angular-chart.min.css" type="text/css">
+
+        <link rel="stylesheet" href="public/libs/angular-material/angular-material.css">
         <!--<link rel="stylesheet" href="public/libs/angular-input-stars-directive/angular-input-stars.css" type="text/css">-->
 
         <!-- Custom CSS -->
@@ -25,9 +27,11 @@
         <link rel="stylesheet" href="public/fonts/font-awesome/css/font-awesome.min.css" type="text/css">
 
         <!-- JavaScripts -->
+        <script type="text/javascript" src="public/libs/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
         <script type="text/javascript" src="public/libs/angular/angular.min.js"></script>
         <script type="text/javascript" src="public/libs/angular-route/angular-route.min.js"></script>
-        <script type="text/javascript" src="public/libs/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="public/libs/jquery/dist/jquery.easing.min.js"></script>
         <script type="text/javascript" src="public/libs/jquery/dist/jquery.fittext.js"></script>
@@ -38,6 +42,9 @@
         <script type="text/javascript" src="public/libs/lodash/lodash.js"></script>
         <script type="text/javascript" src="public/libs/angular-simple-logger/dist/angular-simple-logger.js"></script>
         <script type="text/javascript" src="public/libs/angular-google-maps/dist/angular-google-maps.js"></script>
+        <script type="text/javascript" src="public/libs/angular-material/angular-material.js"></script>
+        <script type="text/javascript" src="public/libs/angular-animate/angular-animate.js"></script>
+        <script type="text/javascript" src="public/libs/angular-aria/angular-aria.js"></script>
 
         <!--<script type="text/javascript" src="public/libs// ng-file-upload(.min).js"></script>-->
         <script type="text/javascript" src="public/libs/ng-file-upload/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
@@ -80,6 +87,7 @@
         <script type="text/javascript" src="controllers/chefDashboard.js"></script>
 
         <script type="text/javascript" src="directives/myEnter.js"></script>
+        <script type="text/javascript" src="directives/myAutocomplete.js"></script>
 
     </head>
     <body>
@@ -99,8 +107,10 @@
                     </div>
 
                     <div class="navbar-filter" ng-show="shouldShowFilter()">
-                        <input id="searchBar" my-enter="search()" ng-model="search.text" name="searchBar" type="text" placeholder="What do you want to eat? " width="200px">
-                        <input id="location" ng-model="search.location" name="location" type="text" placeholder="Where?" >
+                        <div class="form-group form-inline col-md-6 col-centered">
+                            <input id="query" class="form-control" style="width: 45%" my-enter="go()" ng-model="search.query" type="text" placeholder="What do you want to eat?">
+                            <input id="autocomplete" class="form-control" style="width: 35%" ng-model="search.location" type="text" placeholder="Where?">
+                        </div>
                     </div>
 
                     <div class="rightnav" id="bs-example-navbar-collapse-1">

@@ -10,12 +10,19 @@ homadeApp.factory('mealFactory', ['$http', function($http) {
         getMealsOfChef: function(fbId) {
             return $http.get(mealOfChefURL + fbId)  ;
         },
+        getAllTags: function() {
+            return $http.get(mealURL + 'tags')  ;
+        },
         getMeal : function(mealId) {
             return $http.get(mealURL + mealId)  ;
         },
         // call to get all meals
         get : function() {
             return $http.get(mealURL);
+        },
+        // call to get all meals
+        getFiltered : function(search) {
+            return $http.get(mealURL, {params: {search: search}});
         },
         // these will work when more API routes are defined on the Node side of things
         // call to POST and create a new meal

@@ -4,8 +4,11 @@
             <h1>Your Place To Find Great Home-cooked Meals!</h1>
             <hr>
             <p style="font-weight: bold;">Homade is your platfom to find great home cooked meals around you! Just type in what you want to eat and where and start going!</p>
-            <input class="search-header" id="searchBar" my-enter="search()" ng-model="search.text" name="searchBar" type="text" placeholder="What do you want to eat? " width="200px">
-            <input class="location-header" id="location" ng-model="search.location" name="location" type="text" placeholder="Where?" >
+            <!--<input class="search-header" id="searchBar" my-enter="search()" ng-model="search.text" name="searchBar" type="text" placeholder="What do you want to eat? " width="200px">-->
+            <div class="form-group form-inline col-md-6 col-centered">
+                <input id="query" class="form-control" style="width: 45%" my-enter="go()" ng-model="search.query" type="text" placeholder="What do you want to eat?">
+                <input id="autocomplete" class="form-control" style="width: 35%" ng-model="search.location" type="text" placeholder="Where?">
+            </div>
         </div>
     </div>
 </div>

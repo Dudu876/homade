@@ -20,6 +20,9 @@ module.exports = function (app) {
         .post(mealController.createMeal)
         .put(mealController.updateMeal);
 
+    app.route('/api/meals/tags')
+        .get(mealController.getAllTags);
+
     app.route('/api/meals/:meal_id')
         .get(mealController.getMealById)
         .delete(mealController.deleteMeal);

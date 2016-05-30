@@ -453,3 +453,11 @@ hr.soften {
     font-weight: normal;
     font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}

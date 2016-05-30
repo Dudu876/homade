@@ -7,11 +7,21 @@ var Meal = require('../models/meal');
 var Chef = require('../models/chef');
 
 exports.getAllMeals = function (req, res) {
-    Meal.find({})
-        .populate('chef')
-        .exec(function(error,meals){
-            res.json(meals);
-        });
+    var search = req.query.search;
+    if (!search) {
+        Meal.find({})
+            .populate('chef')
+            .exec(function (error, meals) {
+                res.json(meals);
+            });
+    }
+    else {
+        Meal.find({})
+            .populate('chef')
+            .exec(function (error, meals) {
+                res.json(meals);
+            });
+    }
 };
 
 exports.searchMeal = function(req,res){
@@ -136,6 +146,24 @@ exports.createMeal = function (req, res) {
         }
         else {
 
+        }
+    });
+};
+
+exports.getAllTags = function (req, res) {
+    Meal.find({},'tags',function (err, meals) {
+        if (!err) {
+            //tags = fixTags(tags);
+            var finalTags = [];
+            var i;
+            for (i in meals) {
+                finalTags = finalTags.concat(meals[i].tags);
+            }
+            finalTags = fixTags(finalTags);
+            res.json(finalTags);
+        }
+        else {
+            //Utils.generateResponse(req, res, 0, err);
         }
     });
 };
