@@ -12,6 +12,15 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
 
     //$scope.search = {};
 
+    autocomplete = new google.maps.places.Autocomplete(
+        /** @type {!HTMLInputElement} */(document.getElementById('navAutocomplete')),
+        {types: ['address']});
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var place = autocomplete.getPlace();
+        $scope.search.latlng = [place.geometry.location.lng(), place.geometry.location.lat()];
+    });
+
     $scope.$on('isChefUpdate', function(event, args){
         $scope.isChef = args;
     });
