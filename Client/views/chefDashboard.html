@@ -27,6 +27,7 @@
             <div class="panel-header">
                 Messages (0 new)
             </div>
+
             <ul>
                 <div class="row message-dashboard">
                     <div class="col-3" style="width: 25%; float: left;">
@@ -98,49 +99,36 @@ text-align:center;">
         <div class="panel panel-default">
             <table class="table table-hover">
                 <tbody>
-                <tr class="panel-header">
-                    <th>
-                        Meal
-                    </th>
-                    <th>
-                        Chef
-                    </th>
-                    <th>
-                        Quantity
-                    </th>
-                    <th>
-                        Total Price
-                    </th>
-                    <th>
-                        Date
-                    </th>
-                </tr>
-                <tr class="ng-scope">
-                    <td class="ng-binding">
-                        Test
-                    </td>
-                    <td class="ng-binding">Michael Reizelman</td>
-                    <td class="ng-binding">2</td>
-                    <td class="ng-binding">25ש"ח</td>
-                    <td class="text-left text-nowrap">
-                        <button class="btn btn-xs btn-success ng-binding">
-                           05/27/2016 19:56
-                        </button>
-                    </td>
-                </tr>
-                <tr class="ng-scope">
-                    <td class="ng-binding">
-                        Test
-                    </td>
-                    <td class="ng-binding">Michael Reizelman</td>
-                    <td class="ng-binding">3</td>
-                    <td class="ng-binding">25ש"ח</td>
-                    <td class="text-left text-nowrap">
-                        <button class="btn btn-xs btn-success ng-binding">
-                            05/28/2016 14:19
-                        </button>
-                    </td>
-                </tr>
+                    <tr class="panel-header">
+                        <th>
+                            Meal
+                        </th>
+                        <th>
+                            Client
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                        <th>
+                            Total Price
+                        </th>
+                        <th>
+                            Starting Date
+                        </th>
+                    </tr>
+                    <tr ng-repeat="order in activeOrders">
+                        <td>
+                            {{ order.meal.name }}
+                        </td>
+                        <td class="ng-binding"> {{ order.clientName }} </td>
+                        <td class="ng-binding"> {{ order.quantity }} </td>
+                        <td class="ng-binding"> {{ order.totalPrice }} </td>
+                        <td class="text-left text-nowrap">
+                            <button class="btn btn-xs btn-success ng-binding">
+                                {{ formatDate(order.startDate) |  date:'MM/dd/yyyy H:mm' }}
+                            </button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -155,7 +143,7 @@ text-align:center;">
                         Meal
                     </th>
                     <th>
-                        Chef
+                        Client
                     </th>
                     <th>
                         Quantity
@@ -170,19 +158,21 @@ text-align:center;">
                         Rating
                     </th>
                 </tr>
-                <tr class="ng-scope">
+                <tr ng-repeat="order in completeOrders">
                     <td class="ng-binding">
-                        Test
+                        {{ order.meal.name }}
                     </td>
-                    <td class="ng-binding">Michael Reizelman</td>
-                    <td class="ng-binding">2</td>
-                    <td class="ng-binding">25ש"ח</td>
+                    <td class="ng-binding"> {{ order.clientName }}</td>
+                    <td class="ng-binding"> {{ order.quantity }}</td>
+                    <td class="ng-binding"> {{ order.totalPrice }}</td>
                     <td class="text-left text-nowrap">
                         <button class="btn btn-xs btn-success ng-binding">
-                            05/27/2016 19:56
+                            {{ formatDate(order.endDate) |  date:'MM/dd/yyyy H:mm' }}
                         </button>
                     </td>
-                    <td class="ng-binding">25ש"ח</td>
+                    <td class="ng-binding">
+                        <i class="fa fa-star yellowed-star" ng-repeat="n in fullStars(order) track by $index"></i><i class="fa fa-star-o yellowed-star" ng-repeat="n in emptyStars(order) track by $index"></i>
+                    </td>
                 </tr>
                 </tbody>
             </table>
