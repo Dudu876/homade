@@ -6,7 +6,17 @@
             <p style="font-weight: bold;">Homade is your platfom to find great home cooked meals around you! Just type in what you want to eat and where and start going!</p>
             <!--<input class="search-header" id="searchBar" my-enter="search()" ng-model="search.text" name="searchBar" type="text" placeholder="What do you want to eat? " width="200px">-->
             <div class="form-group form-inline col-md-6 col-centered">
-                <input id="query" class="form-control" style="width: 45%" my-enter="go()" ng-model="search.query" type="text" placeholder="What do you want to eat?">
+                <angucomplete-alt id="ex1"
+                                  placeholder="What do you want to eat?"
+                                  pause="100"
+                                  selected-object="selectedCountry"
+                                  local-data="tags"
+                                  search-fields="val"
+                                  title-field="val"
+                                  minlength="1"
+                                  input-class="inline-autocomplete form-control"
+                                />
+                <!--<input id="query" auto-complete ui-items="tags" class="form-control" style="width: 45%" my-enter="go()" ng-model="search.query" type="text" placeholder="What do you want to eat?">-->
                 <input id="autocomplete" class="form-control" style="width: 35%" ng-model="search.location" type="text" placeholder="Where?">
             </div>
         </div>

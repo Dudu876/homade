@@ -160,7 +160,14 @@ exports.getAllTags = function (req, res) {
                 finalTags = finalTags.concat(meals[i].tags);
             }
             finalTags = fixTags(finalTags);
-            res.json(finalTags);
+
+            var sendingTags = [];
+
+            for (var i = 0; i < finalTags.length; i++){
+                sendingTags.push({val: finalTags[i]});
+            }
+
+            res.json(sendingTags);
         }
         else {
             //Utils.generateResponse(req, res, 0, err);

@@ -448,6 +448,11 @@ hr.soften {
     max-width: none;
     width: 100%;
 }
+
+.panel-header th {
+    font-weight: normal;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
 .col-centered {
     display:inline-block;
     float:none;
@@ -455,6 +460,15 @@ hr.soften {
     text-align:left;
     /* inline-block space fix */
     margin-right:-4px;
+}
+
+.inline-autocomplete {
+    width: 45%;
+}
+
+.angucomplete-holder {
+    width: 45%;
+    display: inline;
 }
 
 div:focus {

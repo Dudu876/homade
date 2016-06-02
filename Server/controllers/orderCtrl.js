@@ -68,6 +68,22 @@ exports.updateOrder = function (req, res) {
     });
 };
 
+exports.getChefOrderNumbers = function (req, res) {
+    Order.count({chefFBId: req.params.chef_id}, function(err, totalCount) {
+        var results = {};
+        results.total = totalCount;
+
+        var lastMonth = new Date();
+        lastMonth.setMonth(lastMonth.getMonth() - 1);
+
+        Order.count({chefFBId: req.params.chef_id, endDate: {$gte: lastMonth}}, function (error, lastMonthCount){
+            results.lastMonth = lastMonthCount;
+
+            res.json(results);
+        });
+    });
+};
+
 exports.getActiveOrdersByChef = function (req, res) {
     Order.find({chefFBId: req.params.chef_id, status: {$lt: 3}}).populate('meal').exec(function (err, orders) {
         if (!err) {
