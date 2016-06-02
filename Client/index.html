@@ -20,6 +20,7 @@
         <!-- Custom CSS -->
         <link rel="stylesheet" href="public/stylesheets/navbar.css" type="text/css">
         <link rel="stylesheet" href="public/stylesheets/style.css" type="text/css">
+        <link rel="stylesheet" href="public/stylesheets/chat.css" type="text/css">
 
         <!-- Custom Fonts -->
         <link rel="stylesheet" href="public/stylesheets/OpenSans.css" type="text/css">
@@ -59,7 +60,7 @@
         <script type="text/javascript" src="public/libs/Chart.js/Chart.js"></script>
         <script type="text/javascript" src="public/libs/angular-chart.js/dist/angular-chart.min.js"></script>
         <script type="text/javascript" src="public/libs/angular-input-stars-directive/angular-input-stars.js"></script>
-
+        <script type="text/javascript" src="public/libs/angular-scroll-glue/src/scrollglue.js"></script>
 
         <!-- Custom Angular -->
         <script type="text/javascript" src="app.js"></script>
@@ -71,6 +72,7 @@
         <script type="text/javascript" src="factories/chefsFactory.js"></script>
         <script type="text/javascript" src="factories/userFactory.js"></script>
         <script type="text/javascript" src="factories/ordersFactory.js"></script>
+        <script type="text/javascript" src="factories/messagesFactory.js"></script>
 
         <script type="text/javascript" src="controllers/NavbarController.js"></script>
         <script type="text/javascript" src="controllers/mainPage.js"></script>
@@ -84,6 +86,7 @@
         <script type="text/javascript" src="controllers/chefHistory.js"></script>
         <script type="text/javascript" src="controllers/clientOrders.js"></script>
         <script type="text/javascript" src="controllers/commentOnOrder.js"></script>
+        <script type="text/javascript" src="controllers/messagesCtrl.js"></script>
 
         <script type="text/javascript" src="directives/myEnter.js"></script>
         <script type="text/javascript" src="directives/myAutocomplete.js"></script>
@@ -131,7 +134,7 @@
 
                             </li>
                             <li>
-                                <a class="regular" href="/Contact">Messages</a>
+                                <a class="regular" href="/Messages">Messages</a>
                             </li>
                             <li>
                                 <a class="avatar-link" ng-href="{{ getProfile() }} ">

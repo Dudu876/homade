@@ -456,3 +456,10 @@ hr.soften {
     /* inline-block space fix */
     margin-right:-4px;
 }
+
+div:focus {
+    outline: none;
+}
+.chat-body input:focus {
+    outline: none;
+}
