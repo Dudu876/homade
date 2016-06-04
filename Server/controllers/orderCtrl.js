@@ -108,6 +108,15 @@ exports.getCompletedOrdersByChef = function (req, res) {
     });
 };
 
+exports.getConnections = function (req, res) {
+    Order.find({ $or: [ {'chefFBId': req.params.fbId}, {'clientFBId': req.params.fbId}]}, 'chefFBId clientFBId', function (err, connections) {
+        if (!err) {
+            res.json(connections);
+        }
+
+    })
+};
+
 exports.getAllOrders = function (req, res) {
     Order.find({})
         .populate('chef')

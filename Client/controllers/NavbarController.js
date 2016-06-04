@@ -96,6 +96,12 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
             userFactory.name = res.first_name;
             userFactory.fullname = res.name;
             userFactory.fbId = res.id;
+            if (res.picture !== undefined) {
+                userFactory.picture = res.picture.data.url;
+            }
+            else {
+                userFactory.picture = '../public/images/BlankPicture.png';
+            }
             chefsFactory.isChef(userFactory.fbId).success(function(data) {
                 userFactory.isChefUpdate(data);
                 $scope.loadedChefData = true;

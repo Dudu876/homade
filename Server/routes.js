@@ -7,11 +7,12 @@ var multiparty = require('connect-multiparty');
 var multipartyMiddleware = multiparty();
 
 // Example
-var mealController   = require('./controllers/mealCtrl');
-var cityController   = require('./controllers/cityCtrl');
-var chefController   = require('./controllers/chefCtrl');
-var orderController  = require('./controllers/orderCtrl');
-var uploadController = require('./controllers/uploadCtrl');
+var mealController    = require('./controllers/mealCtrl');
+var cityController    = require('./controllers/cityCtrl');
+var chefController    = require('./controllers/chefCtrl');
+var orderController   = require('./controllers/orderCtrl');
+var uploadController  = require('./controllers/uploadCtrl');
+var messageController = require('./controllers/messageCtrl');
 
 module.exports = function (app) {
 
@@ -58,11 +59,18 @@ module.exports = function (app) {
     app.route('/api/orders/meal/:meal_id/:count')
         .get(orderController.getOrdersByMeal);
 
+    app.route('/api/orders/connections/:fbId')
+        .get(orderController.getConnections);
+
+    app.route('/api/messages')
+        .post(messageController.postMessage);
+
+    app.route('/api/messages/:fbId1,:fbId2')
+        .get(messageController.getMessages);
+
     //app.route('/upload')
     //    .post(uploadController.uploadFile);
     app.post('/upload', multipartyMiddleware, uploadController.uploadFile);
-
-
 
     // route to handle all angular requests
     app.get('*', function (req, res) {

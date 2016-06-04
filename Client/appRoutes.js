@@ -57,6 +57,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: 'views/clientOrders.html',
             controller: 'clientOrdersCtrl'
         })
+        .when('/Messages', {
+            templateUrl: 'views/messages.html',
+            controller: 'messagesCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });

@@ -470,3 +470,10 @@ hr.soften {
     width: 45%;
     display: inline;
 }
+
+div:focus {
+    outline: none;
+}
+.chat-body input:focus {
+    outline: none;
+}
