@@ -20,64 +20,30 @@ homadeApp.controller('messagesCtrl', [ '$scope', 'userFactory', 'ordersFactory',
 
     function updateConnections() {
         ordersFactory.getConnections(userFactory.fbId).success(function (connections) {
-            $scope.connections = connections;
+            //$scope.connections = connections;
+            $scope.connections = [];
             var i = 0;
-
-            //$scope.connections.forEach(function(element, index, array) {
-            //for (i in connections) {
-            //    var connection = {};
-            //    if (connections[i].chefFBId == userFactory.fbId) {
-            //        connection.fbId = connections[i].clientFBId;
-            //        connection.type = "Client";
-            //    }
-            //    else {
-            //        connection.fbId = connections[i].chefFBId;
-            //        connection.type = "Chef";
-            //    }
-            //    if (i == 0) $scope.userSelect(connection);
-            //    if (containsConnection(connection, $scope.connections, i)){
-            //        console.log('found');
-            //    }
-            //    else {
-            //        console.log('not found');
-            //    }
-            //    $scope.connections.push(connection);
-            //    console.log('i before ezfb ' + i);
-            //    ezfb.api('/' + connection.fbId, {fields: ['name','picture']}, function (res) {
-            //        console.log('i inside ezfb ' + i);
-            //        if (res.name === undefined) {
-            //            $scope.connections[i].name = "No Name";
-            //        }
-            //        else {
-            //            $scope.connections[i].name = res.name;
-            //        }
-            //        if (res.picture === undefined) {
-            //            $scope.connections[i].pic = "../public/images/BlankPicture.png";
-            //        }
-            //        else {
-            //            $scope.connections[i].pic = res.picture.data.url;
-            //        }
-            //        //$scope.connections.push(connection);
-            //    });
-            //}
-            $scope.connections.forEach(function(element, index, array) {
+            connections.forEach(function(element, index, array) {
                 var connection = {};
                 if (element.chefFBId == userFactory.fbId) {
-                    element.fbId = element.clientFBId;
-                    element.type = "Client";
+                    connection.fbId = element.clientFBId;
+                    connection.type = "Client";
                 }
                 else {
-                    element.fbId = element.chefFBId;
-                    element.type = "Chef";
+                    connection.fbId = element.chefFBId;
+                    connection.type = "Chef";
                 }
-                if (index == 0) $scope.userSelect(element);
-                if (containsConnection(element, $scope.connections, index)){
+                if (index == 0) $scope.userSelect(connection);
+                if (containsConnection(connection, $scope.connections, index)){
                     console.log('found');
                 }
                 else {
                     console.log('not found');
+                    $scope.connections.push(connection);
                 }
-                console.log('outside ' + index);
+            });
+            console.log('first loop end');
+            $scope.connections.forEach(function(element, index, array) {
                 ezfb.api('/' + element.fbId, {fields: ['name','picture']}, function (res) {
                     console.log('inside ' + index);
                     if (res.name === undefined) {
@@ -92,8 +58,6 @@ homadeApp.controller('messagesCtrl', [ '$scope', 'userFactory', 'ordersFactory',
                     else {
                         element.pic = res.picture.data.url;
                     }
-                    //$scope.connections.push(connection);
-                    if (index == array.length - 1) $scope.connections = deleteDup($scope.connections);
                 });
             });
             console.log('all done');
@@ -148,15 +112,5 @@ homadeApp.controller('messagesCtrl', [ '$scope', 'userFactory', 'ordersFactory',
             }
         }
         return false;
-    }
-
-    function deleteDup(array){
-        var newArray = [];
-        for (i in array) {
-            if (!containsConnection(array[i],newArray,i)) {
-                newArray.push(array[i]);
-            }
-        }
-        return newArray;
     }
 }]);

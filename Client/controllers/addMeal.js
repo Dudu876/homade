@@ -7,6 +7,7 @@ homadeApp.controller('addMealCtrl', ['$scope', '$uibModalInstance', 'mealFactory
     var isUpdate = meal ? true : false;
 
     $scope.meal = meal;
+    $scope.title = isUpdate ? $scope.meal.name : "New Meal";
     $scope.tags = [];
     $scope.currencies = ['₪','$','€'];
     $scope.currency = $scope.currencies[0];
