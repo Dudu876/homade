@@ -8,6 +8,11 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
     $scope.loggedInStatusVerified = false;
     $scope.loadedChefData = false;
     $scope.isChef = false;
+
+    if ($rootScope.search == null){
+        $rootScope.search = {};
+    }
+
     $scope.search = $rootScope.search;
     loadAllTags();
 
@@ -36,7 +41,16 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
         $scope.search = args;
     });
 
+
+    $scope.onSelect = function(data) {
+        if (data.title != null){
+            $scope.search.query = data.title;
+            $scope.go();
+        }
+    };
+
     $scope.go = function() {
+        if ($scope.search.query === undefined) return;
         $location.url('/Result?q=' + $scope.search.query);
     };
 
