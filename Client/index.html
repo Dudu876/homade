@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" ng-app="homadeApp">
     <head>
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
@@ -93,79 +93,169 @@
         <script type="text/javascript" src="controllers/messagesCtrl.js"></script>
 
         <script type="text/javascript" src="directives/myEnter.js"></script>
-        <script type="text/javascript" src="directives/myAutocomplete.js"></script>
 
     </head>
     <body>
 
         <div ng-controller="NavbarController">
-            <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-                <div class="container-fluid panel-medium">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand page-scroll" href="/">HOMADE</a>
-                    </div>
 
-                    <div class="navbar-filter" ng-show="shouldShowFilter()">
-                        <div class="form-group form-inline col-md-6 col-centered">
-                            <input id="query" class="form-control" style="width: 45%" my-enter="go()" ng-model="search.query" type="text" placeholder="What do you want to eat?">
-                            <input id="navAutocomplete" class="form-control" style="width: 35%" ng-model="search.location" type="text" placeholder="Where?">
-                        </div>
-                    </div>
+            <div class="new-navbar-header">
+                <a href="/">HOMADE</a>
+            </div>
 
-                    <div class="rightnav" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right" ng-show="loggedIn && loggedInStatusVerified" >
-                            <li ng-show="loadedChefData && !isChef" ng-hide="isChef || !loadedChefData ">
-                                <a class="regular" href="/BecomeAChef">Become A Chef!</a>
+            <div class="form-group form-inline col-md-6 new-navbar-filter" ng-show="shouldShowFilter()">
+                <input id="query" class="form-control" style="width: 45%" my-enter="go()" ng-model="search.query" type="text" placeholder="What do you want to eat?">
+                <input id="navAutocomplete" class="form-control" style="width: 35%" ng-model="search.location" type="text" placeholder="Where?">
+            </div>
+            <nav id="primary_nav_wrap">
 
-                            </li>
-                            <li ng-show="loadedChefData && isChef" ng-hide="!isChef || !loadedChefData">
-                                <a class="regular-chef" href="/Chef">Chef</a>
-
-                                <ul class="dropdown">
-                                    <li><a href="/Profile">Dashboard</a></li>
-                                    <li><a href="/ChefMeals">My Meals</a></li>
-                                    <li><a href="/AddMeal">Add Meal</a></li>
-                                    <li><a href="/ChefOrders">Orders</a></li>
-                                    <li><a href="/ChefHistory">History</a></li>
-                                </ul>
-
+                <ul>
+                    <li ng-show="loggedIn && loggedInStatusVerified && loadedChefData && !isChef" ng-hide="isChef || !loadedChefData">
+                        <a href="/BecomeAChef">
+                            Become A Chef!
+                        </a>
+                    </li>
+                    <li ng-show="loggedIn && loggedInStatusVerified && isChef && loadedChefData" ng-hide="!isChef || !loadedChefData">
+                        <a href="/Chef">Chef</a>
+                        <ul>
+                            <li>
+                                <a href="/Profile">Dashboard</a>
                             </li>
                             <li>
-                                <a class="regular" href="/Messages">Messages</a>
+                                <a href="/ChefMeals">My Meals</a>
                             </li>
                             <li>
-                                <a class="avatar-link" ng-href="{{ getProfile() }} ">
-                                    {{apiMe.first_name}}
-                                    <img src="{{ apiMe.picture.data.url }}" class="avatar-frame" alt="avatar">
-                                </a>
-
-                                <ul class="dropdown">
-                                    <li><a href="/Result">Search!</a></li>
-                                    <li><a href="/ClientOrders">My Orders</a></li>
-                                    <li><a href="#" ng-click="logout()">Log Out</a></li>
-                                </ul>
+                                <a href="/AddMeal">Add Meal</a>
+                            </li>
+                            <li>
+                                <a href="/ChefOrders">Orders</a>
+                            </li>
+                            <li>
+                                <a href="/ChefHistory">History</a>
                             </li>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right" >
+                    </li>
+
+                    <li ng-show="loggedIn && loggedInStatusVerified">
+                        <a href="/Messages">
+                            Messages
+                        </a>
+                    </li>
+
+                    <li ng-show="loggedIn && loggedInStatusVerified">
+                        <a class="avatar-link" ng-href="{{ getProfile() }} ">
+                            {{apiMe.first_name}}
+                            <img src="{{ apiMe.picture.data.url }}" class="avatar-frame" >
+                        </a>
+                        <ul>
                             <li>
-                                <a class="btn btn-block btn-social btn-facebook" ng-click="login()" ng-show="!loggedIn && loggedInStatusVerified">
-                                    <span class="fa fa-facebook-f"></span> Sign in with facebook
-                                </a>
+                                <a href="/Result">Search</a>
                             </li>
+                            <li>
+                                <a href="/ClientOrders">My Orders</a>
+                            </li>
+                            <li><a href="#" ng-click="logout()">Log Out</a></li>
                         </ul>
-                    </div>
-                </div>
+                    </li>
+
+                    <li>
+                        <a class="btn btn-block btn-social btn-facebook" ng-click="login()" ng-show="!loggedIn && loggedInStatusVerified">
+                            <span class="fa fa-facebook-f">
+
+                            </span>
+                            <div style="padding-left: 30px;">
+                                Login
+                            </div>
+                        </a>
+                    </li>
+                </ul>
             </nav>
+            <!---->
+                <!--<ul>-->
+                    <!--<li >-->
+                        <!--<a class="regular" href="/BecomeAChef">Become A Chef!</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<div class="dropdown-nav">-->
+                            <!--<a href="/Chef">-->
+                                <!--Chef-->
+                            <!--</a>-->
+                            <!--<div class="dropdown-content">-->
+                                <!--<a href="/Profile">Dashboard</a>-->
+                                <!--<a href="/ChefMeals">My Meals</a>-->
+                                <!--<a href="/AddMeal">Add Meal</a>-->
+                                <!--<a href="/ChefOrders">Orders</a>-->
+                                <!--<a href="/ChefHistory">History</a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+
+                    <!--</li>-->
+                <!--</ul>-->
+
+            </div>
+
+            <!--<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">-->
+                <!--<div class="container-fluid panel-medium">-->
+                    <!--&lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
+                    <!--<div class="navbar-header">-->
+                        <!--<a class="navbar-brand page-scroll" href="/">HOMADE</a>-->
+                    <!--</div>-->
+
+                    <!--<div class="navbar-filter" ng-show="shouldShowFilter()">-->
+                        <!--<div class="form-group form-inline col-md-6 col-centered">-->
+                            <!--<input id="query" class="form-control" style="width: 45%" my-enter="go()" ng-model="search.query" type="text" placeholder="What do you want to eat?">-->
+                            <!--<input id="navAutocomplete" class="form-control" style="width: 35%" ng-model="search.location" type="text" placeholder="Where?">-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="rightnav" id="bs-example-navbar-collapse-1">-->
+                        <!--<ul class="nav navbar-nav navbar-right" ng-show="loggedIn && loggedInStatusVerified" >-->
+                            <!--<li ng-show="loadedChefData && !isChef" ng-hide="isChef || !loadedChefData ">-->
+                                <!--<a class="regular" href="/BecomeAChef">Become A Chef!</a>-->
+
+                            <!--</li>-->
+                            <!--<li ng-show="loadedChefData && isChef" ng-hide="!isChef || !loadedChefData">-->
+                                <!--<a class="regular-chef" href="/Chef">Chef</a>-->
+
+                                <!--<ul class="dropdown">-->
+                                    <!--<li><a href="/Profile">Dashboard</a></li>-->
+                                    <!--<li><a href="/ChefMeals">My Meals</a></li>-->
+                                    <!--<li><a href="/AddMeal">Add Meal</a></li>-->
+                                    <!--<li><a href="/ChefOrders">Orders</a></li>-->
+                                    <!--<li><a href="/ChefHistory">History</a></li>-->
+                                <!--</ul>-->
+
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a class="regular" href="/Messages">Messages</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a class="avatar-link" ng-href="{{ getProfile() }} ">-->
+                                    <!--{{apiMe.first_name}}-->
+                                    <!--<img src="{{ apiMe.picture.data.url }}" class="avatar-frame" alt="avatar">-->
+                                <!--</a>-->
+
+                                <!--<ul class="dropdown">-->
+                                    <!--<li><a href="/Result">Search!</a></li>-->
+                                    <!--<li><a href="/ClientOrders">My Orders</a></li>-->
+                                    <!--<li><a href="#" ng-click="logout()">Log Out</a></li>-->
+                                <!--</ul>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                        <!--<ul class="nav navbar-nav navbar-right" >-->
+                            <!--<li>-->
+                                <!--<a class="btn btn-block btn-social btn-facebook" ng-click="login()" ng-show="!loggedIn && loggedInStatusVerified">-->
+                                    <!--<span class="fa fa-facebook-f"></span> Sign in with facebook-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</nav>-->
         </div>
 
-        <div class="panel-medium" style="padding-top: 5vw; ">
+        <div class="new-navbar-panel">
             <!-- ANGULAR DYNAMIC CONTENT -->
             <div class="panel-medium" ng-view></div>
         </div>

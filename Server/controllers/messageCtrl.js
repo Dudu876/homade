@@ -24,6 +24,17 @@ exports.postMessage = function (req, res) {
     });
 };
 
+exports.getMessagesReceived = function(req, res) {
+    Message.find({"target.fbId": req.params.fbId}).sort({time: 'desc'}).limit(3).exec(function (err, messages){
+        if (!err) {
+            res.json(messages);
+        }
+        else {
+            res.json('error occured');
+        }
+    });
+};
+
 exports.getMessages = function (req, res) {
     Message.find({ $or: [ { $and: [{'author.fbId': req.params.fbId1}, {'target.fbId': req.params.fbId2 }] }, { $and: [{'author.fbId': req.params.fbId2}, {'target.fbId': req.params.fbId1}] } ] }, function (err, messages)
     {

@@ -5,24 +5,29 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
     $scope.isActive1 = true;
     $scope.isActive2 = false;
     $scope.locationChosen = false;
+
+    $scope.init = function(){
+        $scope.chefDetails.fbId = userFactory.fbId;
+        $scope.chefDetails.name = userFactory.fullname;
+    };
+
+    if (userFactory.fbId != "") {
+        $scope.init();
+    }
+    else {
+        $scope.$on('isChefUpdate', function (event, args) {
+            $scope.init();
+        });
+    }
+
     $scope.chefDetails = {};
-    $scope.chefDetails.fbId = userFactory.fbId;
-    $scope.chefDetails.name = userFactory.fullname;
     $scope.chefDetails.location = {latitude: 32, longitude: 35};
     $scope.zoom = 10;
     $scope.polygons = [];
     $scope.areaLoaded = false;
     $scope.tags = "a";
     $scope.series = ['Popular Tags'];
-
-    $scope.showCols = function(){
-        if ($scope.data[0].length > 0){
-            return "col-md-4";
-        }
-        else {
-            return "col-md-2";
-        }
-    };
+    $scope.showCols = "col-md-2";
 
     $scope.data = [
         []
@@ -48,6 +53,7 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
 
             if(data.showTips)
             {
+                $scope.showCols = "col-md-4";
                 $scope.tags = [];
                 $scope.areaLoaded = true;
                 $scope.polygons = [];
