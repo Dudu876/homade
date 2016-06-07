@@ -89,7 +89,7 @@ homadeApp.controller('messagesCtrl', [ '$scope', 'userFactory', 'ordersFactory',
     };
 
     function dateToString(d) {
-        return d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes();
+        return d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes();
     }
 
     function updateMessage(message) {
