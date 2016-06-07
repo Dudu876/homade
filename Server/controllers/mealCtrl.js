@@ -72,14 +72,24 @@ exports.getMealsOfChef = function (req, res) {
 exports.updateMeal = function (req, res) {
     Meal.findById(req.body._id, function (err, meal) {
         if (!err) {
-            //meal.number = req.body.number;
-            //meal.type.manufacturer = req.body.type.manufacturer;
-            //meal.type.model = req.body.type.model;
-            //meal.type.year = new Date(req.body.type.year).getFullYear();
-            //meal.category = req.body.category;
-            //meal.price = req.body.price;
-            //meal.gearbox = req.body.gearbox;
-            //meal.branch = req.body.branch._id;
+
+            meal.name = req.body.name;
+            meal.description = req.body.description;
+            meal.kosher = req.body.kosher || false;
+            meal.glutenfree = req.body.glutenfree || false;
+            meal.price = req.body.price;
+            meal.type = req.body.type;
+            //meal.chefFBId = req.body.chefFBId;
+
+            //handle tags
+            for (var i in req.body.tags) {
+                meal.tags.push(req.body.tags[i].text);
+            }
+            var name_tags = req.body.name.split(" ");
+            meal.tags = meal.tags.concat(name_tags);
+
+            meal.tags = fixTags(meal.tags);
+            meal.tags = filterTags(meal.tags);
 
             meal.save(function (err) {
                 if (!err) {

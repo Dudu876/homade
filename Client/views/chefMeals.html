@@ -17,9 +17,9 @@
     <div class="col-lg-4 col-sm-2 col-xs-12" ng-repeat="meal in meals" style="padding: 10px;">
         <div class="" ng-click="mealClicked(meal)" style="cursor: pointer; ">
             <div class="meal-pic-container">
-                <img class="gridPhoto" cl-src="{{meal._id}}" style="height: auto; width: 100%;"/>
+                <img class="gridPhoto" cl-src="{{meal._id}}" style=""/>
                 <div class="edit-delete-image">
-                    <button type="button" class="btn btn-xs btn-primary inlineEditor" ng-click="editrow()">
+                    <button type="button" class="btn btn-xs btn-primary inlineEditor" ng-click="mealModal(meal)">
                         <i class="fa fa-edit fa-lg"></i>
                     </button>
                     <button type="button" class="btn btn-xs btn-danger inlineEditor" ng-click="deleteMeal(meal._id)" confirm="Are you sure you want to remove {{ meal.name }} from your available meals?" confirm-settings="{size: 'la'}">
@@ -47,4 +47,6 @@
             </div>
         </div>
     </div>
+
+    <button class="btn btn-primary" ng-click="mealModal()">ADD MEAL</button>
 </div>

@@ -1,16 +1,16 @@
 <div class="container">
-    <script type="text/ng-template" id="commentOnOrder.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Comment</h3>
-        </div>
-        <div class="modal-body">
-            <textarea ng-model="comment" style="width: 100%;" ></textarea>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
+    <!--<script type="text/ng-template" id="commentOnOrder.html">-->
+        <!--<div class="modal-header">-->
+            <!--<h3 class="modal-title">{{title}}</h3>-->
+        <!--</div>-->
+        <!--<div class="modal-body">-->
+            <!--<textarea ng-model="comment" style="width: 100%;" ></textarea>-->
+        <!--</div>-->
+        <!--<div class="modal-footer">-->
+            <!--<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>-->
+            <!--<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>-->
+        <!--</div>-->
+    <!--</script>-->
 
     <div class="wizard-header">
         <h2>
@@ -44,7 +44,7 @@
                     </button>
                     <button class="btn btn-xs btn-info" ng-bind="getStatusName(order.status, true)">
                     </button>
-                    <button class="btn btn-xs btn-warning">
+                    <button class="btn btn-xs btn-warning" ng-click="open(order,false)">
                         Send message
                         <span class="glyphicon glyphicon-envelope" style="height: 10px"/>
                     </button>
@@ -82,7 +82,7 @@
                     <div style="text-align: center;">
                     </div>
                     <hr class="comment-hr">
-                    <a class="btn btn-info" ng-click="open(order)" style="width: 50%;margin-left: 25%;">
+                    <a class="btn btn-info" ng-click="open(order, true)" style="width: 50%;margin-left: 25%;">
                         COMMENT <i class="fa fa-comment-o" aria-hidden="true"></i>
                     </a>
                 </div>

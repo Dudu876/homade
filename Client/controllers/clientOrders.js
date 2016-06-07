@@ -1,7 +1,7 @@
 /**
  * Created by Michael on 4/28/2016.
  */
-homadeApp.controller('clientOrdersCtrl', ['$scope', 'ordersFactory', 'chefsFactory', 'userFactory', 'ezfb', '$uibModal', function ($scope, ordersFactory, chefsFactory, userFactory, ezfb, $uibModal) {
+homadeApp.controller('clientOrdersCtrl', ['$scope', 'ordersFactory', 'chefsFactory', 'userFactory', 'messageFactory', 'ezfb', '$uibModal', function ($scope, ordersFactory, chefsFactory, userFactory, messageFactory, ezfb, $uibModal) {
     var statusesArr = ['Order Received', 'Cooking', 'Ready', 'Taken'];
 
     $scope.$on('isChefUpdate', function (event, args) {
@@ -18,27 +18,54 @@ homadeApp.controller('clientOrdersCtrl', ['$scope', 'ordersFactory', 'chefsFacto
         });
     };
 
-    $scope.open = function (order) {
+    $scope.open = function (order, isComment) {
+        var comment = order.comment;
+        var title = 'Comment';
+        if (!isComment){
+            title = 'Message';
+            comment = '';
+        }
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: 'commentOnOrder.html',
+            templateUrl: 'views/commentOnOrder.html',
             controller: 'commentOnOrderCtrl',
             resolve: {
                 comment: function () {
-                    return order.comment;
+                    return comment;
+                },
+                title: function () {
+                    return title;
                 }
             }
         });
 
-        modalInstance.result.then(function (comment) {
-            order.comment = comment;
-            ordersFactory.update(order).success(function(res){
-                if (!(res == "succesfully saved")) {
-                    alert('error occured');
-                }
-                else {
-                }
-            });
+        modalInstance.result.then(function (result) {
+            if (isComment) {
+                order.comment = result;
+                ordersFactory.update(order).success(function (res) {
+                    if (!(res == "succesfully saved")) {
+                        alert('error occured');
+                    }
+                    else {
+                    }
+                });
+            }
+            else {
+                if (result == "" || result === undefined) return;
+                var now = new Date();
+                var newMessage = {
+                    author: {
+                        fbId: userFactory.fbId,
+                        name: userFactory.fullname
+                    },
+                    target: {
+                        fbId: order.chefFBId
+                    },
+                    time: now,
+                    content: result
+                };
+                messageFactory.post(newMessage);
+            }
         });
     };
 

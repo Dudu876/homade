@@ -1,7 +1,7 @@
 /**
  * Created by Michael on 4/23/2016.
  */
-homadeApp.controller('chefMealsCtrl', ['$scope', 'mealFactory', 'userFactory', 'chefsFactory', function ($scope, mealFactory, userFactory, chefsFactory) {
+homadeApp.controller('chefMealsCtrl', ['$scope', 'mealFactory', 'userFactory', 'chefsFactory', '$uibModal', function ($scope, mealFactory, userFactory, chefsFactory, $uibModal) {
     $scope.mealsLoaded = false;
     $scope.$on('isChefUpdate', function(event, args){
         mealFactory.getMealsOfChef(userFactory.fbId).success(function(data) {
@@ -36,4 +36,22 @@ homadeApp.controller('chefMealsCtrl', ['$scope', 'mealFactory', 'userFactory', '
             }
         });
     };
+
+    $scope.mealModal = function(meal) {
+
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'views/mealModal.html',
+            controller: 'addMealCtrl',
+            resolve: {
+                meal: function () {
+                    return meal;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (result) {
+
+        });
+    }
 }]);
