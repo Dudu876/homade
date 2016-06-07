@@ -44,6 +44,7 @@ homadeApp.controller('mainPageCtrl', ['$scope', '$rootScope', '$location', 'meal
     }
 
     $scope.go = function() {
+
         if ($scope.search.query === undefined) return;
         $scope.search.query = $scope.search.query.title;
         $rootScope.search = $scope.search;
