@@ -107,13 +107,14 @@
                 <div style="display: inline-block; width: 50%;">
                     <angucomplete-alt placeholder="What do you want to eat?"
                                       pause="100"
-                                      selected-object="selectedCountry"
+                                      selected-object="onSelect"
                                       local-data="tags"
                                       search-fields="val"
                                       title-field="val"
                                       minlength="1"
                                       my-enter="go()"
                                       input-class="form-control inline-autocomplete-navbar"
+                                      initial-value="search.query"
                     />
                 </div>
                 <input id="navAutocomplete" class="form-control" style="width: 40%; display: inline-block" ng-model="search.location" type="text" placeholder="Where?">

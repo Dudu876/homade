@@ -19,8 +19,10 @@ homadeApp.controller('mainPageCtrl', ['$scope', '$rootScope', '$location', 'meal
 
     loadAllTags();
 
-    function onSelect(data) {
-    }
+    $scope.onSelect = function(data) {
+        $scope.search.query = data;
+        $scope.go();
+    };
 
     function loadAllTags() {
         mealFactory.getAllTags().success(function(tags) {
