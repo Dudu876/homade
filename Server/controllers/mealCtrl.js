@@ -7,7 +7,7 @@ var Meal = require('../models/meal');
 var Chef = require('../models/chef');
 
 exports.getAllMeals = function (req, res) {
-    var search = req.query.search;
+    var search = JSON.parse(req.query.search);
     if (!search) {
         Meal.find({})
             .populate('chef')
@@ -16,8 +16,9 @@ exports.getAllMeals = function (req, res) {
             });
     }
     else {
-        Meal.find({})
+        Meal.find({ tags: search.query})
             .populate('chef')
+            .sort('-averageRating')
             .exec(function (error, meals) {
                 res.json(meals);
             });
