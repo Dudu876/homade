@@ -70,7 +70,7 @@ homadeApp.controller('messagesCtrl', [ '$scope', 'userFactory', 'ordersFactory',
             time: now,
             content: $scope.text
         };
-            messageFactory.post(newMessage);
+        messageFactory.post(newMessage);
         updateMessage(newMessage);
         $scope.messages.push(newMessage);
         $scope.text = "";

@@ -9,13 +9,14 @@
                 <angucomplete-alt id="ex1"
                                   placeholder="What do you want to eat?"
                                   pause="100"
-                                  selected-object="selectedCountry"
+                                  selected-object="search.query"
+                                  my-enter="go()"
                                   local-data="tags"
                                   search-fields="val"
                                   title-field="val"
                                   minlength="1"
                                   input-class="inline-autocomplete form-control"
-                                />
+                                ></angucomplete-alt>
                 <!--<input id="query" auto-complete ui-items="tags" class="form-control" style="width: 45%" my-enter="go()" ng-model="search.query" type="text" placeholder="What do you want to eat?">-->
                 <input id="autocomplete" class="form-control" style="width: 35%" ng-model="search.location" type="text" placeholder="Where?">
             </div>
