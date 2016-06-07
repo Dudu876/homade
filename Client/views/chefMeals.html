@@ -17,9 +17,9 @@
     <div class="col-lg-4 col-sm-2 col-xs-12" ng-repeat="meal in meals" style="padding: 10px;">
         <div class="" ng-click="mealClicked(meal)" style="cursor: pointer; ">
             <div class="meal-pic-container">
-                <img class="gridPhoto" cl-src="{{meal._id}}" style="height: auto; width: 100%;"/>
+                <img class="gridPhoto" cl-src="{{meal._id}}" style=""/>
                 <div class="edit-delete-image">
-                    <button type="button" class="btn btn-xs btn-primary inlineEditor" ng-click="editrow()">
+                    <button type="button" class="btn btn-xs btn-primary inlineEditor" ng-click="mealModal(meal)">
                         <i class="fa fa-edit fa-lg"></i>
                     </button>
                     <button type="button" class="btn btn-xs btn-danger inlineEditor" ng-click="deleteMeal(meal._id)" confirm="Are you sure you want to remove {{ meal.name }} from your available meals?" confirm-settings="{size: 'la'}">
@@ -43,6 +43,29 @@
             <div class="mish-title-chef-meals">
                 <h3 title="" class="h5">
                     {{meal.name}}
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-2 col-xs-12" style="padding: 10px;">
+        <div class="" ng-click="mealModal()" style="cursor: pointer; ">
+            <div class="meal-pic-container" style="background-color: #BFBFBF">
+                <div style="margin: 0 15vh 0 15vh;">
+                    <img class="gridPhoto" src="../public/images/plus-empty.png" style=""/>
+                </div>
+            </div>
+            <div class="mish-price-baner-chef-meals">
+                <div>
+                    <div class="price-amount-container">
+                        <!--<sup class="h6 text-contrast">₪</sup>-->
+                        <!--<span class="h3 text-contrast price-amount">{{meal.price}}</span>-->
+                        <!--<sup class="h6 text-contrast"></sup>-->
+                    </div>
+                </div>
+            </div>
+            <div class="mish-title-chef-meals">
+                <h3 title="" class="h5">
+                    ADD NEW MEAL
                 </h3>
             </div>
         </div>

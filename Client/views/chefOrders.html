@@ -31,7 +31,7 @@
                     </button>
                     <button class="btn btn-xs btn-info" ng-bind="getStatusName(order.status, true)" ng-click="updateStatus(order)" confirm="Change order status to: {{ getStatusName(order.status + 1, false) }} ?" confirm-settings="{size: 'la'}">
                     </button>
-                    <button class="btn btn-xs btn-warning">
+                    <button class="btn btn-xs btn-warning" ng-click="open(order,false)">
                         Send message
                         <span class="glyphicon glyphicon-envelope" style="height: 10px"/>
                     </button>

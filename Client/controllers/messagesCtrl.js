@@ -20,20 +20,32 @@ homadeApp.controller('messagesCtrl', [ '$scope', 'userFactory', 'ordersFactory',
 
     function updateConnections() {
         ordersFactory.getConnections(userFactory.fbId).success(function (connections) {
-            $scope.connections = connections;
-            var i;
-            $scope.connections.forEach(function(element, index, array) {
-                //var connection = {};
+            //$scope.connections = connections;
+            $scope.connections = [];
+            var i = 0;
+            connections.forEach(function(element, index, array) {
+                var connection = {};
                 if (element.chefFBId == userFactory.fbId) {
-                    element.fbId = element.clientFBId;
-                    element.type = "Client";
+                    connection.fbId = element.clientFBId;
+                    connection.type = "Client";
                 }
                 else {
-                    element.fbId = element.chefFBId;
-                    element.type = "Chef";
+                    connection.fbId = element.chefFBId;
+                    connection.type = "Chef";
                 }
-                if (index == 0) $scope.userSelect(element);
+                if (index == 0) $scope.userSelect(connection);
+                if (containsConnection(connection, $scope.connections, index)){
+                    console.log('found');
+                }
+                else {
+                    console.log('not found');
+                    $scope.connections.push(connection);
+                }
+            });
+            console.log('first loop end');
+            $scope.connections.forEach(function(element, index, array) {
                 ezfb.api('/' + element.fbId, {fields: ['name','picture']}, function (res) {
+                    console.log('inside ' + index);
                     if (res.name === undefined) {
                         element.name = "No Name";
                     }
@@ -46,9 +58,9 @@ homadeApp.controller('messagesCtrl', [ '$scope', 'userFactory', 'ordersFactory',
                     else {
                         element.pic = res.picture.data.url;
                     }
-                    //$scope.connections.push(connection);
                 });
-            })
+            });
+            console.log('all done');
         });
     }
 
@@ -70,7 +82,7 @@ homadeApp.controller('messagesCtrl', [ '$scope', 'userFactory', 'ordersFactory',
             time: now,
             content: $scope.text
         };
-            messageFactory.post(newMessage);
+        messageFactory.post(newMessage);
         updateMessage(newMessage);
         $scope.messages.push(newMessage);
         $scope.text = "";
@@ -88,5 +100,17 @@ homadeApp.controller('messagesCtrl', [ '$scope', 'userFactory', 'ordersFactory',
         else {
             message.pic = $scope.selectedUser.pic;
         }
+    }
+
+    function containsConnection(connection, connections, index) {
+        var i = 0;
+        for (i in connections) {
+            if (i != index) {
+                if (connections[i].fbId == connection.fbId) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }]);

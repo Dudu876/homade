@@ -2,15 +2,12 @@
  * Created by Dudu on 19/03/2016.
  */
 
-homadeApp.controller('addMealCtrl', ['$scope', 'mealFactory', 'userFactory', 'Upload', function ($scope, mealFactory, userFactory, Upload) {
+homadeApp.controller('addMealCtrl', ['$scope', '$uibModalInstance', 'mealFactory', 'userFactory', 'Upload', 'meal', function ($scope, $uibModalInstance, mealFactory, userFactory, Upload, meal) {
 
+    var isUpdate = meal ? true : false;
 
-    $('.btn-main').click( function() {
-        $(this).addClass('active').siblings().removeClass('active');
-        //$(this).toggleClass('active');
-    });
-
-    $scope.meal = {};
+    $scope.meal = meal;
+    $scope.title = isUpdate ? $scope.meal.name : "New Meal";
     $scope.tags = [];
     $scope.currencies = ['₪','$','€'];
     $scope.currency = $scope.currencies[0];
@@ -19,7 +16,24 @@ homadeApp.controller('addMealCtrl', ['$scope', 'mealFactory', 'userFactory', 'Up
     //$scope.meal.file = {};
 
     $scope.init = function (){
-
+        $scope.types = [
+            {
+                name: 'Meat',
+                img: '../public/images/meat.png'
+            },
+            {
+                name: 'Milk',
+                img: '../public/images/milk.png'
+            },
+            {
+                name: 'Vegetarian',
+                img: '../public/images/leaf.png'
+            },
+            {
+                name: 'Vegan',
+                img: '../public/images/leaf.png'
+            }
+        ]
     };
     $scope.chngCurr = function(curren) {
         $scope.currency = curren;
@@ -30,7 +44,20 @@ homadeApp.controller('addMealCtrl', ['$scope', 'mealFactory', 'userFactory', 'Up
         $scope.meal.type = type;
     };
 
+    $scope.cancel = function() {
+        $uibModalInstance.dismiss('cancel');
+    };
+
     $scope.submit = function(){
+        if (isUpdate) {
+            mealFactory.update($scope.meal).success(function(data) {
+                alert (data);
+                $scope.cancel();
+            }).error(function(data) {
+                alert(data);
+            });
+            return;
+        }
         if (!$scope.meal.type) {
             alert('No type selected. Select one.');
             //$('.btn-group').focus();
@@ -57,7 +84,7 @@ homadeApp.controller('addMealCtrl', ['$scope', 'mealFactory', 'userFactory', 'Up
         });
 
         upload($scope.meal.file); //call upload function
-        //update meal
+        $scope.cancel();
     };
 
     function upload(file) {

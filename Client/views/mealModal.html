@@ -1,0 +1,243 @@
+<!--<div class="modal-header">-->
+    <!--<h3 class="modal-title">{{title}}</h3>-->
+<!--</div>-->
+<!--<div class="modal-body">-->
+    <!--<div class="panel-body panel-medium">-->
+        <!--<form name="form" ng-submit="submit()" class="container">-->
+            <!--&lt;!&ndash;LEFT SIDE&ndash;&gt;-->
+            <!--<div class="" ng-init="init()">-->
+                <!--<div class="row mish-margin">-->
+
+                    <!--<label for="type"> <strong>Type</strong> </label>-->
+                    <!--<br>-->
+                    <!--<div id="type" class="btn-group btn-group-lg" role="group" aria-label="Large button group">-->
+                        <!--<button type="button" class="btn btn-default btn-main" ng-click="setType('Meat')">-->
+                            <!--<img class="mish-icon" src="../public/images/meat.png">-->
+                            <!--Meat-->
+                        <!--</button>-->
+                        <!--<button type="button" class="btn btn-default btn-main" ng-click="setType('Milk')">-->
+                            <!--<img class="mish-icon" src="../public/images/milk.png">-->
+                            <!--Milk-->
+                        <!--</button>-->
+                        <!--<button type="button" class="btn btn-default btn-main" ng-click="setType('Vegetarian')">-->
+                            <!--<img class="mish-icon" src="../public/images/leaf.png">-->
+                            <!--Vegetarian-->
+                        <!--</button>-->
+                        <!--<button type="button" class="btn btn-default btn-main" ng-click="setType('Vegan')">-->
+                            <!--<img class="mish-icon" src="../public/images/leaf.png">-->
+                            <!--<img class="mish-icon" src="../public/images/leaf.png">-->
+                            <!--Vegan-->
+                        <!--</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="row mish-margin">-->
+                    <!--<label for="name"> <strong>Name</strong> </label>-->
+                    <!--<br>-->
+                    <!--<div id="name" class="">-->
+                        <!--<input required ng-model="meal.name" type="text" class="form-control" placeholder="Meal Name">-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="row mish-margin">-->
+                    <!--<label for="description">Description</label>-->
+                    <!--<br>-->
+                    <!--<div class="" id="description">-->
+                        <!--<textarea required ng-model="meal.description" placeholder="Description" class="form-control" rows="5" id=""></textarea>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="row mish-margin">-->
+                    <!--<label for="tags"> <strong>Tags</strong> </label>-->
+                    <!--<br>-->
+                    <!--<div class="">-->
+                        <!--<tags-input id="tags" ng-model="meal.tags" add-on-paste="true" add-on-space="true">-->
+                            <!--&lt;!&ndash;<auto-complete source="loadTags($query)"></auto-complete>&ndash;&gt;-->
+                        <!--</tags-input>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="row mish-margin">-->
+                    <!--<label for="price"> <strong>Price per Meal</strong> </label>-->
+                    <!--<br>-->
+                    <!--<div id="price" class="input-group col-lg-6">-->
+                        <!--<input required ng-model="meal.price" data-number-to-fixed="2" type="number" class="form-control currency" step="" placeholder="Meal Price...">-->
+                        <!--<span ng-click="dropdown = !dropdown" class="input-group-addon">{{currency}}</span>-->
+                        <!--<div ng-click="dropdown = !dropdown" ng-show="dropdown" class="dropdown">-->
+                            <!--<a href="" ng-repeat="curren in currencies" ng-click="chngCurr(curren)">{{curren}}</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="row mish-margin">-->
+                    <!--<label class="checkbox-inline"><input ng-model="meal.kosher" type="checkbox" value="">Kosher</label>-->
+                    <!--<label class="checkbox-inline"><input ng-model="meal.glutenfree" type="checkbox" value="">Gluten-free</label>-->
+                    <!--<label class="checkbox-inline"><input type="checkbox" value="">Option 3</label>-->
+                <!--</div>-->
+
+                <!--<input  class="mish-margin"-->
+                        <!--type="file"-->
+                        <!--ngf-select-->
+                        <!--ng-model="meal.file"-->
+                        <!--name="file"-->
+                        <!--ngf-pattern="'image/*'"-->
+                        <!--accept="image/*"-->
+                        <!--ngf-max-size="20MB"/>-->
+                <!--Image thumbnail: <img style="width:100px;" ngf-thumbnail="meal.file || '/thumb.jpg'"> <br>-->
+                <!--<i ng-show="meal.file.$error.required">*required</i><br>-->
+                <!--<i ng-show="meal.file.$error.maxSize">File too large-->
+                    <!--{{meal.file.size / 1000000|number:1}}MB: max 20M</i>-->
+                <!--&lt;!&ndash;<button type="submit" ng-click="up.submit()">submit</button>&ndash;&gt;-->
+                <!--<p>{{meal.file.progress}}</p>-->
+
+                <!--<div class="col-lg-6">-->
+                    <!--<button type="submit" class="btn btn-warning btn-block mish-margin">-->
+                        <!--Submit-->
+                    <!--</button>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; RIGHT SIDE &ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-lg-4" style="margin-left: 2vw;">&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</form>-->
+    <!--</div>-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+    <!--<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>-->
+    <!--<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>-->
+<!--</div>-->
+
+<!-- Modal -->
+<!--<div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog"-->
+     <!--aria-labelledby="myModalLabel" aria-hidden="true">-->
+    <!--<div class="modal-dialog">-->
+        <div class="">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="cancel()">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    {{title}}
+                </h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+
+                <form role="form" name="form" ng-submit="submit()">
+                    <!--<div class="form-group">-->
+                        <!--<label for="exampleInputPassword1">Password</label>-->
+                        <!--<input type="password" class="form-control"-->
+                               <!--id="exampleInputPassword1" placeholder="Password"/>-->
+                    <!--</div>-->
+                    <!--<div class="checkbox">-->
+                        <!--<label>-->
+                            <!--<input type="checkbox"/> Check me out-->
+                        <!--</label>-->
+                    <!--</div>-->
+                    <!--<form name="form" role="form" ng-submit="submit()" class="container">&ndash;&gt;-->
+                        <!--LEFT SIDE-->
+                        <div class="" ng-init="init()">
+                            <!--<div class="row mish-margin">-->
+
+                                <label for="type"> <strong>Type</strong> </label>
+                                <br>
+                                <div id="type" class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+                                    <button ng-repeat="type in types" type="button" class="btn btn-default btn-main" ng-class="{'active': type.name == meal.type}" ng-click="setType(type.name)">
+                                        <img class="mish-icon" ng-src={{type.img}}>
+                                        {{type.name}}
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="mish-margin">
+                                <label for="name"> <strong>Name</strong> </label>
+                                <br>
+                                <div id="name" class="">
+                                    <input required ng-model="meal.name" type="text" class="form-control" placeholder="Meal Name">
+                                </div>
+                            </div>
+
+                            <div class="mish-margin">
+                                <label for="description">Description</label>
+                                <br>
+                                <div class="" id="description">
+                                    <textarea required ng-model="meal.description" placeholder="Description" class="form-control" rows="5" id=""></textarea>
+                                </div>
+                            </div>
+
+                            <div class="mish-margin">
+                                <label for="tags"> <strong>Tags</strong> </label>
+                                <br>
+                                <div class="">
+                                    <tags-input id="tags" ng-model="meal.tags" add-on-paste="true" add-on-space="true">
+                                        <!--<auto-complete source="loadTags($query)"></auto-complete>-->
+                                    </tags-input>
+                                </div>
+                            </div>
+
+                            <div class="mish-margin">
+                                <label for="price"> <strong>Price per Meal</strong> </label>
+                                <br>
+                                <div id="price" class="input-group col-lg-6">
+                                    <input required ng-model="meal.price" data-number-to-fixed="2" type="number" class="form-control currency" step="" placeholder="Meal Price...">
+                                    <span ng-click="dropdown = !dropdown" class="input-group-addon">{{currency}}</span>
+                                    <div ng-click="dropdown = !dropdown" ng-show="dropdown" class="dropdown">
+                                        <a href="" ng-repeat="curren in currencies" ng-click="chngCurr(curren)">{{curren}}</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mish-margin">
+                                <label class="checkbox-inline"><input ng-model="meal.kosher" type="checkbox" value="">Kosher</label>
+                                <label class="checkbox-inline"><input ng-model="meal.glutenfree" type="checkbox" value="">Gluten-free</label>
+                                <label class="checkbox-inline"><input type="checkbox" value="">Option 3</label>
+                            </div>
+
+                            <input  class="mish-margin btn btn-default"
+                                    type="file"
+                                    ngf-select
+                                    ng-model="meal.file"
+                                    name="file"
+                                    ngf-pattern="'image/*'"
+                                    accept="image/*"
+                                    ngf-max-size="20MB"/>
+                            Image thumbnail: <img style="width:100px;" cl-src="{{meal._id}}" ngf-thumbnail="meal.file || '/thumb.jpg'"> <br>
+                            <i ng-show="meal.file.$error.required">*required</i><br>
+                            <i ng-show="meal.file.$error.maxSize">File too large
+                                {{meal.file.size / 1000000|number:1}}MB: max 20M</i>
+                            <!--<button type="submit" ng-click="up.submit()">submit</button>-->
+                            <p>{{meal.file.progress}}</p>
+
+                            <!--<div>-->
+                                <!--<button type="submit" class="btn btn-warning btn-block mish-margin">-->
+                                    <!--Submit-->
+                                <!--</button>-->
+                            <!--</div>-->
+                        </div>
+                        <!-- RIGHT SIDE -->
+                        <!--<div class="col-lg-4" style="margin-left: 2vw;">-->
+
+                        <!--</div>-->
+                    </form>
+                    <!--<button type="submit" class="btn btn-default">Submit</button>-->
+                </form>
+
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="cancel()">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="submit()">
+                    submit meal
+                </button>
+            </div>
+        </div>
+    <!--</div>-->
+<!--</div>-->
