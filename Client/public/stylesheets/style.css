@@ -1,11 +1,9 @@
 .mish-container {
     position: relative;
     width: 100%;
+    height: 46.5vw;
     /*padding: 100px 15px;*/
     padding-top: 10vw;
-    padding-left: 1vw;
-    padding-right: 1vw;
-    padding-bottom: 20vw;
     text-align: center;
 }
 
@@ -466,6 +464,11 @@ hr.soften {
     display: inline-block;
     vertical-align: middle;
     width: 60%;
+}
+
+.inline-autocomplete-navbar {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .angucomplete-holder {

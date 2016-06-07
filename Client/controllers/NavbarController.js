@@ -2,15 +2,22 @@
  * Created by Michael on 3/18/2016.
  */
 
-homadeApp.controller('NavbarController', function NavbarController($scope, $rootScope, ezfb, $location, userFactory, chefsFactory) {
+homadeApp.controller('NavbarController', function NavbarController($scope, $rootScope, ezfb, $location, userFactory, chefsFactory, mealFactory) {
 
     $scope.loggedIn = false;
     $scope.loggedInStatusVerified = false;
     $scope.loadedChefData = false;
     $scope.isChef = false;
     $scope.search = $rootScope.search;
+    loadAllTags();
 
-    //$scope.search = {};
+
+    function loadAllTags() {
+        mealFactory.getAllTags().success(function(tags) {
+            $scope.tags = tags;
+            console.log('tags loaded!');
+        });
+    }
 
     autocomplete = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */(document.getElementById('navAutocomplete')),
