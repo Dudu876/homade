@@ -65,6 +65,9 @@ module.exports = function (app) {
     app.route('/api/messages')
         .post(messageController.postMessage);
 
+    app.route('/api/messages/received/:fbId')
+        .get(messageController.getMessagesReceived);
+
     app.route('/api/messages/:fbId1,:fbId2')
         .get(messageController.getMessages);
 

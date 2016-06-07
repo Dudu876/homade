@@ -25,10 +25,12 @@
                 <input id="autocomplete" required ng-model="chosenPlace" type="text" class="form-control" placeholder="Location">
                 <br>
                 <div class="row graphs">
-                    <div ng-class="showCols()">
-                        <canvas id="bar" class="chart chart-bar" width="523" style="width: 523px; height: 95vh;"
-                                chart-data="data" chart-labels="labels" chart-series="series">
-                        </canvas>
+                    <div ng-class="showCols">
+                        <div style="width: 200%; height: 100%;">
+                            <canvas id="bar" class="chart chart-bar" width="523" style="width: 523px; height: 95vh;"
+                                    chart-data="data" chart-labels="labels" chart-series="series">
+                            </canvas>
+                        </div>
                     </div>
 
                     <div class="col-md-8">
