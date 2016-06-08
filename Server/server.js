@@ -11,10 +11,6 @@ var uploader = require('./controllers/uploadCtrl');
 var multer = require('multer');
 
 var app = express();
-var xFrameOptions = require('x-frame-options');
-var middleware = xFrameOptions(headerValue = 'SAMEORIGIN');
-
-app.use(xFrameOptions());
 
 var port = process.env.PORT || 5000;
 //var dbpath = process.env.DB || 'mongodb://localhost:27017/homade';
