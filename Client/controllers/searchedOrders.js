@@ -9,6 +9,12 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
 
     //console.log('this is the route params' +  $routeParams.q); *********WORKING
 
+    if ($rootScope.search.query === undefined) {
+        $rootScope.search = {
+            'query': $routeParams.q
+        };
+    }
+
     mealFactory.getFiltered($rootScope.search).success(function (response) {
         $scope.meals = response;
         addMarkers();

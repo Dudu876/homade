@@ -43,9 +43,11 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
 
 
     $scope.onSelect = function(data) {
-        if (data.title != null){
-            $scope.search.query = data.title;
-            $scope.go();
+        if (data != null) {
+            if (data.title != null) {
+                $scope.search.query = data.title;
+                $scope.go();
+            }
         }
     };
 

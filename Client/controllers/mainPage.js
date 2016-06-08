@@ -20,8 +20,12 @@ homadeApp.controller('mainPageCtrl', ['$scope', '$rootScope', '$location', 'meal
     loadAllTags();
 
     $scope.onSelect = function(data) {
-        $scope.search.query = data;
-        $scope.go();
+        if (data != null) {
+            if (data.title != null) {
+                $scope.search.query = data.title;
+                $scope.go();
+            }
+        }
     };
 
     function loadAllTags() {
@@ -48,7 +52,7 @@ homadeApp.controller('mainPageCtrl', ['$scope', '$rootScope', '$location', 'meal
     $scope.go = function() {
 
         if ($scope.search.query === undefined) return;
-        $scope.search.query = $scope.search.query.title;
+//         $scope.search.query = $scope.search.query.title;
         $rootScope.search = $scope.search;
         $rootScope.$broadcast('SEARCH',$scope.search);
         $location.url('/Result?q=' + $scope.search.query);
