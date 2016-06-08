@@ -661,3 +661,19 @@ div:focus {
     height: 3.4vw;
     background-color: white;
 }
+
+.loading {
+    position: fixed;
+    z-index: 999;
+    /*height: 2em;*/
+    /*width: 2em;*/
+    overflow: visible;
+    margin: auto;
+    padding: 20vh 50vw 50vh 45vw;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #5F5F5F;
+    opacity: 0.5;
+}

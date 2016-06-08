@@ -1,13 +1,16 @@
 /**
  * Created by Dudu on 04/04/2016.
  */
-homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$timeout', '$location', '$routeParams', 'ezfb', 'uiGmapGoogleMapApi', function ($scope, $rootScope, mealFactory, $timeout, $location, $routeParams, ezfb, uiGmapGoogleMapApi) {
+homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$timeout', '$location', '$routeParams', 'ezfb', 'uiGmapGoogleMapApi', 'spinnerService', function ($scope, $rootScope, mealFactory, $timeout, $location, $routeParams, ezfb, uiGmapGoogleMapApi, spinnerService) {
 
     //$scope.meals = meals;
     var i = 100;
     var mapIsReady = false;
 
     //console.log('this is the route params' +  $routeParams.q); *********WORKING
+
+
+    spinnerService.show('mainSpinner');
 
     mealFactory.getFiltered($rootScope.search).success(function (response) {
         $scope.meals = response;
@@ -70,6 +73,7 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
             };
             $scope.markers.push(marker);
         });
+        spinnerService.hide('mainSpinner');
     }
 
     $scope.mealClicked = function(meal) {

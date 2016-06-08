@@ -1,7 +1,7 @@
 /**
  * Created by Michael on 3/16/2016.
  */
-homadeApp.controller('mainPageCtrl', ['$scope', '$rootScope', '$location', 'mealFactory', function ($scope, $rootScope, $location, mealFactory) {
+homadeApp.controller('mainPageCtrl', ['$scope', '$rootScope', '$location', 'mealFactory', 'spinnerService', function ($scope, $rootScope, $location, mealFactory, spinnerService) {
 
     $scope.search = {};
     $scope.tags = [];
@@ -52,6 +52,7 @@ homadeApp.controller('mainPageCtrl', ['$scope', '$rootScope', '$location', 'meal
         $rootScope.search = $scope.search;
         $rootScope.$broadcast('SEARCH',$scope.search);
         $location.url('/Result?q=' + $scope.search.query);
+        spinnerService.show('mainSpinner');
     };
 
 }]);
