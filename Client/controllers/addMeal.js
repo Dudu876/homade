@@ -6,7 +6,7 @@ homadeApp.controller('addMealCtrl', ['$scope', '$uibModalInstance', 'mealFactory
 
     var isUpdate = meal ? true : false;
 
-    $scope.meal = meal;
+    $scope.meal = meal ? meal : {};
     $scope.title = isUpdate ? $scope.meal.name : "New Meal";
     $scope.tags = [];
     $scope.currencies = ['₪','$','€'];
@@ -52,7 +52,7 @@ homadeApp.controller('addMealCtrl', ['$scope', '$uibModalInstance', 'mealFactory
         if (isUpdate) {
             mealFactory.update($scope.meal).success(function(data) {
                 alert (data);
-                $scope.cancel();
+                $uibModalInstance.close({ 'meal': $scope.meal, 'isUpdate': isUpdate});
             }).error(function(data) {
                 alert(data);
             });
@@ -79,12 +79,13 @@ homadeApp.controller('addMealCtrl', ['$scope', '$uibModalInstance', 'mealFactory
 
         mealFactory.create(meal).success(function(data) {
             alert ("meal saved!" + "  " + data);
+            meal._id = data;
+            $uibModalInstance.close({ 'meal': meal, 'isUpdate': isUpdate});
         }).error(function(data) {
             alert(data);
         });
 
         upload($scope.meal.file); //call upload function
-        $scope.cancel();
     };
 
     function upload(file) {

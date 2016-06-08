@@ -146,9 +146,9 @@ exports.createMeal = function (req, res) {
     Chef.find({fbId: req.body.chefFBId}, function (err, chef) {
         if (!err) {
             meal.chef = chef[0];
-            meal.save(function (error) {
+            meal.save(function (error, savedMeal) {
                 if (!error) {
-                    res.json('meal created');
+                    res.json(savedMeal.id);
                 }
                 else {
                     //Utils.generateResponse(req, res, 0, err);

@@ -39,19 +39,29 @@ homadeApp.controller('chefMealsCtrl', ['$scope', 'mealFactory', 'userFactory', '
 
     $scope.mealModal = function(meal) {
 
+        var meal_copy = angular.copy(meal);
+
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'views/mealModal.html',
             controller: 'addMealCtrl',
             resolve: {
                 meal: function () {
-                    return meal;
+                    return meal_copy;
                 }
             }
         });
 
         modalInstance.result.then(function (result) {
-
+            if (result.isUpdate) {
+                 var updated = angular.copy(result.meal);
+//                  meal = updated
+//                 meal = result.meal;
+                 meal.name = 'dsada';
+            }
+            else {
+                $scope.meals.push(result.meal);
+            }
         });
     }
 }]);

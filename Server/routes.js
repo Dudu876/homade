@@ -75,6 +75,10 @@ module.exports = function (app) {
     //    .post(uploadController.uploadFile);
     app.post('/upload', multipartyMiddleware, uploadController.uploadFile);
 
+    app.get('/api/env', function(req, res) {
+        res.json('env');
+    });
+
     // route to handle all angular requests
     app.get('*', function (req, res) {
         res.sendFile('index.html', {root: path.join(__dirname, '../Client')}); // load our public/index.html file
