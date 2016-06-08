@@ -54,10 +54,7 @@ homadeApp.controller('chefMealsCtrl', ['$scope', 'mealFactory', 'userFactory', '
 
         modalInstance.result.then(function (result) {
             if (result.isUpdate) {
-                 var updated = angular.copy(result.meal);
-//                  meal = updated
-//                 meal = result.meal;
-                 meal.name = 'dsada';
+
             }
             else {
                 $scope.meals.push(result.meal);
