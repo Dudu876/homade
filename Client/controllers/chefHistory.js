@@ -3,11 +3,6 @@
  */
 homadeApp.controller('chefHistoryCtrl', ['$scope', 'ordersFactory', 'chefsFactory', 'userFactory', 'ezfb', function ($scope, ordersFactory, chefsFactory, userFactory, ezfb) {
 
-    $scope.$on('isChefUpdate', function (event, args) {
-        ordersFactory.getCompleteOrdersByChef(userFactory.fbId).success(function (data) {
-            updateClientNamesAndFillOrders(data);
-        });
-    });
 
     var updateClientNamesAndFillOrders = function(data){
         $scope.orders = data;
@@ -25,10 +20,17 @@ homadeApp.controller('chefHistoryCtrl', ['$scope', 'ordersFactory', 'chefsFactor
     {
         chefsFactory.isChef(userFactory.fbId).success(function (isChef) {
             if (isChef) {
-                ordersFactory.getActiveOrdersByChef(userFactory.fbId).success(function(data) {
+                ordersFactory.getCompleteOrdersByChef(userFactory.fbId).success(function(data) {
                     updateClientNamesAndFillOrders(data);
                 });
             }
+        });
+    }
+    else {
+        $scope.$on('isChefUpdate', function (event, args) {
+            ordersFactory.getCompleteOrdersByChef(userFactory.fbId).success(function (data) {
+                updateClientNamesAndFillOrders(data);
+            });
         });
     }
 
