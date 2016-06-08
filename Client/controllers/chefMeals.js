@@ -25,7 +25,7 @@ homadeApp.controller('chefMealsCtrl', ['$scope', 'mealFactory', 'userFactory', '
             {
                 var removeSaver = 0;
                 for (i = 0; i < $scope.meals.length; i++) {
-                    if ($scope.meals._id == resultId)
+                    if ($scope.meals[i]._id == resultId)
                     {
                         removeSaver = i;
                         break;
