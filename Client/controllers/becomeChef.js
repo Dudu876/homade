@@ -1,11 +1,12 @@
 /**
  * Created by Michael on 3/31/2016.
  */
-homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFactory', 'userFactory', 'uiGmapGoogleMapApi', function ($scope, locationTipsFactory, chefsFactory, userFactory, uiGmapGoogleMapApi) {
+homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFactory', 'userFactory', 'uiGmapIsReady', function ($scope, locationTipsFactory, chefsFactory, userFactory, uiGmapGoogleMapApi) {
     $scope.isActive1 = true;
     $scope.isActive2 = false;
     $scope.locationChosen = false;
     $scope.isEdit = false;
+    $scope.showMap = false;
 
     $scope.init = function(){
         $scope.chefDetails.fbId = userFactory.fbId;
@@ -73,9 +74,8 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
         []
     ];
 
-    uiGmapGoogleMapApi.then(function(maps) {
-        $scope.chefDetails.location = {latitude: 45, longitude: -73};
-        $scope.map = {center: {latitude: 45, longitude: -73}, zoom: 8};
+    uiGmapGoogleMapApi.promise().then(function(maps) {
+        google.maps.event.trigger(maps[0].map, 'resize');
     });
 
     autocomplete = new google.maps.places.Autocomplete(
