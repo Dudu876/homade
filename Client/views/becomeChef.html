@@ -37,6 +37,7 @@
                         <ui-gmap-google-map class="map-become-chef"
                                             center="chefDetails.location"
                                             zoom="zoom"
+                                            events="map.events"
                                             ng-cloak>
                             <ui-gmap-polygon static="true" ng-repeat="p in polygons track by p.id" path="p.path" stroke="p.stroke" visible="p.visible"
                                              geodesic="p.geodesic" fill="p.fill" fit="false" editable="p.editable" draggable="p.draggable">
