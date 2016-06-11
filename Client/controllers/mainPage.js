@@ -7,7 +7,7 @@ homadeApp.controller('mainPageCtrl', ['$scope', '$rootScope', '$location', 'meal
     $scope.tags = [];
 
     autocomplete = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+        /** @type {!HTMLInputElement} */(document.getElementById('mainAutocomplete')),
         {types: ['address']});
 
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
