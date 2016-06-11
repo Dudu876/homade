@@ -26,8 +26,8 @@
                 <br>
                 <div class="row graphs">
                     <div ng-class="showCols">
-                        <div style="width: 200%; height: 100%;">
-                            <canvas id="bar" class="chart chart-bar" width="523" style="width: 523px; height: 95vh;"
+                        <div style="width: 100%; height: 100%;">
+                            <canvas id="bar" class="chart chart-bar" width="523" style="width: 523px; height: 95vh;"  ng-show="showTips" ng-hide="!showTips"
                                     chart-data="data" chart-labels="labels" chart-series="series">
                             </canvas>
                         </div>
@@ -41,7 +41,7 @@
                             <ui-gmap-polygon static="true" ng-repeat="p in polygons track by p.id" path="p.path" stroke="p.stroke" visible="p.visible"
                                              geodesic="p.geodesic" fill="p.fill" fit="false" editable="p.editable" draggable="p.draggable">
                             </ui-gmap-polygon>
-                            <ui-gmap-marker coords="chefDetails.location" ng-show="locationChosen" options="marker.options" events="marker.events" idkey="chefDetails.name">
+                            <ui-gmap-marker coords="chefDetails.location" ng-show="locationChosen" options="marker.options" events="marker.events" idkey="1">
                             </ui-gmap-marker>
                         </ui-gmap-google-map>
                     </div>
@@ -56,7 +56,7 @@
 
             <div class="centered" >
                 <div class="col-sm-12">
-                    <h4 class="info-text"> When do you want to be available?</h4>
+                    <h4 class="workdays-header"> When do you want to be available?</h4>
                 </div>
             </div>
             <br>

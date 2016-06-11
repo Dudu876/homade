@@ -130,13 +130,15 @@ exports.performCitySplitting = function (affectedCity)
 
     if (cityHashtable[affectedCity] % 1 == 0)
     {
-        Order.find({city: affectedCity}).populate('chef meal').exec(function(error, orders) {
+        Order.find({city: affectedCity}).populate('chef').populate('meal').exec(function(error, orders) {
             var cityLocations = [];
             var cityTags = [];
 
             for (i = 0; i < orders.length; i++) {
                 cityLocations.push(orders[i].chef.location.coordinates);
-                if (orders[i].meal !== undefined) cityTags.push(orders[i].meal.tags);
+                if (orders[i].meal != null && orders[i].meal.tags != null) {
+                    cityTags.push(orders[i].meal.tags);
+                }
             }
 
 
