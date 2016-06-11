@@ -665,3 +665,8 @@ div:focus {
     top: 0;
     width: 100%;
 }
+
+.angucomplete-dropdown {
+    overflow-y: auto;
+    max-height: 200px;
+}
