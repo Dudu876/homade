@@ -86,6 +86,7 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
         locationTipsFactory.getTips([lng, lat]).success(function(data) {
 
         $scope.labels = [];
+        $scope.data[0] = [];
         $scope.chefDetails.location = [lng, lat];
         $scope.showTips = data.showTips;
 
@@ -119,6 +120,7 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
                         $scope.data[0].push(data.areas[i].popularTags[j].count);
                         $scope.labels.push(data.areas[i].popularTags[j].tag);
                     }
+
                     currPolygon.fill.color = '#53AE68'
                 }
 
