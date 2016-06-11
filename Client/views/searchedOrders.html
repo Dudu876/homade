@@ -28,7 +28,7 @@
                         </h3>
                         <div>
                             <small> {{meal.description}} </small>
-                            <b style="right: 0;position: absolute;">{{meal.distance}} km Away</b>
+                            <b ng-show="meal.distance" style="right: 0;position: absolute;">{{meal.distance}} km Away</b>
                         </div>
                         <div style="padding: 10px;">
                             <img title="Kosher" ng-show="meal.kosher" class="mish-icon meal-icon" src="../public/images/kosher_icon.png">
