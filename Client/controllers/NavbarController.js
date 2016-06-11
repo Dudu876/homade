@@ -24,13 +24,14 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
         });
     }
 
-    autocomplete = new google.maps.places.Autocomplete(
+    var navAutocomplete = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */(document.getElementById('navAutocomplete')),
         {types: ['address']});
 
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
-        var place = autocomplete.getPlace();
+    google.maps.event.addListener(navAutocomplete, 'place_changed', function() {
+        var place = navAutocomplete.getPlace();
         $scope.search.latlng = [place.geometry.location.lng(), place.geometry.location.lat()];
+        $scope.search.location = place.formatted_address;
     });
 
     $scope.$on('isChefUpdate', function(event, args){
@@ -53,6 +54,9 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
 
     $scope.go = function() {
         if ($scope.search.query === undefined) return;
+        if ($scope.search.location == "") $scope.search.latlng = undefined;
+        $rootScope.search = $scope.search;
+        $rootScope.$broadcast('SEARCH',$scope.search);
         $location.url('/Result?q=' + $scope.search.query);
     };
 
