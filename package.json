@@ -32,6 +32,7 @@
     "d3-voronoi": "^0.3.2",
     "express": "^4.13.4",
     "fs": "0.0.2",
+    "geolib": "^2.0.21",
     "mongoose": "^4.4.10",
     "multer": "^1.1.0",
     "node-kmeans": "0.0.1",
