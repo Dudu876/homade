@@ -6,13 +6,14 @@ homadeApp.controller('mainPageCtrl', ['$scope', '$rootScope', '$location', 'meal
     $scope.search = {};
     $scope.tags = [];
 
-    autocomplete = new google.maps.places.Autocomplete(
+    var mainAutocomplete = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */(document.getElementById('mainAutocomplete')),
         {types: ['address']});
 
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
-        var place = autocomplete.getPlace();
+    google.maps.event.addListener(mainAutocomplete, 'place_changed', function() {
+        var place = mainAutocomplete.getPlace();
         $scope.search.latlng = [place.geometry.location.lng(), place.geometry.location.lat()];
+        $scope.search.location = place.formatted_address;
     });
 
     navigator.geolocation.getCurrentPosition(setPosition);
@@ -52,6 +53,7 @@ homadeApp.controller('mainPageCtrl', ['$scope', '$rootScope', '$location', 'meal
     $scope.go = function() {
 
         if ($scope.search.query === undefined) return;
+        if ($scope.search.location == "") $scope.search.latlng = undefined;
 //         $scope.search.query = $scope.search.query.title;
         $rootScope.search = $scope.search;
         $rootScope.$broadcast('SEARCH',$scope.search);
