@@ -4,8 +4,8 @@
 homadeApp
     .config(function (ezfbProvider) {
     ezfbProvider.setInitParams({
-        appId: '613002398781110' // Prod
-        //appId: '1020897501324929' // Test
+        //appId: '613002398781110' // Prod
+        appId: '1020897501324929' // Test
     });})
     .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
