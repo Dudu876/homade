@@ -139,10 +139,13 @@ exports.performCitySplitting = function (affectedCity)
                 if (orders[i].meal != null && orders[i].meal.tags != null) {
                     cityTags.push(orders[i].meal.tags);
                 }
+                else {
+                    cityTags.push([]);
+                }
             }
 
 
-            if (cityLocations >= 3) {
+            if (cityLocations.length >= 3) {
                 kmeans.clusterize(cityLocations, {k: 3}, function (err, kmeansRes) {
                     if (err) {
                         console.error(err);
