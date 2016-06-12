@@ -146,7 +146,7 @@ exports.performCitySplitting = function (affectedCity)
 
 
             if (cityLocations.length >= 3) {
-                kmeans.clusterize(cityLocations, {k: 3}, function (err, kmeansRes) {
+                kmeans.clusterize(cityLocations, {k: 4}, function (err, kmeansRes) {
                     if (err) {
                         console.error(err);
                     }

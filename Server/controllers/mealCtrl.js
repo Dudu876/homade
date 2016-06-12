@@ -20,8 +20,10 @@ exports.getAllMeals = function (req, res) {
 
         //var pointA = { type: 'Point', coordinates: [search.latlng.lng, search.latlng.lat] };
         var pointA = search.latlng ? { latitude: search.latlng.lat, longitude: search.latlng.lng} : undefined;
+        var query;
+        if (search.query != '*') query = { tags: search.query };
 
-        Meal.find({ tags: search.query })
+        Meal.find(query)
             .populate('chef')
             .sort('-averageRating')
             .lean()
@@ -192,6 +194,7 @@ exports.getAllTags = function (req, res) {
             finalTags = fixTags(finalTags);
 
             var sendingTags = [];
+            sendingTags.push({val: '*'});
 
             for (var i = 0; i < finalTags.length; i++){
                 sendingTags.push({val: finalTags[i]});
