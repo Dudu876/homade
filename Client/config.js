@@ -3,11 +3,9 @@
  */
 homadeApp
     .config(function (ezfbProvider) {
-        console.log(window.location);
         var appid;
         if (window.location.hostname == 'localhost') appid = '1020897501324929';
-        if (window.location.hostname == 'herokuapp') appid = '613002398781110';
-        console.log(appid);
+        if (window.location.hostname == 'homade.herokuapp.com') appid = '613002398781110';
     ezfbProvider.setInitParams({
         //appId: '613002398781110' // Prod
         //appId: '1020897501324929' // Test
