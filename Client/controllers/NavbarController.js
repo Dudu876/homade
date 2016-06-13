@@ -77,7 +77,7 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
             if (res.authResponse) {
                 updateLoginStatus(updateApiMe);
             }
-        }, {scope: 'email,user_likes'});
+        }, {scope: 'email, user_likes, user_photos'});
     };
 
     $scope.shouldShowFilter = function (){
