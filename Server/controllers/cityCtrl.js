@@ -120,6 +120,7 @@ exports.findCityByCoordinates = function(location) {
 
 exports.performCitySplitting = function (affectedCity)
 {
+    // Check if there were orders in the corresponding city
     if (cityHashtable[affectedCity] == null)
     {
         cityHashtable[affectedCity] = 1;
@@ -128,12 +129,15 @@ exports.performCitySplitting = function (affectedCity)
         cityHashtable[affectedCity]++;
     }
 
-    if (cityHashtable[affectedCity] % 1 == 0)
+    // Check to make sure there is a significant change in the number of orders
+    if (cityHashtable[affectedCity] % 3 == 0)
     {
+        // Select all the orders of the corresponding city
         Order.find({city: affectedCity}).populate('chef').populate('meal').exec(function(error, orders) {
             var cityLocations = [];
             var cityTags = [];
 
+            // Push all the tags to an array
             for (i = 0; i < orders.length; i++) {
                 cityLocations.push(orders[i].chef.location.coordinates);
                 if (orders[i].meal != null && orders[i].meal.tags != null) {
@@ -144,8 +148,9 @@ exports.performCitySplitting = function (affectedCity)
                 }
             }
 
-
+            // Make sure there are enough locations in the orders array in order to perform the splitting
             if (cityLocations.length >= 3) {
+                // Perform the k-means clustering
                 kmeans.clusterize(cityLocations, {k: 4}, function (err, kmeansRes) {
                     if (err) {
                         console.error(err);
@@ -198,6 +203,7 @@ exports.performCitySplitting = function (affectedCity)
                                 console.error(error);
                             }
                             else {
+                                // Perform the voronoi section
                                 var voronoitemp = d3.voronoi();
                                 var voronoi = d3.voronoi().extent([[[cityRes.southwest[1]], cityRes.southwest[0]], [cityRes.northeast[1], cityRes.northeast[0]]]);
                                 var vertices = [];
@@ -226,6 +232,7 @@ exports.performCitySplitting = function (affectedCity)
                                     }
                                 }
 
+                                // Save the complete areas polygon in the db.
                                 for (x = 0; x < areas.length; x++) {
                                     if (areas[x] != null) {
                                         var cityArea = new CityArea();
