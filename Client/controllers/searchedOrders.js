@@ -9,7 +9,13 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
 
     //console.log('this is the route params' +  $routeParams.q); *********WORKING
 
+    if ($rootScope.search.query === undefined) {
+        $rootScope.search = {
+            'query': $routeParams.q
+        };
+    }
 
+    //spinner
     spinnerService.show('mainSpinner');
 
     mealFactory.getFiltered($rootScope.search).success(function (response) {
@@ -36,7 +42,7 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
         }
         console.log('Map is ready');
         $scope.meals.forEach(function(element, index, array) {
-            ezfb.api(element.chefFBId + '/picture?height=100&width=100', function (res) {
+            ezfb.api('/' + element.chefFBId + '/picture?height=100&width=100', function (res) {
                 if (!res.error)
                 {
                     element.chefPic = res.data.url;
@@ -73,6 +79,7 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
             };
             $scope.markers.push(marker);
         });
+        //spinner
         spinnerService.hide('mainSpinner');
     }
 

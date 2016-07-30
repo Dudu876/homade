@@ -83,8 +83,9 @@ homadeApp.controller('messagesCtrl', [ '$scope', 'userFactory', 'ordersFactory',
             content: $scope.text
         };
         messageFactory.post(newMessage);
-        updateMessage(newMessage);
-        $scope.messages.push(newMessage);
+        var newNewMessage = angular.copy(newMessage);
+        updateMessage(newNewMessage);
+        $scope.messages.push(newNewMessage);
         $scope.text = "";
     };
 

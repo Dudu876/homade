@@ -3,9 +3,13 @@
  */
 homadeApp
     .config(function (ezfbProvider) {
+        var appid;
+        if (window.location.hostname == 'localhost') appid = '1020897501324929';
+        if (window.location.hostname == 'homade.herokuapp.com') appid = '613002398781110';
     ezfbProvider.setInitParams({
         //appId: '613002398781110' // Prod
-        appId: '1020897501324929' // Test
+        //appId: '1020897501324929' // Test
+        appId: appid
     });})
     .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({

@@ -52,14 +52,6 @@ exports.uploadFile = function(req, res) {
     }
     else {
         cloudinary.uploader.upload(req.files.file.path,function(image,err){
-            //console.log();
-            //console.log("** Public Id");
-            //if (err){
-            //    console.warn(err);
-            //}
-            //console.log("* Same image, uploaded with a custom public_id");
-            //console.log("* "+image.public_id);
-            //console.log("* "+image.url);
             _mealId = "";
             res.json({error_code:0,err_desc:null});
             //waitForAllUploads("pizza2",err,image);

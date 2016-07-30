@@ -1,6 +1,7 @@
 /**
  * Created by Dudu on 25/03/2016.
  */
+var geolib = require('geolib');
 var uploader = require('./uploadCtrl');
 
 var Meal = require('../models/meal');
@@ -16,12 +17,32 @@ exports.getAllMeals = function (req, res) {
             });
     }
     else {
-        Meal.find({ tags: search.query})
+
+        //var pointA = { type: 'Point', coordinates: [search.latlng.lng, search.latlng.lat] };
+        var pointA = search.latlng ? { latitude: search.latlng.lat, longitude: search.latlng.lng} : undefined;
+        var query;
+        if (search.query != '*') query = { tags: search.query };
+
+        Meal.find(query)
             .populate('chef')
             .sort('-averageRating')
+            .lean()
             .exec(function (error, meals) {
-                res.json(meals);
+                if (pointA === undefined) {
+                    res.json(meals);
+                }
+                else {
+                    meals.forEach(function (element, index, array) {
+                        var pointB = {latitude: element.chef.location.coordinates[1], longitude: element.chef.location.coordinates[0]};
+                        var dis = geolib.getDistance(pointA, pointB);
+                        element.distance = dis / 1000;
+                    });
+                    res.json(meals);
+                }
             });
+        //Meal.geoNear(point, { queey: query }, function(err,docs) {
+        //    console.log(docs);
+        //});
     }
 };
 
@@ -173,6 +194,7 @@ exports.getAllTags = function (req, res) {
             finalTags = fixTags(finalTags);
 
             var sendingTags = [];
+            sendingTags.push({val: '*'});
 
             for (var i = 0; i < finalTags.length; i++){
                 sendingTags.push({val: finalTags[i]});

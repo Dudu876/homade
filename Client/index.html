@@ -110,7 +110,7 @@
                                           local-data="tags"
                                           search-fields="val"
                                           title-field="val"
-                                          minlength="1"
+                                          minlength="0"
                                           my-enter="go()"
                                           input-class="form-control inline-autocomplete-navbar"
                                           initial-value="search.query"
@@ -129,6 +129,9 @@
                         <li ng-show="loggedIn && loggedInStatusVerified && isChef && loadedChefData" ng-hide="!isChef || !loadedChefData">
                             <a href="/Chef">Chef</a>
                             <ul>
+                                <li>
+                                    <a href="/BecomeAChef">Edit Details</a>
+                                </li>
                                 <li>
                                     <a href="/Profile">Dashboard</a>
                                 </li>

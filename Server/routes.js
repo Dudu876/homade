@@ -37,7 +37,11 @@ module.exports = function (app) {
     app.route('/api/chefs/:chef_id')
         .get(chefController.isChef);
 
+    app.route('/api/chefs/details/:chef_id')
+        .get(chefController.getDetails);
+
     app.route('/api/chefs')
+        .put(chefController.updateChef)
         .post(chefController.createChef);
 
     app.route('/api/orders')

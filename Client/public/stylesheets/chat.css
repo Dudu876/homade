@@ -68,11 +68,11 @@ body{
 }
 .col-inside-lg {
     padding: 20px;
-    height: calc(100vh - 210px);
+    height: calc(75vh - 60px);
     overflow: auto;
 }
 .chat {
-    height: calc(100vh - 150px);
+    height: 75vh;
 }
 .chat.content {
     border: 1px solid #ccc;
@@ -291,7 +291,7 @@ body{
     border-radius: 0;
 }
 .chat-body.answer-add .answer-btn-1 {
-    background: url("http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/icon-40.png") 50% 50% no-repeat;
+    background: url("../images/send_icon.png") 50% 50% no-repeat;
     right: 56px;
 }
 .chat-body.answer-add .answer-btn {
@@ -304,7 +304,7 @@ body{
     margin-top: -18px;
 }
 .chat-body.answer-add .answer-btn-2 {
-    background: url("http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/icon-41.png") 50% 50% no-repeat;
+    background: url("../images/send_icon.png") 50% 50% no-repeat;
     right: 20px;
 }
 .chat input::-webkit-input-placeholder {

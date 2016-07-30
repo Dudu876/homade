@@ -11,6 +11,12 @@ homadeApp.factory('chefsFactory', ['$http', function($http) {
         },
         isChef : function(fbId) {
             return $http.get(chefURL + fbId);
+        },
+        get : function(fbId) {
+            return $http.get(chefURL + 'details/' + fbId)
+        },
+        update : function(chefData) {
+            return $http.put(chefURL, chefData);
         }
     }
 }]);

@@ -24,13 +24,14 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
         });
     }
 
-    autocomplete = new google.maps.places.Autocomplete(
+    var navAutocomplete = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */(document.getElementById('navAutocomplete')),
         {types: ['address']});
 
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
-        var place = autocomplete.getPlace();
+    google.maps.event.addListener(navAutocomplete, 'place_changed', function() {
+        var place = navAutocomplete.getPlace();
         $scope.search.latlng = [place.geometry.location.lng(), place.geometry.location.lat()];
+        $scope.search.location = place.formatted_address;
     });
 
     $scope.$on('isChefUpdate', function(event, args){
@@ -43,14 +44,19 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
 
 
     $scope.onSelect = function(data) {
-        if (data.title != null){
-            $scope.search.query = data.title;
-            $scope.go();
+        if (data != null) {
+            if (data.title != null) {
+                $scope.search.query = data.title;
+                $scope.go();
+            }
         }
     };
 
     $scope.go = function() {
         if ($scope.search.query === undefined) return;
+        if ($scope.search.location == "") $scope.search.latlng = undefined;
+        $rootScope.search = $scope.search;
+        $rootScope.$broadcast('SEARCH',$scope.search);
         $location.url('/Result?q=' + $scope.search.query);
     };
 
@@ -71,7 +77,7 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
             if (res.authResponse) {
                 updateLoginStatus(updateApiMe);
             }
-        }, {scope: 'email,user_likes'});
+        }, {scope: 'email, user_likes, user_photos'});
     };
 
     $scope.shouldShowFilter = function (){
@@ -124,6 +130,7 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
                 userFactory.picture = '../public/images/BlankPicture.png';
             }
             chefsFactory.isChef(userFactory.fbId).success(function(data) {
+                userFactory.isChef = data;
                 userFactory.isChefUpdate(data);
                 $scope.loadedChefData = true;
             }).error(function(data) {
