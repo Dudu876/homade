@@ -35,17 +35,17 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
             startingTime.setMinutes(0);
 
             var finishTime = new Date();
-            finishTime.setHours(18);
+            finishTime.setHours(20);
             finishTime.setMinutes(0);
 
             $scope.chefDetails.workDays = [
-                { day: 1, dayName: 'Sunday', isWorking:false, startingTime: startingTime, finishTime: finishTime },
-                { day: 2, dayName: 'Monday', isWorking:false, startingTime: startingTime, finishTime: finishTime },
-                { day: 3, dayName: 'Tuesday', isWorking:false, startingTime: startingTime, finishTime: finishTime },
-                { day: 4, dayName: 'Wedenesday', isWorking:false, startingTime: startingTime, finishTime: finishTime },
-                { day: 5, dayName: 'Thursday', isWorking:false, startingTime: startingTime, finishTime: finishTime },
-                { day: 6, dayName: 'Friday', isWorking:false, startingTime: startingTime, finishTime: finishTime },
-                { day: 7, dayName: 'Saturday', isWorking:false, startingTime: startingTime, finishTime: finishTime }
+                { day: 1, dayName: 'Sunday', isWorking:true, startingTime: startingTime, finishTime: finishTime },
+                { day: 2, dayName: 'Monday', isWorking:true, startingTime: startingTime, finishTime: finishTime },
+                { day: 3, dayName: 'Tuesday', isWorking:true, startingTime: startingTime, finishTime: finishTime },
+                { day: 4, dayName: 'Wedenesday', isWorking:true, startingTime: startingTime, finishTime: finishTime },
+                { day: 5, dayName: 'Thursday', isWorking:true, startingTime: startingTime, finishTime: finishTime },
+                { day: 6, dayName: 'Friday', isWorking:true, startingTime: startingTime, finishTime: finishTime },
+                { day: 7, dayName: 'Saturday', isWorking:true, startingTime: startingTime, finishTime: finishTime }
             ];
         }
 

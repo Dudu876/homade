@@ -49,7 +49,6 @@ homadeApp.controller('orderMealCtrl', ['$scope', 'ordersFactory', 'userFactory',
         });
     };
 
-
     if (userFactory.fbId != "") {
         getOrders();
     }
@@ -87,8 +86,18 @@ homadeApp.controller('orderMealCtrl', ['$scope', 'ordersFactory', 'userFactory',
     $scope.performOrder = function () {
         $scope.order.clientFBId = userFactory.fbId;
         ordersFactory.create($scope.order).success(function(data) {
-            alert('Order complete');
-            location.href = "/";
+            if (data.created != false){
+                alert('Order complete');
+                location.href = "/";
+            }
+            else {
+                if (!data.active){
+                    alert("This meal isn't available anymore");
+                }
+                else {
+                    alert("Chef is unavailable in the current time");
+                }
+            }
         });
     };
 

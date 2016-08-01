@@ -10,18 +10,17 @@ var Chef = require('../models/chef');
 exports.getAllMeals = function (req, res) {
     var search = JSON.parse(req.query.search);
     if (!search) {
-        Meal.find({})
+        Meal.find({isActive: true})
             .populate('chef')
             .exec(function (error, meals) {
                 res.json(meals);
             });
     }
     else {
-
         //var pointA = { type: 'Point', coordinates: [search.latlng.lng, search.latlng.lat] };
         var pointA = search.latlng ? { latitude: search.latlng.lat, longitude: search.latlng.lng} : undefined;
-        var query;
-        if (search.query != '*') query = { tags: search.query };
+        var query = { isActive: true };
+        if (search.query != '*') query = { tags: search.query, isActive: true };
 
         Meal.find(query)
             .populate('chef')
@@ -82,7 +81,7 @@ exports.getMealById = function (req, res) {
 };
 
 exports.getMealsOfChef = function (req, res) {
-    Meal.find({ chefFBId: req.params.chef_id}).populate('chef').exec(function (err, meal) {
+    Meal.find({ chefFBId: req.params.chef_id, isActive: true}).populate('chef').exec(function (err, meal) {
         if (!err) {
             res.json(meal);
         }
@@ -101,12 +100,14 @@ exports.updateMeal = function (req, res) {
             meal.glutenfree = req.body.glutenfree || false;
             meal.price = req.body.price;
             meal.type = req.body.type;
+            meal.isActive = true;
             //meal.chefFBId = req.body.chefFBId;
 
             //handle tags
             for (var i in req.body.tags) {
                 meal.tags.push(req.body.tags[i].text);
             }
+
             var name_tags = req.body.name.split(" ");
             meal.tags = meal.tags.concat(name_tags);
 
@@ -130,9 +131,18 @@ exports.updateMeal = function (req, res) {
 };
 
 exports.deleteMeal = function (req, res) {
-    Meal.remove({_id: req.params.meal_id}, function (err) {
+    Meal.findById(req.params.meal_id, function (err, meal) {
         if (!err) {
-            res.json(req.params.meal_id);
+            meal.isActive = false;
+            meal.save(function (err) {
+                if (!err) {
+                    res.json('meal deleted');
+                }
+                else {
+                    //Utils.generateResponse(req, res, 0, err);
+                }
+            });
+
         }
         else {
             //Utils.generateResponse(req, res, 0, err);
@@ -153,6 +163,7 @@ exports.createMeal = function (req, res) {
     meal.price = req.body.price;
     meal.type = req.body.type;
     meal.chefFBId = req.body.chefFBId;
+    meal.isActive = true;
 
     //handle tags
     for (var i in req.body.tags) {
@@ -183,7 +194,7 @@ exports.createMeal = function (req, res) {
 };
 
 exports.getAllTags = function (req, res) {
-    Meal.find({},'tags',function (err, meals) {
+    Meal.find({isActive: true},'tags',function (err, meals) {
         if (!err) {
             //tags = fixTags(tags);
             var finalTags = [];
