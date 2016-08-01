@@ -7,7 +7,6 @@ homadeApp.controller('mainPageCtrl', ['$scope', '$rootScope', '$location', 'meal
     $scope.tags = [];
 
     $rootScope.loading = 0;
-    $rootScope.loading++;
     console.log('mainPage start loading ' + $rootScope.loading);
 
     var mainAutocomplete = new google.maps.places.Autocomplete(
@@ -52,8 +51,6 @@ homadeApp.controller('mainPageCtrl', ['$scope', '$rootScope', '$location', 'meal
                 }
             }
         });
-        $rootScope.loading--;
-        console.log('mainpage finish location loading ' + $rootScope.loading);
     }
 
     $scope.go = function() {

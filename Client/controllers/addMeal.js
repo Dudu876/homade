@@ -2,7 +2,9 @@
  * Created by Dudu on 19/03/2016.
  */
 
-homadeApp.controller('addMealCtrl', ['$scope', '$uibModalInstance', 'mealFactory', 'userFactory', 'Upload', 'meal', function ($scope, $uibModalInstance, mealFactory, userFactory, Upload, meal) {
+homadeApp.controller('addMealCtrl', ['$scope', '$rootScope', '$uibModalInstance', 'mealFactory', 'userFactory', 'Upload', 'meal', function ($scope, $rootScope, $uibModalInstance, mealFactory, userFactory, Upload, meal) {
+
+    $rootScope.loading = 0;
 
     var isUpdate = meal ? true : false;
 
@@ -48,7 +50,7 @@ homadeApp.controller('addMealCtrl', ['$scope', '$uibModalInstance', 'mealFactory
         $uibModalInstance.dismiss('cancel');
     };
 
-    $scope.submit = function(){
+    $scope.submit = function() {
         if (isUpdate) {
             mealFactory.update($scope.meal).success(function(data) {
                 alert (data);
@@ -73,6 +75,8 @@ homadeApp.controller('addMealCtrl', ['$scope', '$uibModalInstance', 'mealFactory
             alert('Please add an image. No Image, No Meal!');
             return;
         }
+
+        $rootScope.loading++;
 
         var meal = $scope.meal;
         meal.chefFBId = userFactory.fbId;
