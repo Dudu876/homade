@@ -13,6 +13,20 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
         $rootScope.search = {};
     }
 
+    $rootScope.loading = 0;
+    $rootScope.loadingAdd = function(){
+        $rootScope.loading++;
+    };
+    $rootScope.loadingSub = function(){
+        $rootScope.loading--;
+    };
+
+    $rootScope.$watch(function() {
+        return $rootScope.loading;
+    }, function() {
+        console.log('loading changed!');
+    });
+
     $scope.search = $rootScope.search;
     loadAllTags();
 

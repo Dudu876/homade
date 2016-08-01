@@ -16,7 +16,11 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
     }
 
     //spinner
-    spinnerService.show('mainSpinner');
+    //spinnerService.show('mainSpinner');
+    $rootScope.loading = 0;
+    $rootScope.loading++;
+    $rootScope.loading++;
+    console.log('starting search ' + $rootScope.loading);
 
     mealFactory.getFiltered($rootScope.search).success(function (response) {
         $scope.meals = response;
@@ -32,6 +36,28 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
             console.log('center changed');
             $scope.map.center.latitude = position.coords.latitude;
             $scope.map.center.longitude = position.coords.longitude;
+            $scope.markers.push({id: 0,
+                coords: {
+                    longitude : position.coords.longitude,
+                    latitude: position.coords.latitude
+                },
+                options: {
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                },
+                window: {
+                    title: "Me",
+                    options: {
+                        visible: true
+                    },
+                    onClick: function(window) {
+                        window.options.visible = !window.options.visible;
+                    },
+                    closeClick: function(window) {
+                        window.options.visible = false;
+                    }
+                }});
+            $rootScope.loading--;
+            console.log('end of Me loading ' + $rootScope.loading);
         },1000);
     }
 
@@ -53,7 +79,7 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
                 }
             });
             var marker = {
-                id: index,
+                id: index+1,
                 coords: {
                     //latitude: element.location.lat,
                     //longitude: element.location.lng
@@ -80,7 +106,9 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
             $scope.markers.push(marker);
         });
         //spinner
-        spinnerService.hide('mainSpinner');
+        //spinnerService.hide('mainSpinner');
+        $rootScope.loading--;
+        console.log('end of Markers loading ' + $rootScope.loading);
     }
 
     $scope.mealClicked = function(meal) {
