@@ -11,26 +11,63 @@ var Meal = require('../models/meal');
 var cityController = require('./cityCtrl');
 
 exports.createOrder = function(req, res) {
-    var order = new Order();
-    order.clientFBId = req.body.clientFBId;
-    order.chefFBId = req.body.chefFBId;
-    order.chef = req.body.chef;
-    order.meal = req.body.meal;
-    order.mealID = req.body.meal._id;
-    order.quantity = req.body.quantity;
-    order.totalPrice = req.body.quantity * req.body.meal.price;
-    order.city = req.body.chef.city;
-    order.startDate = new Date();
-    order.status = 0;
 
-    order.save(function (err) {
-        if (!err) {
-            res.json('Created order!');
-            cityController.performCitySplitting(order.city);
+    // Check if meal is active
+    if (!req.body.meal.isActive){
+        var result = { created: false, active: false};
+        res.json(result);
+    }
+    else
+    {
+        var date = new Date();
+        var day = date.getDay();
+
+        if (req.body.chef.workDays[day].isWorking)
+        {
+            var startHour = req.body.chef.workDays[day].startingTime.getHours();
+            var finishHour = req.body.chef.workDays[day].finishTime.getHours();
+
+            var startMin = req.body.chef.workDays[day].startingTime.getMinutes();
+            var finishMin = req.body.chef.workDays[day].finishTime.getMinutes();
+
+            var currHour = date.getHours();
+            var currMin = date.getMinutes();
+
+            if (!((currHour > startHour || currHour == startHour && currMin >= startMin) && (currHour < finishHour || currHour == finishHour && currMin <= finishMin)))
+            {
+                var result = { created: false, active: true};
+                res.json(result);
+            }
+
+            var order = new Order();
+            order.clientFBId = req.body.clientFBId;
+            order.chefFBId = req.body.chefFBId;
+            order.chef = req.body.chef;
+
+
+            order.meal = req.body.meal;
+            order.mealID = req.body.meal._id;
+            order.quantity = req.body.quantity;
+            order.totalPrice = req.body.quantity * req.body.meal.price;
+            order.city = req.body.chef.city;
+            order.startDate = new Date();
+            order.status = 0;
+
+            order.save(function (err) {
+                if (!err) {
+                    res.json({created: true});
+                    cityController.performCitySplitting(order.city);
+                }
+                else {
+                }
+            });
         }
         else {
+            var result = { created: false, active: true};
+            res.json(result);
         }
-    });
+
+    }
 };
 
 exports.getOrdersByMeal = function(req, res) {

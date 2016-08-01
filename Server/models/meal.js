@@ -16,7 +16,8 @@ var mealSchema = new Schema({
     glutenfree: Boolean,
     chefFBId: Number,
     chef: { type: Schema.Types.ObjectId, ref: 'Chef' },
-    averageRating: Number
+    averageRating: Number,
+    isActive: Boolean
 });
 
 // define our meal model
