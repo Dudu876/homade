@@ -34,6 +34,10 @@
                             <img title="Kosher" ng-show="meal.kosher" class="mish-icon meal-icon" src="../public/images/kosher_icon.png">
                             <img title="Gluten Free" ng-show="meal.glutenfree" class="mish-icon meal-icon" src="../public/images/gluten_free_icon.png">
                         </div>
+                        <div style="float: right; display: inline-block;">
+                            <input-stars max="5" ng-model="meal.averageRating" readonly="true"></input-stars>
+                            <b>{{meal.averageRating}}</b>
+                        </div>
                     </div>
                 </div>
             </div>
