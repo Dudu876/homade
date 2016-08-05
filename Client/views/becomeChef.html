@@ -91,7 +91,7 @@
     </div>
 
     <div class="pull-right">
-        <input type="button" ng-show="isActive2" class="btn btn-previous btn-fill btn-default btn-wd btn-sm" ng-click="sendData()" name="next" value="Become a chef >>">
+        <input type="button" ng-show="isActive2" class="btn btn-previous btn-fill btn-default btn-wd btn-sm" ng-click="sendData()" name="next" value="{{ saveButtonText }}">
         <input type="button" ng-show="!isActive2" ng-disabled="!locationChosen" class="btn btn-previous btn-fill btn-default btn-wd btn-sm" ng-click="setNext()" name="next" value="Next >>">
     </div>
 </div>

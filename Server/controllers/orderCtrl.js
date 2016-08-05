@@ -54,6 +54,7 @@ exports.createOrder = function(req, res) {
             order.city = req.body.chef.city;
             order.startDate = new Date();
             order.status = 0;
+            order.location = req.body.chef.location;
 
             order.save(function (err) {
                 if (!err) {

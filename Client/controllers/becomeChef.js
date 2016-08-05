@@ -25,6 +25,7 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
 
         if(userFactory.isChef){
             $scope.isEdit = true;
+            $scope.saveButtonText = "Save changes";
             chefsFactory.get($scope.chefDetails.fbId).success(function(data){
                 $scope.chefDetails = data;
                 document.getElementById('autocomplete').placeholder = $scope.chefDetails.locationName;
