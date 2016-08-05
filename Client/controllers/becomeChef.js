@@ -1,13 +1,17 @@
 /**
  * Created by Michael on 3/31/2016.
  */
-homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFactory', 'userFactory', 'uiGmapIsReady', '$http', function ($scope, locationTipsFactory, chefsFactory, userFactory, uiGmapGoogleMapApi, $http) {
+homadeApp.controller('becomeChef', ['$scope', '$rootScope', 'locationTipsFactory', 'chefsFactory', 'userFactory', 'uiGmapIsReady', '$http', function ($scope, $rootScope, locationTipsFactory, chefsFactory, userFactory, uiGmapGoogleMapApi, $http) {
     $scope.isActive1 = true;
     $scope.isActive2 = false;
     $scope.locationChosen = false;
     $scope.isEdit = false;
     $scope.showMap = false;
     $scope.markerOptions = { draggable: true };
+    $scope.saveButtonText = "Become a Chef >>";
+    $rootScope.loading = 0;
+    $rootScope.loading++;
+
     $scope.events = {
         dragend: function () {
             //UpdatePlace($scope.chefDetails.location[0], $scope.chefDetails.location[1], $scope.chefDetails.locationName);
@@ -25,7 +29,7 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
 
         if(userFactory.isChef){
             $scope.isEdit = true;
-            $scope.saveButtonText = "Save changes";
+            $scope.saveButtonText = "Save changes >>";
             chefsFactory.get($scope.chefDetails.fbId).success(function(data){
                 $scope.chefDetails = data;
                 document.getElementById('autocomplete').placeholder = $scope.chefDetails.locationName;
@@ -38,6 +42,7 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
                 $scope.chefDetails.workDays[6].dayName = 'Saturday';
 
                 UpdatePlace($scope.chefDetails.location.coordinates[0], $scope.chefDetails.location.coordinates[1], $scope.chefDetails.locationName);
+                $rootScope.loading--;
             });
         }
         else
@@ -59,6 +64,8 @@ homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFacto
                 { day: 6, dayName: 'Friday', isWorking:true, startingTime: startingTime, finishTime: finishTime },
                 { day: 7, dayName: 'Saturday', isWorking:true, startingTime: startingTime, finishTime: finishTime }
             ];
+
+            $rootScope.loading--;
         }
 
     };
