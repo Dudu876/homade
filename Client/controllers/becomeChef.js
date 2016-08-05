@@ -1,12 +1,23 @@
 /**
  * Created by Michael on 3/31/2016.
  */
-homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFactory', 'userFactory', 'uiGmapIsReady', function ($scope, locationTipsFactory, chefsFactory, userFactory, uiGmapGoogleMapApi) {
+homadeApp.controller('becomeChef', ['$scope', 'locationTipsFactory', 'chefsFactory', 'userFactory', 'uiGmapIsReady', '$http', function ($scope, locationTipsFactory, chefsFactory, userFactory, uiGmapGoogleMapApi, $http) {
     $scope.isActive1 = true;
     $scope.isActive2 = false;
     $scope.locationChosen = false;
     $scope.isEdit = false;
     $scope.showMap = false;
+    $scope.markerOptions = { draggable: true };
+    $scope.events = {
+        dragend: function () {
+            //UpdatePlace($scope.chefDetails.location[0], $scope.chefDetails.location[1], $scope.chefDetails.locationName);
+            var qs = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + $scope.chefDetails.location[1] + "," + $scope.chefDetails.location[0] +"&sensor=false&key=AIzaSyDpkTgTR--qces2l4LuT35p1todOQcimJg";
+            $http.get(qs).then(function(response) {
+                UpdatePlace($scope.chefDetails.location[0], $scope.chefDetails.location[1], response.data.results[0].formatted_address);
+                document.getElementById('autocomplete').placeholder = $scope.chefDetails.locationName;
+            })
+        }
+    };
 
     $scope.init = function(){
         $scope.chefDetails.fbId = userFactory.fbId;

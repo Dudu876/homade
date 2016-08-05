@@ -42,7 +42,7 @@
                             <ui-gmap-polygon static="true" ng-repeat="p in polygons track by p.id" path="p.path" stroke="p.stroke" visible="p.visible"
                                              geodesic="p.geodesic" fill="p.fill" fit="false" editable="p.editable" draggable="p.draggable">
                             </ui-gmap-polygon>
-                            <ui-gmap-marker coords="chefDetails.location" ng-show="locationChosen" options="marker.options" events="marker.events" idkey="1">
+                            <ui-gmap-marker coords="chefDetails.location" draggable="true" ng-show="locationChosen" options="markerOptions" events="events" idkey="1">
                             </ui-gmap-marker>
                         </ui-gmap-google-map>
                     </div>
