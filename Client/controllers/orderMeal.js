@@ -1,15 +1,18 @@
 /**
  * Created by Michael on 4/13/2016.
  */
-homadeApp.controller('orderMealCtrl', ['$scope', 'ordersFactory', 'userFactory', 'mealFactory', 'ezfb', function ($scope, ordersFactory, userFactory, mealFactory, ezfb) {
+homadeApp.controller('orderMealCtrl', ['$scope', '$rootScope', 'ordersFactory', 'userFactory', 'mealFactory', 'ezfb', function ($scope, $rootScope, ordersFactory, userFactory, mealFactory, ezfb) {
     var mealId = location.pathname.split("/").pop();
     $scope.order = {};
     $scope.flooredRating = 0;
     $scope.averageRating = 0;
     $scope.ratingText = "No Ratings Yet!";
     $scope.order.quantity = 1;
+    $rootScope.loading = 0;
+    $rootScope.loading++;
 
     mealFactory.getMeal(mealId).success(function(data) {
+        $rootScope.loading++;
         $scope.order.meal = data;
         $scope.order.chefFBId = data.chefFBId;
         $scope.order.chef = data.chef;
@@ -24,12 +27,14 @@ homadeApp.controller('orderMealCtrl', ['$scope', 'ordersFactory', 'userFactory',
 
         ezfb.api('/v2.6/' + data.chefFBId + '/picture?height=100&width=100', function (res) {
             $scope.chefPic = res.data.url;
+            $rootScope.loading--;
         });
     });
 
     var getOrders = function(){
         ordersFactory.getOrdersByMeal(mealId, 5).success(function (data) {
             $scope.ordersOfMeal = data;
+            $rootScope.loading += $scope.ordersOfMeal.length - 1;
             $scope.ordersOfMeal.forEach(function (element, index, array) {
                 ezfb.api(element.clientFBId + '?fields=first_name', function (res) {
                     if (!res.error) {
@@ -38,6 +43,8 @@ homadeApp.controller('orderMealCtrl', ['$scope', 'ordersFactory', 'userFactory',
                     else {
                         element.clientName = "Anonymous";
                     }
+
+                    $rootScope.loading--;
                 });
 
                 element.fullStars = new Array(element.rating);
