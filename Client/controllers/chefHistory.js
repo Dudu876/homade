@@ -1,17 +1,21 @@
 /**
  * Created by Michael on 4/28/2016.
  */
-homadeApp.controller('chefHistoryCtrl', ['$scope', 'ordersFactory', 'chefsFactory', 'userFactory', 'ezfb', function ($scope, ordersFactory, chefsFactory, userFactory, ezfb) {
-
+homadeApp.controller('chefHistoryCtrl', ['$scope', '$rootScope', 'ordersFactory', 'chefsFactory', 'userFactory', 'ezfb', function ($scope, $rootScope, ordersFactory, chefsFactory, userFactory, ezfb) {
+    $rootScope.loading = 0;
+    $rootScope.loading++;
 
     var updateClientNamesAndFillOrders = function(data){
         $scope.orders = data;
+        $rootScope.loading += $scope.orders.length - 1;
         $scope.orders.forEach(function(element, index, array) {
             ezfb.api(element.clientFBId + '?fields=name', function (res) {
                 if (!res.error)
                 {
                     element.clientName = res.name;
                 }
+
+                $rootScope.loading--;
             });
         });
     };
@@ -23,6 +27,9 @@ homadeApp.controller('chefHistoryCtrl', ['$scope', 'ordersFactory', 'chefsFactor
                 ordersFactory.getCompleteOrdersByChef(userFactory.fbId).success(function(data) {
                     updateClientNamesAndFillOrders(data);
                 });
+            }
+            else {
+                $rootScope.loading--;
             }
         });
     }

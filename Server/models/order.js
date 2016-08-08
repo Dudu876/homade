@@ -19,7 +19,8 @@ var orderSchema = new Schema({
     startDate: Date,
     endDate: Date,
     city: String,
-    status: Number
+    status: Number,
+    location: { type: { type: String }, coordinates: [] }
 });
 
 // define our order model

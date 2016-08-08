@@ -24,13 +24,13 @@ exports.createOrder = function(req, res) {
 
         if (req.body.chef.workDays[day].isWorking)
         {
-            var startingTime = new Date(req.body.chef.workDays[day].startingTime);
-            var finishingTime = new Date(req.body.chef.workDays[day].finishTime);
-            var startHour = startingTime.getHours();
-            var finishHour = finishingTime.getHours();
+            var startDate = new Date(req.body.chef.workDays[day].startingTime);
+            var finishDate = new Date(req.body.chef.workDays[day].finishTime);
+            var startHour = startDate.getHours();
+            var finishHour = finishDate.getHours();
 
-            var startMin = startingTime.getMinutes();
-            var finishMin = finishingTime.getMinutes();
+            var startMin = startDate.getMinutes();
+            var finishMin = finishDate.getMinutes();
 
             var currHour = date.getHours();
             var currMin = date.getMinutes();
@@ -54,6 +54,7 @@ exports.createOrder = function(req, res) {
             order.city = req.body.chef.city;
             order.startDate = new Date();
             order.status = 0;
+            order.location = req.body.chef.location;
 
             order.save(function (err) {
                 if (!err) {

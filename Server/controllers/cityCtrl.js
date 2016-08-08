@@ -139,7 +139,7 @@ exports.performCitySplitting = function (affectedCity)
 
             // Push all the tags to an array
             for (i = 0; i < orders.length; i++) {
-                cityLocations.push(orders[i].chef.location.coordinates);
+                cityLocations.push(orders[i].location.coordinates);
                 if (orders[i].meal != null && orders[i].meal.tags != null) {
                     cityTags.push(orders[i].meal.tags);
                 }

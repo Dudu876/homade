@@ -1,8 +1,10 @@
 /**
  * Created by Michael on 4/28/2016.
  */
-homadeApp.controller('chefOrdersCtrl', ['$scope', 'ordersFactory', 'chefsFactory', 'userFactory', 'messageFactory', 'ezfb', '$uibModal', function ($scope, ordersFactory, chefsFactory, userFactory, messageFactory, ezfb, $uibModal) {
+homadeApp.controller('chefOrdersCtrl', ['$scope', '$rootScope', 'ordersFactory', 'chefsFactory', 'userFactory', 'messageFactory', 'ezfb', '$uibModal', function ($scope, $rootScope, ordersFactory, chefsFactory, userFactory, messageFactory, ezfb, $uibModal) {
     var statusesArr = ['Order Received', 'Cooking', 'Ready', 'Taken'];
+    $rootScope.loading = 0;
+    $rootScope.loading++;
 
     $scope.$on('isChefUpdate', function (event, args) {
         ordersFactory.getActiveOrdersByChef(userFactory.fbId).success(function (data) {
@@ -12,12 +14,15 @@ homadeApp.controller('chefOrdersCtrl', ['$scope', 'ordersFactory', 'chefsFactory
 
     var updateClientNamesAndFillOrders = function(data){
         $scope.activeOrders = data;
+        $rootScope.loading += $scope.activeOrders - 1;
         $scope.activeOrders.forEach(function(element, index, array) {
             ezfb.api(element.clientFBId + '?fields=name', function (res) {
                 if (!res.error)
                 {
                     element.clientName = res.name;
                 }
+
+                $rootScope.loading--;
             });
         });
     };
