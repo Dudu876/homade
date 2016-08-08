@@ -24,11 +24,13 @@ exports.createOrder = function(req, res) {
 
         if (req.body.chef.workDays[day].isWorking)
         {
-            var startHour = req.body.chef.workDays[day].startingTime.getHours();
-            var finishHour = req.body.chef.workDays[day].finishTime.getHours();
+            var startingTime = new Date(req.body.chef.workDays[day].startingTime);
+            var finishingTime = new Date(req.body.chef.workDays[day].finishTime);
+            var startHour = startingTime.getHours();
+            var finishHour = finishingTime.getHours();
 
-            var startMin = req.body.chef.workDays[day].startingTime.getMinutes();
-            var finishMin = req.body.chef.workDays[day].finishTime.getMinutes();
+            var startMin = startingTime.getMinutes();
+            var finishMin = finishingTime.getMinutes();
 
             var currHour = date.getHours();
             var currMin = date.getMinutes();

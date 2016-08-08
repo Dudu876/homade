@@ -286,6 +286,7 @@ hr.soften {
     left: auto;
     bottom: 0;
     top: 8vh;
+    padding: 0;
 }
 
 .mish-title-chef-meals {
