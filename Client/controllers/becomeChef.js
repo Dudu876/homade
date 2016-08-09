@@ -18,7 +18,7 @@ homadeApp.controller('becomeChef', ['$scope', '$rootScope', 'locationTipsFactory
             var qs = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + $scope.chefDetails.location[1] + "," + $scope.chefDetails.location[0] +"&sensor=false&key=AIzaSyDpkTgTR--qces2l4LuT35p1todOQcimJg";
             $http.get(qs).then(function(response) {
                 UpdatePlace($scope.chefDetails.location[0], $scope.chefDetails.location[1], response.data.results[0].formatted_address);
-                document.getElementById('autocomplete').placeholder = $scope.chefDetails.locationName;
+                document.getElementById('autocomplete').placeholder = response.data.results[0].formatted_address;
             })
         }
     };

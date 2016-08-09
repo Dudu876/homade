@@ -40,30 +40,32 @@ exports.createOrder = function(req, res) {
                 var result = { created: false, active: true};
                 res.json(result);
             }
+            else{
 
-            var order = new Order();
-            order.clientFBId = req.body.clientFBId;
-            order.chefFBId = req.body.chefFBId;
-            order.chef = req.body.chef;
+                var order = new Order();
+                order.clientFBId = req.body.clientFBId;
+                order.chefFBId = req.body.chefFBId;
+                order.chef = req.body.chef;
 
 
-            order.meal = req.body.meal;
-            order.mealID = req.body.meal._id;
-            order.quantity = req.body.quantity;
-            order.totalPrice = req.body.quantity * req.body.meal.price;
-            order.city = req.body.chef.city;
-            order.startDate = new Date();
-            order.status = 0;
-            order.location = req.body.chef.location;
+                order.meal = req.body.meal;
+                order.mealID = req.body.meal._id;
+                order.quantity = req.body.quantity;
+                order.totalPrice = req.body.quantity * req.body.meal.price;
+                order.city = req.body.chef.city;
+                order.startDate = new Date();
+                order.status = 0;
+                order.location = req.body.chef.location;
 
-            order.save(function (err) {
-                if (!err) {
-                    res.json({created: true});
-                    cityController.performCitySplitting(order.city);
-                }
-                else {
-                }
-            });
+                order.save(function (err) {
+                    if (!err) {
+                        res.json({created: true});
+                        cityController.performCitySplitting(order.city);
+                    }
+                    else {
+                    }
+                });
+            }
         }
         else {
             var result = { created: false, active: true};
