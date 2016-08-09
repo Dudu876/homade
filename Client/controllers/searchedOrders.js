@@ -15,8 +15,6 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
         };
     }
 
-    //spinner
-    //spinnerService.show('mainSpinner');
     $rootScope.loading = 0;
     $rootScope.loading++;
     $rootScope.loading++;
@@ -42,7 +40,7 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
                     latitude: position.coords.latitude
                 },
                 options: {
-                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                    icon: '../public/images/markers/green-dot.png'
                 },
                 window: {
                     title: "Me",
@@ -87,9 +85,17 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
                     latitude: element.chef.location.coordinates[1]
                 },
                 options: {
+                    icon: '../public/images/markers/red-dot.png'
                 },
                 events: {
+                    mouseover: function () {
+                        console.log('marker over');
+                    },
+                    mouseout: function () {
+                        console.log('marker over');
+                    }
                 },
+                //control: $scope.mapControl[index+1],
                 window: {
                     title: element.name,
                     options: {
@@ -97,6 +103,7 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
                     },
                     onClick: function(window) {
                         window.options.visible = !window.options.visible;
+                        console.log(window);
                     },
                     closeClick: function(window) {
                         window.options.visible = false;
@@ -104,6 +111,8 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
                 }
             };
             $scope.markers.push(marker);
+            //$scope.markers[index].myControl = {};
+            //$scope.markers[index].control = $scope.markers[index].myControl;
         });
         //spinner
         //spinnerService.hide('mainSpinner');
@@ -113,6 +122,11 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
 
     $scope.mealClicked = function(meal) {
         $location.url('/OrderMeal/' + meal._id);
+    };
+
+    $scope.mealOver = function(meal) {
+        console.log('meal over');
+        console.log($scope.mapControl);
     };
 
     uiGmapGoogleMapApi.then(function(maps) {
