@@ -7,7 +7,6 @@ homadeApp.controller('mainPageCtrl', ['$scope', '$rootScope', '$location', 'meal
     $scope.tags = [];
 
     $rootScope.loading = 0;
-    console.log('mainPage start loading ' + $rootScope.loading);
 
     var mainAutocomplete = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */(document.getElementById('mainAutocomplete')),
@@ -43,7 +42,6 @@ homadeApp.controller('mainPageCtrl', ['$scope', '$rootScope', '$location', 'meal
         var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         geocoder.geocode({'latLng': latlng}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-                console.log(results);
                 if (results[1]) {
                     //formatted address
                     $scope.search.location = results[0].formatted_address;

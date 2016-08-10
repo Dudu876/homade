@@ -105,10 +105,11 @@ exports.updateMeal = function (req, res) {
 
             //handle tags
             for (var i in req.body.tags) {
-                meal.tags.push(req.body.tags[i].text);
+                meal.tags.push(req.body.tags[i].text.toLowerCase());
             }
 
-            var name_tags = req.body.name.split(" ");
+            var lower_name = req.body.name.toLowerCase();
+            var name_tags = lower_name.split(" ");
             meal.tags = meal.tags.concat(name_tags);
 
             meal.tags = fixTags(meal.tags);
@@ -167,9 +168,11 @@ exports.createMeal = function (req, res) {
 
     //handle tags
     for (var i in req.body.tags) {
-        meal.tags.push(req.body.tags[i].text);
+        meal.tags.push(req.body.tags[i].text.toLowerCase());
     }
-    var name_tags = req.body.name.split(" ");
+
+    var lower_name = req.body.name.toLowerCase();
+    var name_tags = lower_name.split(" ");
     meal.tags = meal.tags.concat(name_tags);
 
     meal.tags = fixTags(meal.tags);
@@ -226,10 +229,17 @@ function fixTags(tags) {
     });
 }
 function filterTags(tags) {
-    var badWords = ['the','for','in','a','on','at','with','like'];
+    var badWords = ['the','for','in','a','on','at','with','like','good','nice','best'];
     return tags.filter(function(item) {
         return (badWords.indexOf(item) < 0);
     });
+}
+
+function lowercaseTags(tags) {
+    var i;
+    for (i in tags) {
+        tags[i] = tags[i].toLowerCase();
+    }
 }
 
 

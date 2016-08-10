@@ -18,7 +18,6 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
     $rootScope.loading = 0;
     $rootScope.loading++;
     $rootScope.loading++;
-    console.log('starting search ' + $rootScope.loading);
 
     mealFactory.getFiltered($rootScope.search).success(function (response) {
         $scope.meals = response;
@@ -29,9 +28,7 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
     $scope.markers = [];
 
     function showPosition(position) {
-        console.log(position);
         $timeout(function() {
-            console.log('center changed');
             $scope.map.center.latitude = position.coords.latitude;
             $scope.map.center.longitude = position.coords.longitude;
             $scope.markers.push({id: 0,
@@ -55,7 +52,6 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
                     }
                 }});
             $rootScope.loading--;
-            console.log('end of Me loading ' + $rootScope.loading);
         },1000);
     }
 
@@ -89,10 +85,8 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
                 },
                 events: {
                     mouseover: function () {
-                        console.log('marker over');
                     },
                     mouseout: function () {
-                        console.log('marker over');
                     }
                 },
                 //control: $scope.mapControl[index+1],
@@ -103,7 +97,6 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
                     },
                     onClick: function(window) {
                         window.options.visible = !window.options.visible;
-                        console.log(window);
                     },
                     closeClick: function(window) {
                         window.options.visible = false;
@@ -117,7 +110,6 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
         //spinner
         //spinnerService.hide('mainSpinner');
         $rootScope.loading--;
-        console.log('end of Markers loading ' + $rootScope.loading);
     }
 
     $scope.mealClicked = function(meal) {
@@ -125,7 +117,6 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
     };
 
     $scope.mealOver = function(meal) {
-        console.log('meal over');
         console.log($scope.mapControl);
     };
 

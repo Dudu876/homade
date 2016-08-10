@@ -35,17 +35,13 @@ homadeApp.controller('messagesCtrl', [ '$scope', 'userFactory', 'ordersFactory',
                 }
                 if (index == 0) $scope.userSelect(connection);
                 if (containsConnection(connection, $scope.connections, index)){
-                    console.log('found');
                 }
                 else {
-                    console.log('not found');
                     $scope.connections.push(connection);
                 }
             });
-            console.log('first loop end');
             $scope.connections.forEach(function(element, index, array) {
                 ezfb.api('/' + element.fbId, {fields: ['name','picture']}, function (res) {
-                    console.log('inside ' + index);
                     if (res.name === undefined) {
                         element.name = "No Name";
                     }
@@ -60,7 +56,6 @@ homadeApp.controller('messagesCtrl', [ '$scope', 'userFactory', 'ordersFactory',
                     }
                 });
             });
-            console.log('all done');
         });
     }
 

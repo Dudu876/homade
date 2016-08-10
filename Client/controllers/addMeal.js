@@ -52,6 +52,7 @@ homadeApp.controller('addMealCtrl', ['$scope', '$rootScope', '$uibModalInstance'
 
     $scope.submit = function() {
         if (isUpdate) {
+            $rootScope.loading++;
             mealFactory.update($scope.meal).success(function(data) {
                 alert (data);
                 $uibModalInstance.close({ 'meal': $scope.meal, 'isUpdate': isUpdate});
@@ -82,7 +83,6 @@ homadeApp.controller('addMealCtrl', ['$scope', '$rootScope', '$uibModalInstance'
         meal.chefFBId = userFactory.fbId;
 
         mealFactory.create(meal).success(function(data) {
-            //alert ("meal saved!" + "  " + data);
             console.log("meal saved!" + "  " + data);
             meal._id = data;
             //$uibModalInstance.close({ 'meal': meal, 'isUpdate': isUpdate});

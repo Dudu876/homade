@@ -691,3 +691,7 @@ div:focus {
     background: #5F5F5F;
     opacity: 0.5;
 }
+
+.no-focus-border :focus {
+    outline: none;
+}

@@ -24,7 +24,6 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
     $rootScope.$watch(function() {
         return $rootScope.loading;
     }, function() {
-        console.log('loading changed!');
     });
 
     $scope.search = $rootScope.search;
@@ -34,7 +33,6 @@ homadeApp.controller('NavbarController', function NavbarController($scope, $root
     function loadAllTags() {
         mealFactory.getAllTags().success(function(tags) {
             $scope.tags = tags;
-            console.log('tags loaded!');
         });
     }
 
