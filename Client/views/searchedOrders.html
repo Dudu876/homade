@@ -1,42 +1,44 @@
 <div class="" >
     <div class="col-lg-8 col-sm-6 col-xs-12" style="background: #f5f5f5;">
-        <div class="col-lg-6 col-sm-12 col-xs-12" ng-repeat="meal in meals" style="padding: 10px;">
-            <div class="" ng-click="mealClicked(meal)" ng-mouseover="mealOver(meal)" style="cursor: pointer; ">
-                <!--<img class="gridPhoto" ng-src="../meal_uploads/{{meal._id}}" />-->
-                <img class="gridPhoto" cl-src="{{meal._id}}" />
-                <div class="mish-price-baner">
-                    <!--<div class="tooltip tooltip-fixed tooltip-bottom-left total-price-breakdown text-dark-gray" role="tooltip">-->
-                    <!--<div class="loading"></div>-->
-                    <!--</div>-->
-                    <div>
-                        <div class="price-amount-container">
-                            <sup class="h6 text-contrast">₪</sup>
-                            <span class="h3 text-contrast price-amount">{{meal.price}}</span>
-                            <sup class="h6 text-contrast"></sup>
+        <div ng-class="{row : $index % 2 != 0}" ng-repeat="meal in meals">
+            <div class="col-lg-6 col-sm-12 col-xs-12" style="padding: 10px;">
+                <div class="" ng-click="mealClicked(meal)" ng-mouseover="mealOver(meal)" style="cursor: pointer; ">
+                    <!--<img class="gridPhoto" ng-src="../meal_uploads/{{meal._id}}" />-->
+                    <img class="gridPhoto" cl-src="{{meal._id}}" />
+                    <div class="mish-price-baner">
+                        <!--<div class="tooltip tooltip-fixed tooltip-bottom-left total-price-breakdown text-dark-gray" role="tooltip">-->
+                        <!--<div class="loading"></div>-->
+                        <!--</div>-->
+                        <div>
+                            <div class="price-amount-container">
+                                <sup class="h6 text-contrast">₪</sup>
+                                <span class="h3 text-contrast price-amount">{{meal.price}}</span>
+                                <sup class="h6 text-contrast"></sup>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="panel-body meal-card" style="padding: 0px;">
-                    <div class="">
-                        <div class="media-photo media-round pull-right">
-                            <img ng-src="{{ meal.chefPic }}" alt="" style="width: 50px;height: 50px;">
-                        </div>
-                        <h3 title="" class="h5">
-                            <a ng-href="/OrderMeal/{{meal._id}}" class="text-normal" style="text-decoration: none;">
-                                {{meal.name}}
-                            </a>
-                        </h3>
-                        <div>
-                            <small> {{meal.description}} </small>
-                            <b ng-show="meal.distance" style="right: 0;position: absolute;">{{meal.distance}} km Away</b>
-                        </div>
-                        <div style="padding: 10px;">
-                            <img title="Kosher" ng-show="meal.kosher" class="mish-icon meal-icon" src="../public/images/kosher_icon.png">
-                            <img title="Gluten Free" ng-show="meal.glutenfree" class="mish-icon meal-icon" src="../public/images/gluten_free_icon.png">
-                        </div>
-                        <div style="float: right; display: inline-block;">
-                            <input-stars max="5" ng-model="meal.averageRating" readonly="true"></input-stars>
-                            <b>{{meal.averageRating}}</b>
+                    <div class="panel-body meal-card" style="padding: 0px;">
+                        <div class="">
+                            <div class="media-photo media-round pull-right">
+                                <img ng-src="{{ meal.chefPic }}" alt="" style="width: 50px;height: 50px;">
+                            </div>
+                            <h3 title="" class="h5">
+                                <a ng-href="/OrderMeal/{{meal._id}}" class="text-normal" style="text-decoration: none;">
+                                    {{meal.name}}
+                                </a>
+                            </h3>
+                            <div>
+                                <small> {{meal.description}} </small>
+                                <b ng-show="meal.distance" style="right: 0;position: absolute;">{{meal.distance}} km Away</b>
+                            </div>
+                            <div style="padding: 10px;">
+                                <img title="Kosher" ng-show="meal.kosher" class="mish-icon meal-icon" src="../public/images/kosher_icon.png">
+                                <img title="Gluten Free" ng-show="meal.glutenfree" class="mish-icon meal-icon" src="../public/images/gluten_free_icon.png">
+                            </div>
+                            <div style="float: right; display: inline-block;">
+                                <input-stars max="5" ng-model="meal.averageRating" readonly="true"></input-stars>
+                                <b>{{meal.averageRating}}</b>
+                            </div>
                         </div>
                     </div>
                 </div>
