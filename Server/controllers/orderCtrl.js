@@ -99,6 +99,7 @@ exports.updateOrder = function (req, res) {
                 }, this);
 
                 var mealAverage = ratingsSum / ratingsCount;
+                mealAverage = mealAverage.toFixed(1);
                 Meal.findByIdAndUpdate(req.body.mealID, { $set: {'averageRating': mealAverage}}, function (err)
                 {
                     if (err){
