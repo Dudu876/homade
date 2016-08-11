@@ -28,6 +28,9 @@
                     Chef
                 </th>
                 <th>
+                    Address
+                </th>
+                <th>
                     Quantity
                 </th>
             </tr>
@@ -36,7 +39,8 @@
                     <span class="glyphicon glyphicon-file"></span>
                     {{ order.meal.name }}
                 </td>
-                <td>{{ order.chefName }}</td>
+                <td>{{ order.chef.name }}</td>
+                <td>{{ order.chef.locationName }}</td>
                 <td>{{ order.quantity }}</td>
                 <td class="text-right text-nowrap">
                     <button class="btn btn-xs btn-info" >
