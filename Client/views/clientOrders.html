@@ -42,7 +42,7 @@
                     <button class="btn btn-xs btn-info" >
                         Created: {{ formatDate(order.startDate) |  date:'dd/MM/yyyy H:mm' }}
                     </button>
-                    <button class="btn btn-xs btn-info" ng-bind="getStatusName(order.status, true)">
+                    <button ng-class="getClassForStatus(order.status)" class="btn btn-xs" ng-bind="getStatusName(order.status, true)">
                     </button>
                     <button class="btn btn-xs btn-warning" ng-click="open(order,false)">
                         Send message

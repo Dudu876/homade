@@ -2,7 +2,7 @@
  * Created by Michael on 4/28/2016.
  */
 homadeApp.controller('clientOrdersCtrl', ['$scope','$rootScope', 'ordersFactory', 'chefsFactory', 'userFactory', 'messageFactory', 'ezfb', '$uibModal', function ($scope, $rootScope, ordersFactory, chefsFactory, userFactory, messageFactory, ezfb, $uibModal) {
-    var statusesArr = ['Order Received', 'Cooking', 'Ready', 'Taken'];
+    var statusesArr = ['Order Received', 'Cooking', 'Ready - Come take it!', 'Taken'];
 
     $rootScope.loading = 0;
     $rootScope.loading++;
@@ -106,6 +106,15 @@ homadeApp.controller('clientOrdersCtrl', ['$scope','$rootScope', 'ordersFactory'
     $scope.formatDate = function(date){
         var dateOut = new Date(date);
         return dateOut;
+    };
+
+    $scope.getClassForStatus = function(num) {
+        if (num != 2){
+            return "btn-info";
+        }
+        else{
+            return "btn-success";
+        }
     };
 
     $scope.getStatusName = function(num, includePrefix) {
