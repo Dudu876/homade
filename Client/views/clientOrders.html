@@ -28,6 +28,9 @@
                     Chef
                 </th>
                 <th>
+                    Address
+                </th>
+                <th>
                     Quantity
                 </th>
             </tr>
@@ -36,13 +39,14 @@
                     <span class="glyphicon glyphicon-file"></span>
                     {{ order.meal.name }}
                 </td>
-                <td>{{ order.chefName }}</td>
+                <td>{{ order.chef.name }}</td>
+                <td>{{ order.chef.locationName }}</td>
                 <td>{{ order.quantity }}</td>
                 <td class="text-right text-nowrap">
                     <button class="btn btn-xs btn-info" >
                         Created: {{ formatDate(order.startDate) |  date:'dd/MM/yyyy H:mm' }}
                     </button>
-                    <button class="btn btn-xs btn-info" ng-bind="getStatusName(order.status, true)">
+                    <button ng-class="getClassForStatus(order.status)" class="btn btn-xs" ng-bind="getStatusName(order.status, true)">
                     </button>
                     <button class="btn btn-xs btn-warning" ng-click="open(order,false)">
                         Send message

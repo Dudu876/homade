@@ -136,7 +136,7 @@ exports.getActiveOrdersByChef = function (req, res) {
 };
 
 exports.getOrdersByClient = function (req, res) {
-    Order.find({clientFBId: req.params.client_id}).populate('meal').exec(function (err, orders) {
+    Order.find({clientFBId: req.params.client_id}).populate('meal').populate('chef').exec(function (err, orders) {
         if (!err) {
             res.json(orders);
         }

@@ -37,6 +37,10 @@
                 <i ng-if="halfStar()" class="fa fa-star-half-o fa-2x yellowed-star" aria-hidden="true"></i>
                 <i class="fa fa-star-o fa-2x yellowed-star" ng-repeat="n in emptyStars() track by $index"></i>
                 {{ ratingText }}
+                <br/>
+                <div style="font-size: 12px">
+                    <b>Available in:  </b>   {{ order.chef.locationName }}
+                </div>
             </div>
 
 
