@@ -1,7 +1,7 @@
 /**
  * Created by Dudu on 04/04/2016.
  */
-homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$timeout', '$location', '$routeParams', 'ezfb', 'uiGmapGoogleMapApi', 'spinnerService', function ($scope, $rootScope, mealFactory, $timeout, $location, $routeParams, ezfb, uiGmapGoogleMapApi, spinnerService) {
+homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$timeout', '$location', '$routeParams', 'ezfb', 'uiGmapGoogleMapApi', 'spinnerService', function($scope, $rootScope, mealFactory, $timeout, $location, $routeParams, ezfb, uiGmapGoogleMapApi, spinnerService) {
 
     //$scope.meals = meals;
     var i = 100;
@@ -16,10 +16,10 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
     }
 
     $rootScope.loading = 0;
-    $rootScope.loading++;
+    // $rootScope.loading++;
     $rootScope.loading++;
 
-    mealFactory.getFiltered($rootScope.search).success(function (response) {
+    mealFactory.getFiltered($rootScope.search).success(function(response) {
         $scope.meals = response;
         addMarkers();
     });
@@ -31,9 +31,10 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
         $timeout(function() {
             $scope.map.center.latitude = position.coords.latitude;
             $scope.map.center.longitude = position.coords.longitude;
-            $scope.markers.push({id: 0,
+            $scope.markers.push({
+                id: 0,
                 coords: {
-                    longitude : position.coords.longitude,
+                    longitude: position.coords.longitude,
                     latitude: position.coords.latitude
                 },
                 options: {
@@ -50,44 +51,40 @@ homadeApp.controller('resultCtrl', ['$scope', '$rootScope', 'mealFactory', '$tim
                     closeClick: function(window) {
                         window.options.visible = false;
                     }
-                }});
-            $rootScope.loading--;
-        },1000);
+                }
+            });
+            // $rootScope.loading--;
+        }, 1000);
     }
 
     function addMarkers() {
         if (!mapIsReady) {
-            $timeout(addMarkers,500);
+            $timeout(addMarkers, 500);
             console.log('Map is not ready yet')
         }
         console.log('Map is ready');
         $scope.meals.forEach(function(element, index, array) {
-            ezfb.api('/' + element.chefFBId + '/picture?height=100&width=100', function (res) {
-                if (!res.error)
-                {
+            ezfb.api('/' + element.chefFBId + '/picture?height=100&width=100', function(res) {
+                if (!res.error) {
                     element.chefPic = res.data.url;
-                }
-                else
-                {
+                } else {
                     element.chefPic = "../public/images/BlankPicture.png";
                 }
             });
             var marker = {
-                id: index+1,
+                id: index + 1,
                 coords: {
                     //latitude: element.location.lat,
                     //longitude: element.location.lng
-                    longitude : element.chef.location.coordinates[0],
+                    longitude: element.chef.location.coordinates[0],
                     latitude: element.chef.location.coordinates[1]
                 },
                 options: {
                     icon: '../public/images/markers/red-dot.png'
                 },
                 events: {
-                    mouseover: function () {
-                    },
-                    mouseout: function () {
-                    }
+                    mouseover: function() {},
+                    mouseout: function() {}
                 },
                 //control: $scope.mapControl[index+1],
                 window: {
